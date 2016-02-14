@@ -1,0 +1,3 @@
+starterCtrl = ->
+
+module.exports = starterCtrl
