@@ -115,20 +115,20 @@ gulp.task 'scripts-prod', ->
     .pipe gulp.dest('public/javascript')
 
 gulp.task 'scripts-dev', ->
-  bundler = browserify(
-    entries: 'src/scripts/main.coffee'
-    transform: [coffeeify]
-    debug: true
-    cache: {}
-    packageCache: {}
-    fullPaths: true
-    plugin: [watchify]
-  )
+  bundler =
+    browserify
+      entries: 'src/scripts/main.coffee'
+      transform: [coffeeify]
+      debug: true
+      cache: {}
+      packageCache: {}
+      fullPaths: true
 
-  bundle(bundler)
-
+  bundler = watchify bundler
   bundler.on 'update', ->
-    bundle(bundler)
+    bundle bundler
+
+  bundle bundler
 
 bundle = (bundler) ->
   bundler
@@ -168,11 +168,10 @@ gulp.task 'serve', ->
     server:
       baseDir: 'public'
 
-gulp.task 'watch', ->
+gulp.task 'watch', ['scripts-dev'], ->
   gulp.watch 'src/**/*', [
-    'templates', 'templates-lint'
-    'styles-dev', 'styles-lint'
-    'scripts-dev', 'scripts-lint'
+    'templates'
+    'styles-dev'
     'images'
     browserSync.reload
   ]
