@@ -86,10 +86,7 @@ gulp.task 'styles-dev', ->
 
 gulp.task 'styles-lint', ->
   gulp.src('src/styles/**/*.styl')
-    .pipe(stylint(
-      rules:
-        colons: 'never'
-    ))
+    .pipe(stylint(config: '.stylintrc'))
     .pipe stylint.reporter()
 
 gulp.task 'vendors-javascript', ->
@@ -142,7 +139,7 @@ bundle = (bundler) ->
 
 gulp.task 'scripts-lint', ->
   gulp.src('src/scripts/**/*.coffee')
-    .pipe(coffeelint())
+    .pipe(coffeelint('coffeelint.json'))
     .pipe coffeelint.reporter()
 
 gulp.task 'images', ->
