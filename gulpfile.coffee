@@ -121,11 +121,11 @@ gulp.task 'scripts-dev', ->
       packageCache: {}
       fullPaths: true
 
+  bundle bundler
+
   bundler = watchify bundler
   bundler.on 'update', ->
     bundle bundler
-
-  bundle bundler
 
 bundle = (bundler) ->
   bundler
