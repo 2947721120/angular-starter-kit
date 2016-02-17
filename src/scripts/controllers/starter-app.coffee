@@ -1,3 +1,5 @@
-starterCtrl = ->
+class StarterCtrl
+  constructor: ->
+    # ...
 
-module.exports = starterCtrl
+module.exports = StarterCtrl
