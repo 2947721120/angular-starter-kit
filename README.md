@@ -93,9 +93,16 @@ $ npm run reinstall
 │   ├── favicon.ico
 │   ├── index.jade
 │   └── robots.txt
+├── .editorconfig
+├── .gitattributes
+├── .gitignore
+├── .jadelintrc
+├── .stylintrc
+├── LICENSE
+├── README.md
+├── coffeelint.json
 ├── gulpfile.coffee
-├── package.json
-└── README.md
+└── package.json
 ```
 
 ### Deploy to Firebase Hosting
