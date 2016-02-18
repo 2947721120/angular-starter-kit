@@ -1,7 +1,7 @@
-starterCpn = require './components/starter-app.coffee'
-StarterCtrl = require './controllers/starter-app.coffee'
+appCpn = require './components/app.coffee'
+AppCtrl = require './controllers/app.coffee'
 
 angular
-  .module('starterApp', ['ngMaterial', 'firebase'])
-  .component('starterApp', starterCpn)
-  .controller('StarterCtrl', [StarterCtrl])
+  .module('app', ['ngMaterial', 'firebase'])
+  .component('app', appCpn)
+  .controller('AppCtrl', [AppCtrl])

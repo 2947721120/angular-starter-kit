@@ -56,46 +56,46 @@ $ npm run reinstall
 ### Directory Structure
 ```
 .
-├── README.md
-├── LICENSE
 ├── src
+│   ├── images
+│   │   ├── image-1.png
+│   │   └── image-2.png
 │   ├── scripts
 │   │   ├── components
+│   │   │   ├── app.coffee
 │   │   │   ├── component-1.coffee
-│   │   │   ├── component-2.coffee
-│   │   │   └── starter-app.coffee
-│   │   ├── services
-│   │   │   ├── service-1.coffee
-│   │   │   └── service-2.coffee
+│   │   │   └── component-2.coffee
 │   │   ├── contrillers
+│   │   │   ├── app.coffee
 │   │   │   ├── contriller-1.coffee
-│   │   │   ├── contriller-2.coffee
-│   │   │   └── starter-app.coffee
+│   │   │   └── contriller-2.coffee
 │   │   ├── filters
 │   │   │   ├── filter-1.coffee
 │   │   │   └── filter-2.coffee
+│   │   ├── services
+│   │   │   ├── service-1.coffee
+│   │   │   └── service-2.coffee
 │   │   ├── main.coffee
 │   │   └── vendor.coffee
 │   ├── styles
 │   │   ├── components
+│   │   │   ├── app.styl
 │   │   │   ├── component-1.styl
-│   │   │   ├── component-2.styl
-│   │   │   └── starter-app.styl
+│   │   │   └── component-2.styl
 │   │   ├── main.styl
 │   │   └── vendor.styl
 │   ├── views
 │   │   ├── components
+│   │   │   ├── app.jade
 │   │   │   ├── component-1.jade
-│   │   │   ├── component-2.jade
-│   │   │   └── starter-app.jade
+│   │   │   └── component-2.jade
 │   │   └── main.jade
-│   ├── images
-│   │   └── angular.png
 │   ├── favicon.ico
 │   ├── index.jade
 │   └── robots.txt
 ├── gulpfile.coffee
-└── package.json
+├── package.json
+└── README.md
 ```
 
 ### Deploy to Firebase Hosting
