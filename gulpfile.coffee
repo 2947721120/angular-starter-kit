@@ -22,33 +22,32 @@ browserSync = require 'browser-sync'
 
 gulp.task 'ico-txt-copy', ->
   gulp.src([
-    'src/favicon.ico'
-    'src/robots.txt'
+    './src/favicon.ico'
+    './src/robots.txt'
   ])
-    .pipe gulp.dest('public')
+    .pipe gulp.dest('./public')
 
 gulp.task 'templates', ->
-  locs = {}
-  gulp.src('src/**/*.jade')
-    .pipe(changed('public'))
-    .pipe(jade(locals: locs))
+  gulp.src('./src/**/*.jade')
+    .pipe(changed('./public'))
+    .pipe(jade())
     .pipe(minifyHtml())
-    .pipe gulp.dest('public')
+    .pipe gulp.dest('./public')
 
 gulp.task 'templates-lint', ->
-  gulp.src('src/**/*.jade')
+  gulp.src('./src/**/*.jade')
     .pipe jadelint()
 
 gulp.task 'vendors-css-copy', ->
-  gulp.src('node_modules/angular-material/angular-material.css')
+  gulp.src('./node_modules/angular-material/angular-material.css')
     .pipe(uglifycss())
-    .pipe gulp.dest('public/css')
+    .pipe gulp.dest('./public/css')
 
 gulp.task 'vendors-css-load', ->
-  gulp.src('src/styles/vendor.styl')
+  gulp.src('./src/styles/vendor.styl')
     .pipe(stylus())
     .pipe(uglifycss())
-    .pipe gulp.dest('public/css')
+    .pipe gulp.dest('./public/css')
 
 gulp.task 'vendors-css', [
   'vendors-css-copy'
@@ -56,7 +55,7 @@ gulp.task 'vendors-css', [
 ]
 
 gulp.task 'styles-prod', ->
-  gulp.src('src/styles/main.styl')
+  gulp.src('./src/styles/main.styl')
     .pipe(stylus(
       use: [
         poststylus([
@@ -66,11 +65,11 @@ gulp.task 'styles-prod', ->
       ]
     ))
     .pipe(uglifycss())
-    .pipe gulp.dest('public/css')
+    .pipe gulp.dest('./public/css')
 
 gulp.task 'styles-dev', ->
-  gulp.src('src/styles/main.styl')
-    .pipe(changed('public/css'))
+  gulp.src('./src/styles/main.styl')
+    .pipe(changed('./public/css'))
     .pipe(sourcemaps.init(loadMaps: true))
     .pipe(stylus(
       use: [
@@ -81,40 +80,40 @@ gulp.task 'styles-dev', ->
       ]
     ))
     .pipe(uglifycss())
-    .pipe(sourcemaps.write('/'))
-    .pipe gulp.dest('public/css')
+    .pipe(sourcemaps.write('./'))
+    .pipe gulp.dest('./public/css')
 
 gulp.task 'styles-lint', ->
-  gulp.src('src/styles/**/*.styl')
+  gulp.src('./src/styles/**/*.styl')
     .pipe(stylint(config: '.stylintrc'))
     .pipe stylint.reporter()
 
 gulp.task 'vendors-javascript', ->
   browserify(
-    entries: 'src/scripts/vendor.coffee'
+    entries: './src/scripts/vendor.coffee'
     transform: [coffeeify]
   )
     .bundle()
     .pipe(source('vendor.js'))
     .pipe(buffer())
     .pipe(streamify(uglify()))
-    .pipe gulp.dest('public/javascript')
+    .pipe gulp.dest('./public/javascript')
 
 gulp.task 'scripts-prod', ->
   browserify(
-    entries: 'src/scripts/main.coffee'
+    entries: './src/scripts/main.coffee'
     transform: [coffeeify]
   )
     .bundle()
     .pipe(source('main.js'))
     .pipe(buffer())
     .pipe(streamify(uglify()))
-    .pipe gulp.dest('public/javascript')
+    .pipe gulp.dest('./public/javascript')
 
 gulp.task 'scripts-dev', ->
   bundler =
     browserify
-      entries: 'src/scripts/main.coffee'
+      entries: './src/scripts/main.coffee'
       transform: [coffeeify]
       debug: true
       cache: {}
@@ -134,23 +133,23 @@ bundle = (bundler) ->
     .pipe(buffer())
     .pipe(sourcemaps.init(loadMaps: true))
     .pipe(streamify(uglify()))
-    .pipe(sourcemaps.write('/'))
-    .pipe gulp.dest('public/javascript')
+    .pipe(sourcemaps.write('./'))
+    .pipe gulp.dest('./public/javascript')
 
 gulp.task 'scripts-lint', ->
-  gulp.src('src/scripts/**/*.coffee')
+  gulp.src('./src/scripts/**/*.coffee')
     .pipe(coffeelint('coffeelint.json'))
     .pipe coffeelint.reporter()
 
 gulp.task 'images', ->
-  gulp.src('src/images/**/*')
-    .pipe(changed('public/images'))
+  gulp.src('./src/images/**/*')
+    .pipe(changed('./public/images'))
     .pipe(imagemin(
       progressive: true
       svgoPlugins: [removeViewBox: false]
       use: [pngquant()]
     ))
-    .pipe gulp.dest('public/images')
+    .pipe gulp.dest('./public/images')
 
 gulp.task 'build', [
   'ico-txt-copy'
@@ -163,10 +162,10 @@ gulp.task 'build', [
 gulp.task 'serve', ->
   browserSync
     server:
-      baseDir: 'public'
+      baseDir: './public'
 
 gulp.task 'watch', ['scripts-dev'], ->
-  gulp.watch 'src/**/*', [
+  gulp.watch './src/**/*', [
     'templates'
     'styles-dev'
     'images'
