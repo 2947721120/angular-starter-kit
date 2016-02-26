@@ -1,6 +1,6 @@
 # Angular Starter Kit
 
-### Features
+### Key Features
 * Angular, Material and Firebase
 * Bash and Atom
 * Jade, Stylus and CoffeeScript
@@ -67,6 +67,9 @@ $ npm run reinstall
 │   │   ├── image-1.png
 │   │   └── image-2.png
 │   ├── scripts
+│   │   ├── animations
+│   │   │   ├── animation-1.coffee
+│   │   │   └── animation-2.coffee
 │   │   ├── components
 │   │   │   ├── app.coffee
 │   │   │   ├── component-1.coffee
@@ -75,13 +78,18 @@ $ npm run reinstall
 │   │   │   ├── app.coffee
 │   │   │   ├── contriller-1.coffee
 │   │   │   └── contriller-2.coffee
+│   │   ├── directives
+│   │   │   ├── directive-1.coffee
+│   │   │   └── directive-2.coffee
 │   │   ├── filters
 │   │   │   ├── filter-1.coffee
 │   │   │   └── filter-2.coffee
 │   │   ├── services
 │   │   │   ├── service-1.coffee
 │   │   │   └── service-2.coffee
+│   │   ├── config.coffee
 │   │   ├── main.coffee
+│   │   ├── run.coffee
 │   │   └── vendor.coffee
 │   ├── styles
 │   │   ├── components
