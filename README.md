@@ -1,5 +1,11 @@
 # Angular Starter Kit
 
+### Features
+* Angular, Material and Firebase
+* Bash and Atom
+* Jade, Stylus and CoffeeScript
+* Git, NPM, Gulp, PostStylus, Browserify and BrowserSync
+
 ### Getting Started
 
 ##### Prerequisites
