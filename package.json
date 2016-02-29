@@ -1,7 +1,7 @@
 {
   "name": "angular-starter-kit",
   "version": "1.0.0",
-  "description": "A starter kit for angular applications.",
+  "description": "A starter kit for Angular applications",
   "scripts": {
     "start": "gulp --require coffee-script/register",
     "build": "gulp --require coffee-script/register build",

@@ -85,8 +85,10 @@ $ npm run reinstall
 │   │   │   ├── filter-1.coffee
 │   │   │   └── filter-2.coffee
 │   │   ├── services
+│   │   │   ├── constants.coffee
 │   │   │   ├── service-1.coffee
-│   │   │   └── service-2.coffee
+│   │   │   ├── service-2.coffee
+│   │   │   └── values.coffee
 │   │   ├── config.coffee
 │   │   ├── main.coffee
 │   │   ├── run.coffee
