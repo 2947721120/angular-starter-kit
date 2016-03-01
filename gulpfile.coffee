@@ -19,6 +19,7 @@ sourcemaps = require 'gulp-sourcemaps'
 imagemin = require 'gulp-imagemin'
 pngquant = require 'imagemin-pngquant'
 browserSync = require 'browser-sync'
+runSequence = require 'run-sequence'
 
 gulp.task 'ico-txt-copy', ->
   gulp.src([
@@ -172,12 +173,14 @@ gulp.task 'watch', ['scripts-dev'], ->
     browserSync.reload
   ]
 
-gulp.task 'default', [
-  'ico-txt-copy'
-  'templates', 'templates-lint'
-  'vendors-css', 'styles-dev', 'styles-lint'
-  'vendors-javascript', 'scripts-dev', 'scripts-lint'
-  'images'
-  'serve'
-  'watch'
-]
+gulp.task 'default', (callback) ->
+  runSequence(
+    'ico-txt-copy'
+    ['templates', 'templates-lint']
+    ['vendors-css', 'styles-dev', 'styles-lint']
+    ['vendors-javascript', 'scripts-dev', 'scripts-lint']
+    'images'
+    'serve'
+    'watch'
+    callback
+  )
