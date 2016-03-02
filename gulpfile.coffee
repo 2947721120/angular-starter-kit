@@ -21,6 +21,8 @@ pngquant = require 'imagemin-pngquant'
 browserSync = require 'browser-sync'
 runSequence = require 'run-sequence'
 
+APP_SRC = './src'
+
 APP_DEST = './public'
 CSS_DEST = "#{APP_DEST}/css"
 JAVASCRIPT_DEST = "#{APP_DEST}/javascript"
@@ -28,8 +30,8 @@ IMAGES_DEST = "#{APP_DEST}/images"
 
 gulp.task 'ico-txt-copy', ->
   gulp.src([
-    './src/favicon.ico'
-    './src/robots.txt'
+    "#{APP_SRC}/favicon.ico"
+    "#{APP_SRC}/robots.txt"
   ])
     .pipe gulp.dest(APP_DEST)
 
