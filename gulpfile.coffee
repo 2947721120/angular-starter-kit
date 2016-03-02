@@ -22,6 +22,16 @@ browserSync = require 'browser-sync'
 runSequence = require 'run-sequence'
 
 APP_SRC = './src'
+JADE_SRC = './src/**/*.jade'
+# ./node_modules/angular-material/angular-material.css
+# ./src/styles/vendor.styl
+# ./src/styles/main.styl
+STYLUS_SRC = './src/styles/**/*.styl'
+# ./src/scripts/vendor.coffee
+# ./src/scripts/main.coffee
+# ./src/scripts/**/*.coffee'
+# ./src/images/**/*
+# ./src/**/*
 
 APP_DEST = './public'
 CSS_DEST = "#{APP_DEST}/css"
