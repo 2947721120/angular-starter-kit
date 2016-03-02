@@ -21,19 +21,25 @@ pngquant = require 'imagemin-pngquant'
 browserSync = require 'browser-sync'
 runSequence = require 'run-sequence'
 
+config =
+  APP_DEST: './public'
+  CSS_DEST: './public/css'
+  JAVASCRIPT_DEST: './public/javascript'
+  IMAGES_DEST: './public/images'
+
 gulp.task 'ico-txt-copy', ->
   gulp.src([
     './src/favicon.ico'
     './src/robots.txt'
   ])
-    .pipe gulp.dest('./public')
+    .pipe gulp.dest(APP_DEST)
 
 gulp.task 'templates', ->
   gulp.src('./src/**/*.jade')
-    .pipe(changed('./public'))
+    .pipe(changed(APP_DEST))
     .pipe(jade())
     .pipe(minifyHtml())
-    .pipe gulp.dest('./public')
+    .pipe gulp.dest(APP_DEST)
 
 gulp.task 'templates-lint', ->
   gulp.src('./src/**/*.jade')
@@ -163,7 +169,7 @@ gulp.task 'build', [
 gulp.task 'serve', ->
   browserSync
     server:
-      baseDir: './public'
+      baseDir: APP_DEST
 
 gulp.task 'watch', ['scripts-dev'], ->
   gulp.watch './src/**/*', [
