@@ -23,9 +23,9 @@ runSequence = require 'run-sequence'
 
 config =
   APP_DEST: './public'
-  CSS_DEST: './public/css'
-  JAVASCRIPT_DEST: './public/javascript'
-  IMAGES_DEST: './public/images'
+  CSS_DEST: "#{APP_DEST}/css"
+  JAVASCRIPT_DEST: "#{APP_DEST}/javascript"
+  IMAGES_DEST: "#{APP_DEST}/images"
 
 gulp.task 'ico-txt-copy', ->
   gulp.src([
