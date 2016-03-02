@@ -21,11 +21,10 @@ pngquant = require 'imagemin-pngquant'
 browserSync = require 'browser-sync'
 runSequence = require 'run-sequence'
 
-config =
-  APP_DEST: './public'
-  CSS_DEST: "#{APP_DEST}/css"
-  JAVASCRIPT_DEST: "#{APP_DEST}/javascript"
-  IMAGES_DEST: "#{APP_DEST}/images"
+APP_DEST = './public'
+CSS_DEST = "#{APP_DEST}/css"
+JAVASCRIPT_DEST = "#{APP_DEST}/javascript"
+IMAGES_DEST = "#{APP_DEST}/images"
 
 gulp.task 'ico-txt-copy', ->
   gulp.src([
@@ -48,13 +47,13 @@ gulp.task 'templates-lint', ->
 gulp.task 'vendors-css-copy', ->
   gulp.src('./node_modules/angular-material/angular-material.css')
     .pipe(uglifycss())
-    .pipe gulp.dest('./public/css')
+    .pipe gulp.dest(CSS_DEST)
 
 gulp.task 'vendors-css-load', ->
   gulp.src('./src/styles/vendor.styl')
     .pipe(stylus())
     .pipe(uglifycss())
-    .pipe gulp.dest('./public/css')
+    .pipe gulp.dest(CSS_DEST)
 
 gulp.task 'vendors-css', [
   'vendors-css-copy'
@@ -72,11 +71,11 @@ gulp.task 'styles-prod', ->
       ]
     ))
     .pipe(uglifycss())
-    .pipe gulp.dest('./public/css')
+    .pipe gulp.dest(CSS_DEST)
 
 gulp.task 'styles-dev', ->
   gulp.src('./src/styles/main.styl')
-    .pipe(changed('./public/css'))
+    .pipe(changed(CSS_DEST))
     .pipe(sourcemaps.init(loadMaps: true))
     .pipe(stylus(
       use: [
@@ -88,7 +87,7 @@ gulp.task 'styles-dev', ->
     ))
     .pipe(uglifycss())
     .pipe(sourcemaps.write('./'))
-    .pipe gulp.dest('./public/css')
+    .pipe gulp.dest(CSS_DEST)
 
 gulp.task 'styles-lint', ->
   gulp.src('./src/styles/**/*.styl')
@@ -104,7 +103,7 @@ gulp.task 'vendors-javascript', ->
     .pipe(source('vendor.js'))
     .pipe(buffer())
     .pipe(streamify(uglify()))
-    .pipe gulp.dest('./public/javascript')
+    .pipe gulp.dest(JAVASCRIPT_DEST)
 
 gulp.task 'scripts-prod', ->
   browserify(
@@ -115,7 +114,7 @@ gulp.task 'scripts-prod', ->
     .pipe(source('main.js'))
     .pipe(buffer())
     .pipe(streamify(uglify()))
-    .pipe gulp.dest('./public/javascript')
+    .pipe gulp.dest(JAVASCRIPT_DEST)
 
 gulp.task 'scripts-dev', ->
   bundler =
@@ -141,7 +140,7 @@ bundle = (bundler) ->
     .pipe(sourcemaps.init(loadMaps: true))
     .pipe(streamify(uglify()))
     .pipe(sourcemaps.write('./'))
-    .pipe gulp.dest('./public/javascript')
+    .pipe gulp.dest(JAVASCRIPT_DEST)
 
 gulp.task 'scripts-lint', ->
   gulp.src('./src/scripts/**/*.coffee')
@@ -150,13 +149,13 @@ gulp.task 'scripts-lint', ->
 
 gulp.task 'images', ->
   gulp.src('./src/images/**/*')
-    .pipe(changed('./public/images'))
+    .pipe(changed(IMAGES_DEST))
     .pipe(imagemin(
       progressive: true
       svgoPlugins: [removeViewBox: false]
       use: [pngquant()]
     ))
-    .pipe gulp.dest('./public/images')
+    .pipe gulp.dest(IMAGES_DEST)
 
 gulp.task 'build', [
   'ico-txt-copy'
