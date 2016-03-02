@@ -1,8 +1,10 @@
 cpn = require './components/index.coffee'
 ctrl = require './controllers/index.coffee'
 
-exports =
+appCore =
   angular
-    .module('app.core', [])
+    .module('appCore', [])
     .component('app', cpn.app)
     .controller('AppCtrl', ctrl.app)
+
+exports = appCore
