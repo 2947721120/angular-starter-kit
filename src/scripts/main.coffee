@@ -1,7 +1,7 @@
-app = require './components/app.coffee'
-AppCtrl = require './controllers/app.coffee'
+require './modules.coffee'
 
 angular
-  .module('app', ['ngMaterial', 'firebase'])
-  .component('app', app)
-  .controller('AppCtrl', AppCtrl)
+  .module('app', [
+    'ngMaterial', 'firebase'
+    'app.core'
+  ])
