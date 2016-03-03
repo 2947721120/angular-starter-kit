@@ -22,16 +22,19 @@ browserSync = require 'browser-sync'
 runSequence = require 'run-sequence'
 
 APP_SRC = './src'
-JADE_SRC = './src/**/*.jade'
-# ./node_modules/angular-material/angular-material.css
-# ./src/styles/vendor.styl
-# ./src/styles/main.styl
-STYLUS_SRC = './src/styles/**/*.styl'
-# ./src/scripts/vendor.coffee
-# ./src/scripts/main.coffee
-# ./src/scripts/**/*.coffee'
-# ./src/images/**/*
-# ./src/**/*
+ICO_TXT_SRC = ["#{APP_SRC}/favicon.ico", "#{APP_SRC}/robots.txt"]
+TEMPLATES_SRC = "#{APP_SRC}/**/*.jade"
+VENDORS_CSS_SRC = ['./node_modules/angular-material/angular-material.css']
+STYLES_SRC = "#{APP_SRC}/styles"
+STYLES_VENDOR_SRC = "#{STYLES_SRC}/vendor.styl"
+STYLES_MAIN_SRC = "#{STYLES_SRC}/main.styl"
+STYLES_ALL_SRC = "#{STYLES_SRC}/**/*.styl"
+SCRIPTS_SRC = "#{APP_SRC}/scripts"
+SCRIPTS_VENDOR_SRC = "#{SCRIPTS_SRC}/vendor.coffee"
+SCRIPTS_MAIN_SRC = "#{SCRIPTS_SRC}/main.coffee"
+SCRIPTS_ALL_SRC = "#{SCRIPTS_SRC}/**/*.coffee"
+IMAGES_SRC = "#{APP_SRC}/images/**/*"
+WATCH_SRC = "#{APP_SRC}/**/*"
 
 APP_DEST = './public'
 CSS_DEST = "#{APP_DEST}/css"
@@ -39,30 +42,27 @@ JAVASCRIPT_DEST = "#{APP_DEST}/javascript"
 IMAGES_DEST = "#{APP_DEST}/images"
 
 gulp.task 'ico-txt-copy', ->
-  gulp.src([
-    "#{APP_SRC}/favicon.ico"
-    "#{APP_SRC}/robots.txt"
-  ])
+  gulp.src(ICO_TXT_SRC)
     .pipe gulp.dest(APP_DEST)
 
 gulp.task 'templates', ->
-  gulp.src('./src/**/*.jade')
+  gulp.src(TEMPLATES_SRC)
     .pipe(changed(APP_DEST))
     .pipe(jade())
     .pipe(minifyHtml())
     .pipe gulp.dest(APP_DEST)
 
 gulp.task 'templates-lint', ->
-  gulp.src('./src/**/*.jade')
+  gulp.src(TEMPLATES_SRC)
     .pipe jadelint()
 
 gulp.task 'vendors-css-copy', ->
-  gulp.src('./node_modules/angular-material/angular-material.css')
+  gulp.src(VENDORS_CSS_SRC)
     .pipe(uglifycss())
     .pipe gulp.dest(CSS_DEST)
 
 gulp.task 'vendors-css-load', ->
-  gulp.src('./src/styles/vendor.styl')
+  gulp.src(STYLES_VENDOR_SRC)
     .pipe(stylus())
     .pipe(uglifycss())
     .pipe gulp.dest(CSS_DEST)
@@ -73,7 +73,7 @@ gulp.task 'vendors-css', [
 ]
 
 gulp.task 'styles-prod', ->
-  gulp.src('./src/styles/main.styl')
+  gulp.src(STYLES_MAIN_SRC)
     .pipe(stylus(
       use: [
         poststylus([
@@ -86,7 +86,7 @@ gulp.task 'styles-prod', ->
     .pipe gulp.dest(CSS_DEST)
 
 gulp.task 'styles-dev', ->
-  gulp.src('./src/styles/main.styl')
+  gulp.src(STYLES_MAIN_SRC)
     .pipe(changed(CSS_DEST))
     .pipe(sourcemaps.init(loadMaps: true))
     .pipe(stylus(
@@ -102,13 +102,13 @@ gulp.task 'styles-dev', ->
     .pipe gulp.dest(CSS_DEST)
 
 gulp.task 'styles-lint', ->
-  gulp.src('./src/styles/**/*.styl')
+  gulp.src(STYLES_ALL_SRC)
     .pipe(stylint(config: '.stylintrc'))
     .pipe stylint.reporter()
 
 gulp.task 'vendors-javascript', ->
   browserify(
-    entries: './src/scripts/vendor.coffee'
+    entries: SCRIPTS_VENDOR_SRC
     transform: [coffeeify]
   )
     .bundle()
@@ -119,7 +119,7 @@ gulp.task 'vendors-javascript', ->
 
 gulp.task 'scripts-prod', ->
   browserify(
-    entries: './src/scripts/main.coffee'
+    entries: SCRIPTS_MAIN_SRC
     transform: [coffeeify]
   )
     .bundle()
@@ -131,7 +131,7 @@ gulp.task 'scripts-prod', ->
 gulp.task 'scripts-dev', ->
   bundler =
     browserify
-      entries: './src/scripts/main.coffee'
+      entries: SCRIPTS_MAIN_SRC
       transform: [coffeeify]
       debug: true
       cache: {}
@@ -155,12 +155,12 @@ bundle = (bundler) ->
     .pipe gulp.dest(JAVASCRIPT_DEST)
 
 gulp.task 'scripts-lint', ->
-  gulp.src('./src/scripts/**/*.coffee')
+  gulp.src(SCRIPTS_ALL_SRC)
     .pipe(coffeelint('coffeelint.json'))
     .pipe coffeelint.reporter()
 
 gulp.task 'images', ->
-  gulp.src('./src/images/**/*')
+  gulp.src(IMAGES_SRC)
     .pipe(changed(IMAGES_DEST))
     .pipe(imagemin(
       progressive: true
@@ -183,7 +183,7 @@ gulp.task 'serve', ->
       baseDir: APP_DEST
 
 gulp.task 'watch', ['scripts-dev'], ->
-  gulp.watch './src/**/*', [
+  gulp.watch WATCH_SRC, [
     'templates'
     'styles-dev'
     'images'
