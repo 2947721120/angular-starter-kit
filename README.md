@@ -9,7 +9,6 @@
 * Bash and Atom
 * Jade, Stylus and CoffeeScript
 * Git, NPM, Gulp, PostStylus, Browserify and BrowserSync
-* Exclude Test
 
 ### Getting Started
 
