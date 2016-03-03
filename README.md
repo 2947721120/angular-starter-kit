@@ -9,7 +9,7 @@
 * Bash and Atom
 * Jade, Stylus and CoffeeScript
 * Git, NPM, Gulp, PostStylus, Browserify and BrowserSync
-* Exclude Test :scream:
+* Exclude Test
 
 ### Getting Started
 
@@ -74,36 +74,48 @@ $ npm run reinstall
 │   ├── scripts
 │   │   ├── animations
 │   │   │   ├── animation-1.coffee
-│   │   │   └── animation-2.coffee
+│   │   │   ├── animation-2.coffee
+│   │   │   └── index.coffee
 │   │   ├── components
 │   │   │   ├── app.coffee
 │   │   │   ├── component-1.coffee
-│   │   │   └── component-2.coffee
+│   │   │   ├── component-2.coffee
+│   │   │   └── index.coffee
 │   │   ├── contrillers
 │   │   │   ├── app.coffee
 │   │   │   ├── contriller-1.coffee
-│   │   │   └── contriller-2.coffee
+│   │   │   ├── contriller-2.coffee
+│   │   │   └── index.coffee
 │   │   ├── directives
 │   │   │   ├── directive-1.coffee
-│   │   │   └── directive-2.coffee
+│   │   │   ├── directive-2.coffee
+│   │   │   └── index.coffee
 │   │   ├── filters
 │   │   │   ├── filter-1.coffee
-│   │   │   └── filter-2.coffee
+│   │   │   ├── filter-2.coffee
+│   │   │   └── index.coffee
 │   │   ├── services
-│   │   │   ├── constants.coffee
+│   │   │   ├── index.coffee
 │   │   │   ├── service-1.coffee
-│   │   │   ├── service-2.coffee
-│   │   │   └── values.coffee
+│   │   │   └── service-2.coffee
 │   │   ├── config.coffee
+│   │   ├── constants.coffee
 │   │   ├── main.coffee
+│   │   ├── modules.coffee
 │   │   ├── run.coffee
+│   │   ├── values.coffee
 │   │   └── vendor.coffee
 │   ├── styles
 │   │   ├── components
 │   │   │   ├── app.styl
 │   │   │   ├── component-1.styl
 │   │   │   └── component-2.styl
+│   │   ├── layout.styl
 │   │   ├── main.styl
+│   │   ├── mixins.styl
+│   │   ├── structure.styl
+│   │   ├── typography.styl
+│   │   ├── variables.styl
 │   │   └── vendor.styl
 │   ├── views
 │   │   ├── components
