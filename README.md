@@ -1,5 +1,6 @@
 # Angular Starter Kit
 
+[![GitHub Version](https://badge.fury.io/gh/Shyam-Chen%2Fangular-starter-kit.svg)](https://badge.fury.io/gh/Shyam-Chen%2Fangular-starter-kit)
 [![Dependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit)
 [![devDependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit/dev-status.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit#info=devDependencies)
 
@@ -8,6 +9,7 @@
 * Bash and Atom
 * Jade, Stylus and CoffeeScript
 * Git, NPM, Gulp, PostStylus, Browserify and BrowserSync
+* Exclude Test :scream:
 
 ### Getting Started
 
