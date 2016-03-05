@@ -178,9 +178,9 @@ gulp.task 'build', (callback) ->
   IN_DEV = false
   runSequence(
     'ico-txt-copy'
-    'templates',
+    'templates'
     ['vendors-css', 'styles']
-    ['vendors-javascript', 'scripts-prod',]
+    ['vendors-javascript', 'scripts-prod']
     'images',
     callback
   )
