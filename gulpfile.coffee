@@ -181,7 +181,7 @@ gulp.task 'build', (callback) ->
     'templates'
     ['vendors-css', 'styles']
     ['vendors-javascript', 'scripts-prod']
-    'images',
+    'images'
     callback
   )
 
