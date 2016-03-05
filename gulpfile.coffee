@@ -108,53 +108,46 @@ gulp.task 'styles-lint', ->
     .pipe(stylint(config: '.stylintrc'))
     .pipe stylint.reporter()
 
-gulp.task 'vendors-javascript', ->
-  browserify(
-    entries: SCRIPTS_VENDOR_SRC
+scripts = (file, watch) ->
+  opts =
+    entries: "#{SCRIPTS_SRC}/#{file}.coffee"
     transform: [coffeeify]
-  )
-    .bundle()
-    .pipe(source('vendor.js'))
-    .pipe(buffer())
-    .pipe(streamify(uglify()))
-    .pipe gulp.dest(JAVASCRIPT_DEST)
 
-gulp.task 'scripts-prod', ->
-  browserify(
-    entries: SCRIPTS_MAIN_SRC
-    transform: [coffeeify]
-  )
-    .bundle()
-    .pipe(source('main.js'))
-    .pipe(buffer())
-    .pipe(streamify(uglify()))
-    .pipe gulp.dest(JAVASCRIPT_DEST)
+  if watch is true
+    opts.debug = true
+    opts.cache = {}
+    opts.packageCache = {}
+    opts.fullPaths = true
 
-gulp.task 'scripts-dev', ->
-  bundler =
-    browserify
-      entries: SCRIPTS_MAIN_SRC
-      transform: [coffeeify]
-      debug: true
-      cache: {}
-      packageCache: {}
-      fullPaths: true
+  bundler = if watch then watchify(browserify(opts)) else browserify(opts)
 
-  bundle bundler
+  bundle = ->
+    bundler
+      .bundle()
+      .pipe(source("#{file}.js"))
+      .pipe(buffer())
+      .pipe(gulpif(
+        watch
+        sourcemaps.init(loadMaps: true)
+      ))
+      .pipe(streamify(uglify()))
+      .pipe(gulpif(
+        watch
+        sourcemaps.write('./')
+      ))
+      .pipe gulp.dest(JAVASCRIPT_DEST)
 
-  bundler = watchify bundler
   bundler.on 'update', ->
-    bundle bundler
+    bundle()
+    console.log 'rebundle'
 
-bundle = (bundler) ->
-  bundler
-    .bundle()
-    .pipe(source('main.js'))
-    .pipe(buffer())
-    .pipe(sourcemaps.init(loadMaps: true))
-    .pipe(streamify(uglify()))
-    .pipe(sourcemaps.write('./'))
-    .pipe gulp.dest(JAVASCRIPT_DEST)
+  bundle()
+
+gulp.task 'vendors-javascript', ->
+  scripts('vendor', false)
+
+gulp.task 'scripts', ->
+  scripts('main', IN_DEV)
 
 gulp.task 'scripts-lint', ->
   gulp.src(SCRIPTS_ALL_SRC)
@@ -180,7 +173,7 @@ gulp.task 'build', (callback) ->
     'ico-txt-copy'
     'templates'
     ['vendors-css', 'styles']
-    ['vendors-javascript', 'scripts-prod']
+    ['vendors-javascript', 'scripts']
     'images'
     callback
   )
@@ -190,7 +183,7 @@ gulp.task 'serve', ->
     server:
       baseDir: APP_DEST
 
-gulp.task 'watch', ['scripts-dev'], ->
+gulp.task 'watch', ->
   gulp.watch WATCH_SRC, [
     'templates'
     'styles'
@@ -203,7 +196,7 @@ gulp.task 'default', (callback) ->
     'ico-txt-copy'
     ['templates', 'templates-lint']
     ['vendors-css', 'styles', 'styles-lint']
-    ['vendors-javascript', 'scripts-dev', 'scripts-lint']
+    ['vendors-javascript', 'scripts', 'scripts-lint']
     'images'
     'serve'
     'watch'
