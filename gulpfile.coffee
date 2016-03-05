@@ -1,4 +1,5 @@
 gulp = require 'gulp'
+gulpif = require 'gulp-if'
 changed = require 'gulp-changed'
 jade = require 'gulp-jade'
 minifyHtml = require 'gulp-minify-html'
@@ -20,6 +21,8 @@ imagemin = require 'gulp-imagemin'
 pngquant = require 'imagemin-pngquant'
 browserSync = require 'browser-sync'
 runSequence = require 'run-sequence'
+
+IN_DEV = true
 
 APP_SRC = './src'
 ICO_TXT_SRC = ["#{APP_SRC}/favicon.ico", "#{APP_SRC}/robots.txt"]
@@ -47,7 +50,10 @@ gulp.task 'ico-txt-copy', ->
 
 gulp.task 'templates', ->
   gulp.src(TEMPLATES_SRC)
-    .pipe(changed(APP_DEST))
+    .pipe(gulpif(
+      IN_DEV
+      changed(APP_DEST)
+    ))
     .pipe(jade())
     .pipe(minifyHtml())
     .pipe gulp.dest(APP_DEST)
@@ -72,8 +78,16 @@ gulp.task 'vendors-css', [
   'vendors-css-load'
 ]
 
-gulp.task 'styles-prod', ->
+gulp.task 'styles', ->
   gulp.src(STYLES_MAIN_SRC)
+    .pipe(gulpif(
+      IN_DEV
+      changed(CSS_DEST)
+    ))
+    .pipe(gulpif(
+      IN_DEV
+      sourcemaps.init(loadMaps: true)
+    ))
     .pipe(stylus(
       use: [
         poststylus([
@@ -83,22 +97,10 @@ gulp.task 'styles-prod', ->
       ]
     ))
     .pipe(uglifycss())
-    .pipe gulp.dest(CSS_DEST)
-
-gulp.task 'styles-dev', ->
-  gulp.src(STYLES_MAIN_SRC)
-    .pipe(changed(CSS_DEST))
-    .pipe(sourcemaps.init(loadMaps: true))
-    .pipe(stylus(
-      use: [
-        poststylus([
-          'autoprefixer'
-          'rucksack-css'
-        ])
-      ]
+    .pipe(gulpif(
+      IN_DEV
+      sourcemaps.write('./')
     ))
-    .pipe(uglifycss())
-    .pipe(sourcemaps.write('./'))
     .pipe gulp.dest(CSS_DEST)
 
 gulp.task 'styles-lint', ->
@@ -169,13 +171,16 @@ gulp.task 'images', ->
     ))
     .pipe gulp.dest(IMAGES_DEST)
 
-gulp.task 'build', [
-  'ico-txt-copy'
-  'templates',
-  'vendors-css', 'styles-prod'
-  'vendors-javascript', 'scripts-prod',
-  'images'
-]
+gulp.task 'build', (callback) ->
+  IN_DEV = false
+  runSequence(
+    'ico-txt-copy'
+    'templates',
+    ['vendors-css', 'styles']
+    ['vendors-javascript', 'scripts-prod',]
+    'images',
+    callback
+  )
 
 gulp.task 'serve', ->
   browserSync
@@ -185,7 +190,7 @@ gulp.task 'serve', ->
 gulp.task 'watch', ['scripts-dev'], ->
   gulp.watch WATCH_SRC, [
     'templates'
-    'styles-dev'
+    'styles'
     'images'
     browserSync.reload
   ]
@@ -194,7 +199,7 @@ gulp.task 'default', (callback) ->
   runSequence(
     'ico-txt-copy'
     ['templates', 'templates-lint']
-    ['vendors-css', 'styles-dev', 'styles-lint']
+    ['vendors-css', 'styles', 'styles-lint']
     ['vendors-javascript', 'scripts-dev', 'scripts-lint']
     'images'
     'serve'
