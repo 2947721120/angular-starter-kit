@@ -22,19 +22,24 @@ pngquant = require 'imagemin-pngquant'
 browserSync = require 'browser-sync'
 runSequence = require 'run-sequence'
 
+vendorsCssSrc = ['./node_modules/angular-material/angular-material.css']
+
 IN_DEV = true
 
 APP_SRC = './src'
 ICO_TXT_SRC = ["#{APP_SRC}/favicon.ico", "#{APP_SRC}/robots.txt"]
 TEMPLATES_SRC = "#{APP_SRC}/**/*.jade"
-VENDORS_CSS_SRC = ['./node_modules/angular-material/angular-material.css']
 STYLES_SRC = "#{APP_SRC}/styles"
 STYLES_VENDOR_SRC = "#{STYLES_SRC}/vendor.styl"
 STYLES_MAIN_SRC = "#{STYLES_SRC}/main.styl"
 STYLES_ALL_SRC = "#{STYLES_SRC}/**/*.styl"
+
 SCRIPTS_SRC = "#{APP_SRC}/scripts"
-SCRIPTS_VENDOR_SRC = "#{SCRIPTS_SRC}/vendor.coffee"
-SCRIPTS_MAIN_SRC = "#{SCRIPTS_SRC}/main.coffee"
+# "#{SCRIPTS_SRC}/#{file}.coffee"
+# "#{file}.js"
+# vendor
+# main
+
 SCRIPTS_ALL_SRC = "#{SCRIPTS_SRC}/**/*.coffee"
 IMAGES_SRC = "#{APP_SRC}/images/**/*"
 WATCH_SRC = "#{APP_SRC}/**/*"
@@ -63,7 +68,7 @@ gulp.task 'templates-lint', ->
     .pipe jadelint()
 
 gulp.task 'vendors-css-copy', ->
-  gulp.src(VENDORS_CSS_SRC)
+  gulp.src(vendorsCssSrc)
     .pipe(uglifycss())
     .pipe gulp.dest(CSS_DEST)
 
@@ -139,7 +144,6 @@ scripts = (file, watch) ->
 
   bundler.on 'update', ->
     bundle()
-    console.log 'rebundle'
 
   bundle()
 
