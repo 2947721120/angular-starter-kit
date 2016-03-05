@@ -163,7 +163,10 @@ gulp.task 'scripts-lint', ->
 
 gulp.task 'images', ->
   gulp.src(IMAGES_SRC)
-    .pipe(changed(IMAGES_DEST))
+    .pipe(gulpif(
+      IN_DEV
+      changed(IMAGES_DEST)
+    ))
     .pipe(imagemin(
       progressive: true
       svgoPlugins: [removeViewBox: false]
