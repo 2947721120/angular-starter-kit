@@ -33,13 +33,9 @@ STYLES_SRC = "#{APP_SRC}/styles"
 STYLES_VENDOR_SRC = "#{STYLES_SRC}/vendor.styl"
 STYLES_MAIN_SRC = "#{STYLES_SRC}/main.styl"
 STYLES_ALL_SRC = "#{STYLES_SRC}/**/*.styl"
-
 SCRIPTS_SRC = "#{APP_SRC}/scripts"
-# "#{SCRIPTS_SRC}/#{file}.coffee"
-# "#{file}.js"
-# vendor
-# main
-
+SCRIPTS_VENDOR_SRC = 'vendor'
+SCRIPTS_MAIN_SRC = 'main'
 SCRIPTS_ALL_SRC = "#{SCRIPTS_SRC}/**/*.coffee"
 IMAGES_SRC = "#{APP_SRC}/images/**/*"
 WATCH_SRC = "#{APP_SRC}/**/*"
@@ -148,10 +144,10 @@ scripts = (file, watch) ->
   bundle()
 
 gulp.task 'vendors-javascript', ->
-  scripts('vendor', false)
+  scripts(SCRIPTS_VENDOR_SRC, false)
 
 gulp.task 'scripts', ->
-  scripts('main', IN_DEV)
+  scripts(SCRIPTS_MAIN_SRC, IN_DEV)
 
 gulp.task 'scripts-lint', ->
   gulp.src(SCRIPTS_ALL_SRC)
