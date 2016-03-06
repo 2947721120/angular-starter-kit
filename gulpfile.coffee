@@ -1,6 +1,7 @@
 gulp = require 'gulp'
 gulpif = require 'gulp-if'
 changed = require 'gulp-changed'
+notify = require 'gulp-notify'
 jade = require 'gulp-jade'
 minifyHtml = require 'gulp-minify-html'
 jadelint = require 'gulp-jadelint'
@@ -47,6 +48,23 @@ CSS_DEST = "#{APP_DEST}/css"
 JAVASCRIPT_DEST = "#{APP_DEST}/javascript"
 IMAGES_DEST = "#{APP_DEST}/images"
 
+handleErrors = (error) ->
+  if IN_DEV is true
+    args = Array::slice.call arguments
+
+    notify
+      .onError(
+        title: 'Compile Error'
+        message: '<%= error.message %>'
+      )
+      .apply this, args
+
+    @emit 'end'
+
+  else
+    console.log error
+    process.exit 1
+
 gulp.task 'ico-txt-copy', ->
   gulp.src(ICO_TXT_SRC)
     .pipe gulp.dest(APP_DEST)
@@ -58,6 +76,7 @@ gulp.task 'templates', ->
       changed(APP_DEST)
     ))
     .pipe(jade())
+    .on('error', handleErrors)
     .pipe(minifyHtml())
     .pipe gulp.dest(APP_DEST)
 
@@ -99,6 +118,7 @@ gulp.task 'styles', ->
         ])
       ]
     ))
+    .on('error', handleErrors)
     .pipe(uglifycss())
     .pipe(gulpif(
       IN_DEV
@@ -127,6 +147,7 @@ scripts = (file, watch) ->
   bundle = ->
     bundler
       .bundle()
+      .on('error', handleErrors)
       .pipe(source("#{file}.js"))
       .pipe(buffer())
       .pipe(gulpif(
