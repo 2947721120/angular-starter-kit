@@ -153,14 +153,14 @@ scripts = (file, watch) ->
 
   bundler.on 'update', ->
     start = process.hrtime()
-    gutil.log 'Starting', "'#{gutil.colors.cyan('scripts')}'..."
+    gutil.log 'Starting', "'#{gutil.colors.cyan 'scripts'}'..."
 
     bundle()
 
     end = process.hrtime start
     words = prettyHrtime end
     gutil.log 'Finished',
-      "'#{gutil.colors.cyan('scripts')}' after #{gutil.colors.magenta(words)}"
+      "'#{gutil.colors.cyan 'scripts'}' after #{gutil.colors.magenta words}"
 
   bundle()
 
