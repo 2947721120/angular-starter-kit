@@ -15,6 +15,8 @@ source = require 'vinyl-source-stream'
 buffer = require 'vinyl-buffer'
 streamify = require 'gulp-streamify'
 uglify = require 'gulp-uglify'
+gutil = require 'gulp-util'
+prettyHrtime = require 'pretty-hrtime'
 coffeelint = require 'gulp-coffeelint'
 sourcemaps = require 'gulp-sourcemaps'
 imagemin = require 'gulp-imagemin'
@@ -139,7 +141,15 @@ scripts = (file, watch) ->
       .pipe gulp.dest(JAVASCRIPT_DEST)
 
   bundler.on 'update', ->
+    start = process.hrtime()
+    gutil.log 'Starting', "'#{gutil.colors.cyan('scripts')}'..."
+
     bundle()
+
+    end = process.hrtime(start)
+    words = prettyHrtime(end)
+    gutil.log 'Finished',
+      "'#{gutil.colors.cyan('scripts')}' after #{gutil.colors.magenta(words)}"
 
   bundle()
 
