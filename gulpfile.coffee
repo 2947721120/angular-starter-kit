@@ -6,6 +6,7 @@ jade = require 'gulp-jade'
 minifyHtml = require 'gulp-minify-html'
 jadelint = require 'gulp-jadelint'
 stylus = require 'gulp-stylus'
+nib = require 'nib'
 poststylus = require 'poststylus'
 uglifycss = require 'gulp-uglifycss'
 stylint = require 'gulp-stylint'
@@ -112,11 +113,13 @@ gulp.task 'styles', ->
     ))
     .pipe(stylus(
       use: [
+        nib()
         poststylus([
           'autoprefixer'
           'rucksack-css'
         ])
       ]
+      import: ['nib']
     ))
     .on('error', handleErrors)
     .pipe(uglifycss())
