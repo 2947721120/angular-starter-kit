@@ -23,8 +23,8 @@ prettyHrtime = require 'pretty-hrtime'
 coffeelint = require 'gulp-coffeelint'
 imagemin = require 'gulp-imagemin'
 pngquant = require 'imagemin-pngquant'
-runSequence = require 'run-sequence'
 browserSync = require 'browser-sync'
+runSequence = require 'run-sequence'
 
 vendorsCssSrc = ['./node_modules/angular-material/angular-material.css']
 
