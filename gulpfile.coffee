@@ -1,30 +1,30 @@
 gulp = require 'gulp'
+notify = require 'gulp-notify'
+gutil = require 'gulp-util'
 gulpif = require 'gulp-if'
 changed = require 'gulp-changed'
-notify = require 'gulp-notify'
 jade = require 'gulp-jade'
 minifyHtml = require 'gulp-minify-html'
 jadelint = require 'gulp-jadelint'
+sourcemaps = require 'gulp-sourcemaps'
 stylus = require 'gulp-stylus'
 nib = require 'nib'
 poststylus = require 'poststylus'
 uglifycss = require 'gulp-uglifycss'
 stylint = require 'gulp-stylint'
-browserify = require 'browserify'
-watchify = require 'watchify'
 coffeeify = require 'coffeeify'
+watchify = require 'watchify'
+browserify = require 'browserify'
 source = require 'vinyl-source-stream'
 buffer = require 'vinyl-buffer'
 streamify = require 'gulp-streamify'
 uglify = require 'gulp-uglify'
-gutil = require 'gulp-util'
 prettyHrtime = require 'pretty-hrtime'
 coffeelint = require 'gulp-coffeelint'
-sourcemaps = require 'gulp-sourcemaps'
 imagemin = require 'gulp-imagemin'
 pngquant = require 'imagemin-pngquant'
-browserSync = require 'browser-sync'
 runSequence = require 'run-sequence'
+browserSync = require 'browser-sync'
 
 vendorsCssSrc = ['./node_modules/angular-material/angular-material.css']
 
@@ -56,13 +56,13 @@ handleErrors = (error) ->
     notify
       .onError
         title: 'Compile Error'
-        message: '<%= error %>'
+        message: "\r\n#{error}"
       .apply this, args
 
     @emit 'end'
 
   else
-    console.log error
+    console.log "#{gutil.colors.red error}"
     process.exit 1
 
 gulp.task 'ico-txt-copy', ->
