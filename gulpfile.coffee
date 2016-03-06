@@ -54,10 +54,9 @@ handleErrors = (error) ->
     args = Array::slice.call arguments
 
     notify
-      .onError(
+      .onError
         title: 'Compile Error'
         message: '<%= error.message %>'
-      )
       .apply this, args
 
     @emit 'end'
@@ -67,34 +66,36 @@ handleErrors = (error) ->
     process.exit 1
 
 gulp.task 'ico-txt-copy', ->
-  gulp.src(ICO_TXT_SRC)
-    .pipe gulp.dest(APP_DEST)
+  gulp
+    .src ICO_TXT_SRC
+    .pipe gulp.dest APP_DEST
 
 gulp.task 'templates', ->
-  gulp.src(TEMPLATES_SRC)
-    .pipe(gulpif(
-      IN_DEV
-      changed(APP_DEST)
-    ))
-    .pipe(jade())
-    .on('error', handleErrors)
-    .pipe(minifyHtml())
-    .pipe gulp.dest(APP_DEST)
+  gulp
+    .src TEMPLATES_SRC
+    .pipe gulpif IN_DEV, changed APP_DEST
+    .pipe jade()
+    .on 'error', handleErrors
+    .pipe minifyHtml()
+    .pipe gulp.dest APP_DEST
 
 gulp.task 'templates-lint', ->
-  gulp.src(TEMPLATES_SRC)
+  gulp
+    .src TEMPLATES_SRC
     .pipe jadelint()
 
 gulp.task 'vendors-css-copy', ->
-  gulp.src(vendorsCssSrc)
-    .pipe(uglifycss())
-    .pipe gulp.dest(CSS_DEST)
+  gulp
+    .src vendorsCssSrc
+    .pipe uglifycss()
+    .pipe gulp.dest CSS_DEST
 
 gulp.task 'vendors-css-load', ->
-  gulp.src(STYLES_VENDOR_SRC)
-    .pipe(stylus())
-    .pipe(uglifycss())
-    .pipe gulp.dest(CSS_DEST)
+  gulp
+    .src STYLES_VENDOR_SRC
+    .pipe stylus()
+    .pipe uglifycss()
+    .pipe gulp.dest CSS_DEST
 
 gulp.task 'vendors-css', [
   'vendors-css-copy'
@@ -102,36 +103,28 @@ gulp.task 'vendors-css', [
 ]
 
 gulp.task 'styles', ->
-  gulp.src(STYLES_MAIN_SRC)
-    .pipe(gulpif(
-      IN_DEV
-      changed(CSS_DEST)
-    ))
-    .pipe(gulpif(
-      IN_DEV
-      sourcemaps.init(loadMaps: true)
-    ))
-    .pipe(stylus(
+  gulp
+    .src STYLES_MAIN_SRC
+    .pipe gulpif IN_DEV, changed CSS_DEST
+    .pipe gulpif IN_DEV, sourcemaps.init loadMaps: true
+    .pipe stylus
       use: [
         nib()
-        poststylus([
+        poststylus [
           'autoprefixer'
           'rucksack-css'
-        ])
+        ]
       ]
       import: ['nib']
-    ))
-    .on('error', handleErrors)
-    .pipe(uglifycss())
-    .pipe(gulpif(
-      IN_DEV
-      sourcemaps.write('./')
-    ))
-    .pipe gulp.dest(CSS_DEST)
+    .on 'error', handleErrors
+    .pipe uglifycss()
+    .pipe gulpif IN_DEV, sourcemaps.write './'
+    .pipe gulp.dest CSS_DEST
 
 gulp.task 'styles-lint', ->
-  gulp.src(STYLES_ALL_SRC)
-    .pipe(stylint(config: '.stylintrc'))
+  gulp
+    .src STYLES_ALL_SRC
+    .pipe stylint config: '.stylintrc'
     .pipe stylint.reporter()
 
 scripts = (file, watch) ->
@@ -145,24 +138,18 @@ scripts = (file, watch) ->
     opts.packageCache = {}
     opts.fullPaths = true
 
-  bundler = if watch then watchify(browserify(opts)) else browserify(opts)
+  bundler = if watch then watchify browserify opts else browserify opts
 
   bundle = ->
     bundler
       .bundle()
-      .on('error', handleErrors)
-      .pipe(source("#{file}.js"))
-      .pipe(buffer())
-      .pipe(gulpif(
-        watch
-        sourcemaps.init(loadMaps: true)
-      ))
-      .pipe(streamify(uglify()))
-      .pipe(gulpif(
-        watch
-        sourcemaps.write('./')
-      ))
-      .pipe gulp.dest(JAVASCRIPT_DEST)
+      .on 'error', handleErrors
+      .pipe source "#{file}.js"
+      .pipe buffer()
+      .pipe gulpif watch, sourcemaps.init loadMaps: true
+      .pipe streamify uglify()
+      .pipe gulpif watch, sourcemaps.write './'
+      .pipe gulp.dest JAVASCRIPT_DEST
 
   bundler.on 'update', ->
     start = process.hrtime()
@@ -170,36 +157,34 @@ scripts = (file, watch) ->
 
     bundle()
 
-    end = process.hrtime(start)
-    words = prettyHrtime(end)
+    end = process.hrtime start
+    words = prettyHrtime end
     gutil.log 'Finished',
       "'#{gutil.colors.cyan('scripts')}' after #{gutil.colors.magenta(words)}"
 
   bundle()
 
 gulp.task 'vendors-javascript', ->
-  scripts(SCRIPTS_VENDOR_SRC, false)
+  scripts SCRIPTS_VENDOR_SRC, false
 
 gulp.task 'scripts', ->
-  scripts(SCRIPTS_MAIN_SRC, IN_DEV)
+  scripts SCRIPTS_MAIN_SRC, IN_DEV
 
 gulp.task 'scripts-lint', ->
-  gulp.src(SCRIPTS_ALL_SRC)
-    .pipe(coffeelint('coffeelint.json'))
+  gulp
+    .src SCRIPTS_ALL_SRC
+    .pipe coffeelint 'coffeelint.json'
     .pipe coffeelint.reporter()
 
 gulp.task 'images', ->
-  gulp.src(IMAGES_SRC)
-    .pipe(gulpif(
-      IN_DEV
-      changed(IMAGES_DEST)
-    ))
-    .pipe(imagemin(
+  gulp
+    .src IMAGES_SRC
+    .pipe gulpif IN_DEV, changed IMAGES_DEST
+    .pipe imagemin
       progressive: true
       svgoPlugins: [removeViewBox: false]
       use: [pngquant()]
-    ))
-    .pipe gulp.dest(IMAGES_DEST)
+    .pipe gulp.dest IMAGES_DEST
 
 gulp.task 'build', (callback) ->
   IN_DEV = false

@@ -1,7 +1,7 @@
 require './modules.coffee'
 
 angular
-  .module('app', [
+  .module 'app', [
     'ngMaterial', 'firebase'
     'appCore'
-  ])
+  ]
