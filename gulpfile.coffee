@@ -56,7 +56,7 @@ handleErrors = (error) ->
     notify
       .onError
         title: 'Compile Error'
-        message: '<%= error.message %>'
+        message: '<%= error %>'
       .apply this, args
 
     @emit 'end'
