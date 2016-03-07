@@ -142,3 +142,11 @@ $ npm install -g firebase-tools
 $ firebase init
 $ firebase deploy
 ```
+
+### Cheat Sheet
+* [AngularJade](https://github.com/Shyam-Chen/AngularJade)
+* [AngularStyl](https://github.com/Shyam-Chen/AngularStyl)
+* [AngularCoffee](https://github.com/Shyam-Chen/AngularCoffee)
+
+### ToDo List
+* templatecache
