@@ -28,7 +28,7 @@ pngquant = require 'imagemin-pngquant'
 browserSync = require 'browser-sync'
 runSequence = require 'run-sequence'
 
-vendorsCssSrc = ['./node_modules/angular-material/angular-material.css']
+cssVendorsSrc = ['./node_modules/angular-material/angular-material.css']
 
 IN_DEV = true
 
@@ -109,7 +109,7 @@ gulp.task 'jade-lint', ->
 
 gulp.task 'compile-stylus-vendor', ->
   copy = gulp
-    .src vendorsCssSrc
+    .src cssVendorsSrc
 
   load = gulp
     .src STYLES_VENDOR_SRC
