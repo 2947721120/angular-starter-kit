@@ -33,7 +33,9 @@ IN_DEV = true
 
 APP_SRC = './src'
 ICO_TXT_SRC = ["#{APP_SRC}/favicon.ico", "#{APP_SRC}/robots.txt"]
-TEMPLATES_SRC = "#{APP_SRC}/**/*.jade"
+INDEX_SRC = "#{APP_SRC}/index.jade"
+VIEWS_SRC = "#{APP_SRC}/views"
+VIEWS_ALL_SRC = "#{VIEWS_SRC}/**/*.jade"
 STYLES_SRC = "#{APP_SRC}/styles"
 STYLES_VENDOR_SRC = "#{STYLES_SRC}/vendor.styl"
 STYLES_MAIN_SRC = "#{STYLES_SRC}/main.styl"
@@ -46,6 +48,7 @@ IMAGES_SRC = "#{APP_SRC}/images/**/*"
 WATCH_SRC = "#{APP_SRC}/**/*"
 
 APP_DEST = './public'
+VIEWS_DEST = "#{APP_DEST}/views"
 CSS_DEST = "#{APP_DEST}/css"
 JAVASCRIPT_DEST = "#{APP_DEST}/javascript"
 IMAGES_DEST = "#{APP_DEST}/images"
@@ -72,17 +75,32 @@ gulp.task 'ico-txt-copy', ->
     .pipe gulp.dest APP_DEST
 
 gulp.task 'templates', ->
-  gulp
-    .src TEMPLATES_SRC
+  index = gulp
+    .src INDEX_SRC
     .pipe gulpif IN_DEV, changed APP_DEST
     .pipe jade()
     .on 'error', handleErrors
     .pipe minifyHtml()
     .pipe gulp.dest APP_DEST
 
+  views = gulp
+    .src VIEWS_ALL_SRC
+    .pipe gulpif IN_DEV, changed APP_DEST
+    .pipe jade()
+    .on 'error', handleErrors
+    .pipe minifyHtml()
+    .pipe gulp.dest VIEWS_DEST
+
+  merge2 index, views
+
 gulp.task 'templates-lint', ->
-  gulp
-    .src TEMPLATES_SRC
+  index = gulp
+    .src INDEX_SRC
+
+  views = gulp
+    .src VIEWS_ALL_SRC
+
+  merge2 index, views
     .pipe jadelint()
 
 gulp.task 'vendors-css', ->
