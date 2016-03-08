@@ -77,43 +77,50 @@ gulp.task 'copy-files', ->
 
 gulp.task 'compile-all-jade', ->
   shared = ->
-    combined = combiner(
-      gulpif IN_DEV, changed APP_DEST
-      jade()
-      minifyHtml()
-    )
+    combined =
+      combiner(
+        gulpif IN_DEV, changed APP_DEST
+        jade()
+        minifyHtml()
+      )
 
     combined.on 'error', handleErrors
 
-  index = gulp
-    .src INDEX_SRC
-    .pipe shared()
-    .pipe gulp.dest APP_DEST
+  index =
+    gulp
+      .src INDEX_SRC
+      .pipe shared()
+      .pipe gulp.dest APP_DEST
 
-  views = gulp
-    .src VIEWS_ALL_SRC
-    .pipe shared()
-    .pipe gulp.dest VIEWS_DEST
+  views =
+    gulp
+      .src VIEWS_ALL_SRC
+      .pipe shared()
+      .pipe gulp.dest VIEWS_DEST
 
   merge index, views
 
 gulp.task 'jade-lint', ->
-  index = gulp
-    .src INDEX_SRC
+  index =
+    gulp
+      .src INDEX_SRC
 
-  views = gulp
-    .src VIEWS_ALL_SRC
+  views =
+    gulp
+      .src VIEWS_ALL_SRC
 
   merge index, views
     .pipe jadelint()
 
 gulp.task 'compile-stylus-vendor', ->
-  copy = gulp
-    .src cssVendorsSrc
+  copy =
+    gulp
+      .src cssVendorsSrc
 
-  load = gulp
-    .src STYLES_VENDOR_SRC
-    .pipe stylus()
+  load =
+    gulp
+      .src STYLES_VENDOR_SRC
+      .pipe stylus()
 
   merge copy, load
     .pipe uglifycss()
