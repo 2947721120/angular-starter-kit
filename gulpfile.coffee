@@ -50,8 +50,8 @@ WATCH_SRC = "#{APP_SRC}/**/*"
 
 APP_DEST = './public'
 VIEWS_DEST = "#{APP_DEST}/views"
-CSS_DEST = "#{APP_DEST}/css"
-JAVASCRIPT_DEST = "#{APP_DEST}/javascript"
+STYLES_DEST = "#{APP_DEST}/styles"
+SCRIPTS_DEST = "#{APP_DEST}/scripts"
 IMAGES_DEST = "#{APP_DEST}/images"
 
 handleErrors = (error) ->
@@ -70,18 +70,20 @@ handleErrors = (error) ->
     console.log "#{gutil.colors.red error}"
     process.exit 1
 
-gulp.task 'ico-txt-copy', ->
+gulp.task 'copy-files', ->
   gulp
     .src ICO_TXT_SRC
     .pipe gulp.dest APP_DEST
 
-gulp.task 'templates', ->
+gulp.task 'compile-all-jade', ->
   shared = ->
-    combiner(
+    combined = combiner(
       gulpif IN_DEV, changed APP_DEST
-      jade().on 'error', handleErrors
+      jade()
       minifyHtml()
-  )
+    )
+
+    combined.on 'error', handleErrors
 
   index = gulp
     .src INDEX_SRC
@@ -95,7 +97,7 @@ gulp.task 'templates', ->
 
   merge index, views
 
-gulp.task 'templates-lint', ->
+gulp.task 'jade-lint', ->
   index = gulp
     .src INDEX_SRC
 
@@ -105,7 +107,7 @@ gulp.task 'templates-lint', ->
   merge index, views
     .pipe jadelint()
 
-gulp.task 'vendors-css', ->
+gulp.task 'compile-stylus-vendor', ->
   copy = gulp
     .src vendorsCssSrc
 
@@ -115,12 +117,12 @@ gulp.task 'vendors-css', ->
 
   merge copy, load
     .pipe uglifycss()
-    .pipe gulp.dest CSS_DEST
+    .pipe gulp.dest STYLES_DEST
 
-gulp.task 'styles', ->
+gulp.task 'compile-stylus-main', ->
   gulp
     .src STYLES_MAIN_SRC
-    .pipe gulpif IN_DEV, changed CSS_DEST
+    .pipe gulpif IN_DEV, changed STYLES_DEST
     .pipe gulpif IN_DEV, sourcemaps.init loadMaps: true
     .pipe stylus
       use: [
@@ -134,15 +136,15 @@ gulp.task 'styles', ->
     .on 'error', handleErrors
     .pipe uglifycss()
     .pipe gulpif IN_DEV, sourcemaps.write './'
-    .pipe gulp.dest CSS_DEST
+    .pipe gulp.dest STYLES_DEST
 
-gulp.task 'styles-lint', ->
+gulp.task 'stylus-lint', ->
   gulp
     .src STYLES_ALL_SRC
     .pipe stylint config: '.stylintrc'
     .pipe stylint.reporter()
 
-scripts = (file, watch) ->
+compileCoffeescript = (file, watch) ->
   opts =
     entries: "#{SCRIPTS_SRC}/#{file}.coffee"
     transform: [coffeeify]
@@ -164,34 +166,38 @@ scripts = (file, watch) ->
       .pipe gulpif watch, sourcemaps.init loadMaps: true
       .pipe streamify uglify()
       .pipe gulpif watch, sourcemaps.write './'
-      .pipe gulp.dest JAVASCRIPT_DEST
+      .pipe gulp.dest SCRIPTS_DEST
 
   bundler.on 'update', ->
     start = process.hrtime()
-    gutil.log 'Starting', "'#{gutil.colors.cyan 'scripts'}'..."
+    gutil.log 'Starting', "
+      '#{gutil.colors.cyan 'compile-coffeescript-main'}'...
+    "
 
     bundle()
 
     end = process.hrtime start
     words = prettyHrtime end
-    gutil.log 'Finished',
-      "'#{gutil.colors.cyan 'scripts'}' after #{gutil.colors.magenta words}"
+    gutil.log 'Finished', "
+      '#{gutil.colors.cyan 'compile-coffeescript-main'}' after
+      #{gutil.colors.magenta words}
+    "
 
   bundle()
 
-gulp.task 'vendors-javascript', ->
-  scripts SCRIPTS_VENDOR_SRC, false
+gulp.task 'compile-coffeescript-vendor', ->
+  compileCoffeescript SCRIPTS_VENDOR_SRC, false
 
-gulp.task 'scripts', ->
-  scripts SCRIPTS_MAIN_SRC, IN_DEV
+gulp.task 'compile-coffeescript-main', ->
+  compileCoffeescript SCRIPTS_MAIN_SRC, IN_DEV
 
-gulp.task 'scripts-lint', ->
+gulp.task 'coffeescript-lint', ->
   gulp
     .src SCRIPTS_ALL_SRC
     .pipe coffeelint 'coffeelint.json'
     .pipe coffeelint.reporter()
 
-gulp.task 'images', ->
+gulp.task 'optimize-images', ->
   gulp
     .src IMAGES_SRC
     .pipe gulpif IN_DEV, changed IMAGES_DEST
@@ -204,11 +210,13 @@ gulp.task 'images', ->
 gulp.task 'build', (callback) ->
   IN_DEV = false
   runSequence(
-    'ico-txt-copy'
-    'templates'
-    ['vendors-css', 'styles']
-    ['vendors-javascript', 'scripts']
-    'images'
+    'copy-files'
+    'compile-all-jade'
+    'compile-stylus-vendor'
+    'compile-stylus-main'
+    'compile-coffeescript-vendor'
+    'compile-coffeescript-main'
+    'optimize-images'
     callback
   )
 
@@ -219,19 +227,21 @@ gulp.task 'serve', ->
 
 gulp.task 'watch', ->
   gulp.watch WATCH_SRC, [
-    'templates'
-    'styles'
-    'images'
+    'compile-all-jade'
+    'compile-stylus-main'
+    'optimize-images'
     browserSync.reload
   ]
 
 gulp.task 'default', (callback) ->
   runSequence(
-    'ico-txt-copy'
-    ['templates', 'templates-lint']
-    ['vendors-css', 'styles', 'styles-lint']
-    ['vendors-javascript', 'scripts', 'scripts-lint']
-    'images'
+    'copy-files'
+    ['compile-all-jade', 'jade-lint']
+    'compile-stylus-vendor'
+    ['compile-stylus-main', 'stylus-lint']
+    'compile-coffeescript-vendor'
+    ['compile-coffeescript-main', 'coffeescript-lint']
+    'optimize-images'
     'serve'
     'watch'
     callback
