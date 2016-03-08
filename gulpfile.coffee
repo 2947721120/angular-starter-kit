@@ -3,7 +3,8 @@ notify = require 'gulp-notify'
 gutil = require 'gulp-util'
 gulpif = require 'gulp-if'
 changed = require 'gulp-changed'
-merge2 = require 'merge2'
+combiner = require 'stream-combiner'
+merge = require 'merge-stream'
 jade = require 'gulp-jade'
 minifyHtml = require 'gulp-minify-html'
 jadelint = require 'gulp-jadelint'
@@ -75,23 +76,24 @@ gulp.task 'ico-txt-copy', ->
     .pipe gulp.dest APP_DEST
 
 gulp.task 'templates', ->
+  shared = ->
+    combiner(
+      gulpif IN_DEV, changed APP_DEST
+      jade().on 'error', handleErrors
+      minifyHtml()
+  )
+
   index = gulp
     .src INDEX_SRC
-    .pipe gulpif IN_DEV, changed APP_DEST
-    .pipe jade()
-    .on 'error', handleErrors
-    .pipe minifyHtml()
+    .pipe shared()
     .pipe gulp.dest APP_DEST
 
   views = gulp
     .src VIEWS_ALL_SRC
-    .pipe gulpif IN_DEV, changed APP_DEST
-    .pipe jade()
-    .on 'error', handleErrors
-    .pipe minifyHtml()
+    .pipe shared()
     .pipe gulp.dest VIEWS_DEST
 
-  merge2 index, views
+  merge index, views
 
 gulp.task 'templates-lint', ->
   index = gulp
@@ -100,7 +102,7 @@ gulp.task 'templates-lint', ->
   views = gulp
     .src VIEWS_ALL_SRC
 
-  merge2 index, views
+  merge index, views
     .pipe jadelint()
 
 gulp.task 'vendors-css', ->
@@ -111,7 +113,7 @@ gulp.task 'vendors-css', ->
     .src STYLES_VENDOR_SRC
     .pipe stylus()
 
-  merge2 copy, load
+  merge copy, load
     .pipe uglifycss()
     .pipe gulp.dest CSS_DEST
 
