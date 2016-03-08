@@ -3,6 +3,7 @@ notify = require 'gulp-notify'
 gutil = require 'gulp-util'
 gulpif = require 'gulp-if'
 changed = require 'gulp-changed'
+merge2 = require 'merge2'
 jade = require 'gulp-jade'
 minifyHtml = require 'gulp-minify-html'
 jadelint = require 'gulp-jadelint'
@@ -84,23 +85,17 @@ gulp.task 'templates-lint', ->
     .src TEMPLATES_SRC
     .pipe jadelint()
 
-gulp.task 'vendors-css-copy', ->
-  gulp
+gulp.task 'vendors-css', ->
+  copy = gulp
     .src vendorsCssSrc
-    .pipe uglifycss()
-    .pipe gulp.dest CSS_DEST
 
-gulp.task 'vendors-css-load', ->
-  gulp
+  load = gulp
     .src STYLES_VENDOR_SRC
     .pipe stylus()
+
+  merge2 copy, load
     .pipe uglifycss()
     .pipe gulp.dest CSS_DEST
-
-gulp.task 'vendors-css', [
-  'vendors-css-copy'
-  'vendors-css-load'
-]
 
 gulp.task 'styles', ->
   gulp
