@@ -75,7 +75,7 @@ gulp.task 'copy-files', ->
     .src FILES_COPY_SRC
     .pipe gulp.dest APP_DEST
 
-gulp.task 'compile-all-jade', ->
+gulp.task 'compile-jade', ->
   shared = ->
     combined =
       combiner(
@@ -112,38 +112,44 @@ gulp.task 'lint-jade', ->
   merge index, views
     .pipe jadelint()
 
-gulp.task 'compile-stylus-vendor', ->
+gulp.task 'compile-stylus', ->
   copy =
     gulp
       .src cssVendorsSrc
+      .pipe gulpif IN_DEV, changed STYLES_DEST
 
   load =
     gulp
       .src STYLES_VENDOR_SRC
+      .pipe gulpif IN_DEV, changed STYLES_DEST
       .pipe stylus()
 
-  merge copy, load
-    .pipe uglifycss()
-    .pipe gulp.dest STYLES_DEST
+  vendor =
+    merge copy, load
+      .pipe uglifycss()
+      .pipe gulp.dest STYLES_DEST
 
-gulp.task 'compile-stylus-main', ->
-  gulp
-    .src STYLES_MAIN_SRC
-    .pipe gulpif IN_DEV, changed STYLES_DEST
-    .pipe gulpif IN_DEV, sourcemaps.init loadMaps: true
-    .pipe stylus
-      use: [
-        nib()
-        poststylus [
-          'autoprefixer'
-          'rucksack-css'
+  main =
+    gulp
+      .src STYLES_MAIN_SRC
+      .pipe gulpif IN_DEV, changed STYLES_DEST
+      .pipe gulpif IN_DEV, sourcemaps.init loadMaps: true
+      .pipe stylus
+        use: [
+          nib()
+          poststylus [
+            'autoprefixer'
+            'rucksack-css'
+          ]
         ]
-      ]
-      import: ['nib']
-    .on 'error', handleErrors
-    .pipe uglifycss()
-    .pipe gulpif IN_DEV, sourcemaps.write './'
-    .pipe gulp.dest STYLES_DEST
+        import: ['nib']
+      .on 'error', handleErrors
+      .pipe uglifycss()
+      .pipe gulpif IN_DEV, sourcemaps.write './'
+      .pipe gulp.dest STYLES_DEST
+
+  merge vendor, main
+
 
 gulp.task 'lint-stylus', ->
   gulp
@@ -218,9 +224,8 @@ gulp.task 'build', (callback) ->
   IN_DEV = false
   runSequence(
     'copy-files'
-    'compile-all-jade'
-    'compile-stylus-vendor'
-    'compile-stylus-main'
+    'compile-jade'
+    'compile-stylus'
     'compile-coffeescript-vendor'
     'compile-coffeescript-main'
     'optimize-images'
@@ -234,8 +239,8 @@ gulp.task 'serve', ->
 
 gulp.task 'watch', ->
   gulp.watch WATCH_SRC, [
-    'compile-all-jade'
-    'compile-stylus-main'
+    'compile-jade'
+    'compile-stylus'
     'optimize-images'
     browserSync.reload
   ]
@@ -243,9 +248,8 @@ gulp.task 'watch', ->
 gulp.task 'default', (callback) ->
   runSequence(
     'copy-files'
-    ['compile-all-jade', 'lint-jade']
-    'compile-stylus-vendor'
-    ['compile-stylus-main', 'lint-stylus']
+    ['compile-jade', 'lint-jade']
+    ['compile-stylus', 'lint-stylus']
     'compile-coffeescript-vendor'
     ['compile-coffeescript-main', 'lint-coffeescript']
     'optimize-images'
