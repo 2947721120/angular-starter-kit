@@ -109,37 +109,41 @@ gulp.task 'lint-jade', ->
     .pipe jadelint()
 
 gulp.task 'compile-stylus', ->
+  opts =
+    use: [
+      nib()
+      poststylus [
+        'autoprefixer'
+        'rucksack-css'
+      ]
+    ]
+    import: ['nib']
+
+  shared = (vendor, map) ->
+    combined =
+      combiner(
+        changed STYLES_DEST
+        gulpif map, sourcemaps.init loadMaps: true
+        gulpif vendor, stylus(), stylus(opts)
+        uglifycss()
+        gulpif map, sourcemaps.write './'
+      )
+
+    combined.on 'error', handleErrors
+
   copy = gulp.src cssVendorsSrc
-
   load = gulp.src STYLES_VENDOR_SRC
-
   vendor =
     merge copy, load
-      .pipe changed STYLES_DEST
-      .pipe stylus()
-      .pipe uglifycss()
-      .pipe gulp.dest STYLES_DEST
+      .pipe shared true, false
 
   main =
     gulp
       .src STYLES_MAIN_SRC
-      .pipe changed STYLES_DEST
-      .pipe gulpif IN_DEV, sourcemaps.init loadMaps: true
-      .pipe stylus
-        use: [
-          nib()
-          poststylus [
-            'autoprefixer'
-            'rucksack-css'
-          ]
-        ]
-        import: ['nib']
-      .on 'error', handleErrors
-      .pipe uglifycss()
-      .pipe gulpif IN_DEV, sourcemaps.write './'
-      .pipe gulp.dest STYLES_DEST
+      .pipe shared false, IN_DEV
 
   merge vendor, main
+    .pipe gulp.dest STYLES_DEST
 
 gulp.task 'lint-stylus', ->
   gulp
