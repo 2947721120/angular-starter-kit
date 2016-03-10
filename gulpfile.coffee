@@ -33,7 +33,7 @@ cssVendorsSrc = ['./node_modules/angular-material/angular-material.css']
 IN_DEV = true
 
 APP_SRC = './src'
-ICO_TXT_SRC = ["#{APP_SRC}/favicon.ico", "#{APP_SRC}/robots.txt"]
+FILES_COPY_SRC = ["#{APP_SRC}/favicon.ico", "#{APP_SRC}/robots.txt"]
 INDEX_SRC = "#{APP_SRC}/index.jade"
 VIEWS_SRC = "#{APP_SRC}/views"
 VIEWS_ALL_SRC = "#{VIEWS_SRC}/**/*.jade"
@@ -72,7 +72,7 @@ handleErrors = (error) ->
 
 gulp.task 'copy-files', ->
   gulp
-    .src ICO_TXT_SRC
+    .src FILES_COPY_SRC
     .pipe gulp.dest APP_DEST
 
 gulp.task 'compile-all-jade', ->
