@@ -79,7 +79,7 @@ gulp.task 'compile-jade', ->
   shared = ->
     combined =
       combiner(
-        gulpif IN_DEV, changed APP_DEST
+        changed APP_DEST
         jade()
         minifyHtml()
       )
@@ -101,38 +101,29 @@ gulp.task 'compile-jade', ->
   merge index, views
 
 gulp.task 'lint-jade', ->
-  index =
-    gulp
-      .src INDEX_SRC
+  index = gulp.src INDEX_SRC
 
-  views =
-    gulp
-      .src VIEWS_ALL_SRC
+  views = gulp.src VIEWS_ALL_SRC
 
   merge index, views
     .pipe jadelint()
 
 gulp.task 'compile-stylus', ->
-  copy =
-    gulp
-      .src cssVendorsSrc
-      .pipe gulpif IN_DEV, changed STYLES_DEST
+  copy = gulp.src cssVendorsSrc
 
-  load =
-    gulp
-      .src STYLES_VENDOR_SRC
-      .pipe gulpif IN_DEV, changed STYLES_DEST
-      .pipe stylus()
+  load = gulp.src STYLES_VENDOR_SRC
 
   vendor =
     merge copy, load
+      .pipe changed STYLES_DEST
+      .pipe stylus()
       .pipe uglifycss()
       .pipe gulp.dest STYLES_DEST
 
   main =
     gulp
       .src STYLES_MAIN_SRC
-      .pipe gulpif IN_DEV, changed STYLES_DEST
+      .pipe changed STYLES_DEST
       .pipe gulpif IN_DEV, sourcemaps.init loadMaps: true
       .pipe stylus
         use: [
@@ -149,7 +140,6 @@ gulp.task 'compile-stylus', ->
       .pipe gulp.dest STYLES_DEST
 
   merge vendor, main
-
 
 gulp.task 'lint-stylus', ->
   gulp
@@ -213,7 +203,7 @@ gulp.task 'lint-coffeescript', ->
 gulp.task 'optimize-images', ->
   gulp
     .src IMAGES_SRC
-    .pipe gulpif IN_DEV, changed IMAGES_DEST
+    .pipe changed IMAGES_DEST
     .pipe imagemin
       progressive: true
       svgoPlugins: [removeViewBox: false]
