@@ -124,7 +124,7 @@ gulp.task 'compile-stylus', ->
       combiner(
         changed STYLES_DEST
         gulpif map, sourcemaps.init loadMaps: true
-        gulpif vendor, stylus(), stylus(opts)
+        gulpif vendor, stylus(), stylus opts
         uglifycss()
         gulpif map, sourcemaps.write './'
       )
