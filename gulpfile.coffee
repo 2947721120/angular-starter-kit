@@ -100,7 +100,7 @@ gulp.task 'compile-all-jade', ->
 
   merge index, views
 
-gulp.task 'jade-lint', ->
+gulp.task 'lint-jade', ->
   index =
     gulp
       .src INDEX_SRC
@@ -145,7 +145,7 @@ gulp.task 'compile-stylus-main', ->
     .pipe gulpif IN_DEV, sourcemaps.write './'
     .pipe gulp.dest STYLES_DEST
 
-gulp.task 'stylus-lint', ->
+gulp.task 'lint-stylus', ->
   gulp
     .src STYLES_ALL_SRC
     .pipe stylint config: '.stylintrc'
@@ -198,7 +198,7 @@ gulp.task 'compile-coffeescript-vendor', ->
 gulp.task 'compile-coffeescript-main', ->
   compileCoffeescript SCRIPTS_MAIN_SRC, IN_DEV
 
-gulp.task 'coffeescript-lint', ->
+gulp.task 'lint-coffeescript', ->
   gulp
     .src SCRIPTS_ALL_SRC
     .pipe coffeelint 'coffeelint.json'
@@ -243,11 +243,11 @@ gulp.task 'watch', ->
 gulp.task 'default', (callback) ->
   runSequence(
     'copy-files'
-    ['compile-all-jade', 'jade-lint']
+    ['compile-all-jade', 'lint-jade']
     'compile-stylus-vendor'
-    ['compile-stylus-main', 'stylus-lint']
+    ['compile-stylus-main', 'lint-stylus']
     'compile-coffeescript-vendor'
-    ['compile-coffeescript-main', 'coffeescript-lint']
+    ['compile-coffeescript-main', 'lint-coffeescript']
     'optimize-images'
     'serve'
     'watch'
