@@ -147,7 +147,7 @@ gulp.task 'lint-stylus', ->
     .pipe stylint config: '.stylintrc'
     .pipe stylint.reporter()
 
-compileCoffeescript = (file, watch) ->
+compileCoffeescript = (file, watch, map) ->
   opts =
     entries: "#{SCRIPTS_SRC}/#{file}.coffee"
     transform: [coffeeify]
@@ -166,15 +166,15 @@ compileCoffeescript = (file, watch) ->
       .on 'error', handleErrors
       .pipe source "#{file}.js"
       .pipe buffer()
-      .pipe gulpif watch, sourcemaps.init loadMaps: true
+      .pipe gulpif map, sourcemaps.init loadMaps: true
       .pipe streamify uglify()
-      .pipe gulpif watch, sourcemaps.write './'
+      .pipe gulpif map, sourcemaps.write './'
       .pipe gulp.dest SCRIPTS_DEST
 
   bundler.on 'update', ->
     start = process.hrtime()
     gutil.log 'Starting', "
-      '#{gutil.colors.cyan 'compile-coffeescript-main'}'...
+      '#{gutil.colors.cyan 'compile-coffeescript'}'...
     "
 
     bundle()
@@ -182,17 +182,18 @@ compileCoffeescript = (file, watch) ->
     end = process.hrtime start
     words = prettyHrtime end
     gutil.log 'Finished', "
-      '#{gutil.colors.cyan 'compile-coffeescript-main'}' after
+      '#{gutil.colors.cyan 'compile-coffeescript'}' after
       #{gutil.colors.magenta words}
     "
 
   bundle()
 
-gulp.task 'compile-coffeescript-vendor', ->
-  compileCoffeescript SCRIPTS_VENDOR_SRC, false
+gulp.task 'compile-coffeescript', ->
+  vendor = compileCoffeescript SCRIPTS_VENDOR_SRC, IN_DEV, false
 
-gulp.task 'compile-coffeescript-main', ->
-  compileCoffeescript SCRIPTS_MAIN_SRC, IN_DEV
+  main = compileCoffeescript SCRIPTS_MAIN_SRC, IN_DEV, IN_DEV
+
+  merge vendor, main
 
 gulp.task 'lint-coffeescript', ->
   gulp
@@ -216,8 +217,7 @@ gulp.task 'build', (callback) ->
     'copy-files'
     'compile-jade'
     'compile-stylus'
-    'compile-coffeescript-vendor'
-    'compile-coffeescript-main'
+    'compile-coffeescript'
     'optimize-images'
     callback
   )
@@ -240,8 +240,7 @@ gulp.task 'default', (callback) ->
     'copy-files'
     ['compile-jade', 'lint-jade']
     ['compile-stylus', 'lint-stylus']
-    'compile-coffeescript-vendor'
-    ['compile-coffeescript-main', 'lint-coffeescript']
+    ['compile-coffeescript', 'lint-coffeescript']
     'optimize-images'
     'serve'
     'watch'
