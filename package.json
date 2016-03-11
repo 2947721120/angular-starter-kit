@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "A starter kit for Angular applications",
   "scripts": {
-    "start": "gulp --require coffee-script/register",
-    "build": "gulp --require coffee-script/register build",
-    "serve": "gulp --require coffee-script/register serve",
+    "start": "rimraf public && gulp --require coffee-script/register",
+    "build-dev": "rimraf public && gulp --require coffee-script/register build-dev",
+    "build-dev-watch": "rimraf public && gulp --require coffee-script/register build-dev-watch",
+    "build-prod": "rimraf public && gulp --require coffee-script/register build-prod",
     "clean": "rimraf public",
     "reinstall": "npm cache clean && rimraf node_modules && pnpm-install"
   },

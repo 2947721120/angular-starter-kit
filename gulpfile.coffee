@@ -31,6 +31,7 @@ runSequence = require 'run-sequence'
 cssVendorsSrc = ['./node_modules/angular-material/angular-material.css']
 
 IN_DEV = true
+IS_WATCH = true
 
 APP_SRC = './src'
 FILES_COPY_SRC = ["#{APP_SRC}/favicon.ico", "#{APP_SRC}/robots.txt"]
@@ -193,9 +194,9 @@ compileCoffeescript = (file, watch, map) ->
   bundle()
 
 gulp.task 'compile-coffeescript', ->
-  vendor = compileCoffeescript SCRIPTS_VENDOR_SRC, IN_DEV, false
+  vendor = compileCoffeescript SCRIPTS_VENDOR_SRC, IN_DEV and IS_WATCH, false
 
-  main = compileCoffeescript SCRIPTS_MAIN_SRC, IN_DEV, IN_DEV
+  main = compileCoffeescript SCRIPTS_MAIN_SRC, IN_DEV and IS_WATCH, IN_DEV
 
   merge vendor, main
 
@@ -215,16 +216,13 @@ gulp.task 'optimize-images', ->
       use: [pngquant()]
     .pipe gulp.dest IMAGES_DEST
 
-gulp.task 'build', (callback) ->
-  IN_DEV = false
-  runSequence(
-    'copy-files'
-    'compile-jade'
-    'compile-stylus'
-    'compile-coffeescript'
-    'optimize-images'
-    callback
-  )
+build = [
+  'copy-files'
+  'compile-jade', 'lint-jade'
+  'compile-stylus', 'lint-stylus'
+  'compile-coffeescript', 'lint-coffeescript'
+  'optimize-images'
+]
 
 gulp.task 'serve', ->
   browserSync
@@ -239,14 +237,16 @@ gulp.task 'watch', ->
     browserSync.reload
   ]
 
+gulp.task 'build-dev', (callback) ->
+  IS_WATCH = false
+  runSequence build, callback
+
+gulp.task 'build-dev-watch', (callback) ->
+  runSequence build, callback
+
+gulp.task 'build-prod', (callback) ->
+  IN_DEV = false
+  runSequence build, callback
+
 gulp.task 'default', (callback) ->
-  runSequence(
-    'copy-files'
-    ['compile-jade', 'lint-jade']
-    ['compile-stylus', 'lint-stylus']
-    ['compile-coffeescript', 'lint-coffeescript']
-    'optimize-images'
-    'serve'
-    'watch'
-    callback
-  )
+  runSequence build, 'serve', 'watch', callback
