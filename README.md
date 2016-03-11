@@ -56,7 +56,7 @@ $ npm run build-dev-watch
 $ npm run build-prod
 ```
 
-##### Clean the Public Folder
+##### Clean the Application
 
 ```bash
 $ npm run clean

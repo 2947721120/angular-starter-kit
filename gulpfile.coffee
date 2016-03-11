@@ -242,7 +242,7 @@ gulp.task 'build-dev', (callback) ->
   runSequence build, callback
 
 gulp.task 'build-dev-watch', (callback) ->
-  runSequence build, callback
+  runSequence build, 'watch', callback
 
 gulp.task 'build-prod', (callback) ->
   IN_DEV = false
