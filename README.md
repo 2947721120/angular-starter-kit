@@ -38,19 +38,25 @@ $ npm start  # in development
 
 ### Other Commands
 
-##### Building the Application in Production
+##### Build the Application in Development
 
 ```bash
-$ npm run build
+$ npm run build-dev
 ```
 
-##### Serving the Application Files
+##### Build the Application and Watching the Application Files in Development
 
 ```bash
-$ npm run serve
+$ npm run build-dev-watch
 ```
 
-##### Cleaning the Application Files
+##### Build the Application in Production
+
+```bash
+$ npm run build-prod
+```
+
+##### Clean the Public Folder
 
 ```bash
 $ npm run clean
