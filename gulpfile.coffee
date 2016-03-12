@@ -26,6 +26,7 @@ coffeelint = require 'gulp-coffeelint'
 imagemin = require 'gulp-imagemin'
 pngquant = require 'imagemin-pngquant'
 browserSync = require 'browser-sync'
+rimraf = require 'rimraf'
 runSequence = require 'run-sequence'
 
 cssVendorsSrc = ['./node_modules/angular-material/angular-material.css']
@@ -216,7 +217,7 @@ gulp.task 'optimize-images', ->
       use: [pngquant()]
     .pipe gulp.dest IMAGES_DEST
 
-build = [
+gulp.task 'build', [
   'copy-files'
   'compile-jade', 'lint-jade'
   'compile-stylus', 'lint-stylus'
@@ -237,16 +238,19 @@ gulp.task 'watch', ->
     browserSync.reload
   ]
 
+gulp.task 'clean', (callback) ->
+  rimraf APP_DEST, callback
+
 gulp.task 'build-dev', (callback) ->
   IS_WATCH = false
-  runSequence build, callback
+  runSequence 'clean', 'build', callback
 
 gulp.task 'build-dev-watch', (callback) ->
-  runSequence build, 'watch', callback
+  runSequence 'clean', 'build', 'watch', callback
 
 gulp.task 'build-prod', (callback) ->
   IN_DEV = false
-  runSequence build, callback
+  runSequence 'clean', 'build', callback
 
 gulp.task 'default', (callback) ->
-  runSequence build, 'serve', 'watch', callback
+  runSequence 'clean', 'build', 'serve', 'watch', callback

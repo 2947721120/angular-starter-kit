@@ -26,8 +26,8 @@ $ cd <your-project-name>
 ##### Install Dependencies
 
 ```bash
-$ npm install -g gulp rimraf pnpm
-$ pnpm-install
+$ npm install -g gulp
+$ npm install
 ```
 
 ##### Run the Application

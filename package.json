@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "A starter kit for Angular applications",
   "scripts": {
-    "start": "rimraf public && gulp --require coffee-script/register",
-    "build-dev": "rimraf public && gulp --require coffee-script/register build-dev",
-    "build-dev-watch": "rimraf public && gulp --require coffee-script/register build-dev-watch",
-    "build-prod": "rimraf public && gulp --require coffee-script/register build-prod",
-    "clean": "rimraf public",
-    "reinstall": "npm cache clean && rimraf node_modules && pnpm-install"
+    "start": "gulp --require coffee-script/register",
+    "build-dev": "gulp --require coffee-script/register build-dev",
+    "build-dev-watch": "gulp --require coffee-script/register build-dev-watch",
+    "build-prod": "gulp --require coffee-script/register build-prod",
+    "clean": "gulp --require coffee-script/register clean",
+    "reinstall": "npm cache clean && git clean -dfx -e '.*' && npm install"
   },
   "repository": {
     "type": "git",
@@ -60,6 +60,7 @@
     "nib": "^1.1.0",
     "poststylus": "^0.2.3",
     "pretty-hrtime": "^1.0.2",
+    "rimraf": "^2.5.2",
     "rucksack-css": "^0.8.5",
     "run-sequence": "^1.1.5",
     "stream-combiner": "^0.2.2",
