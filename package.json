@@ -7,6 +7,7 @@
     "build-dev": "gulp --require coffee-script/register build-dev",
     "build-dev-watch": "gulp --require coffee-script/register build-dev-watch",
     "build-prod": "gulp --require coffee-script/register build-prod",
+    "build-prod-serve": "gulp --require coffee-script/register build-prod-serve",
     "clean": "gulp --require coffee-script/register clean",
     "reinstall": "npm cache clean && git clean -dfx -e '.*' && npm install"
   },
@@ -51,7 +52,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-streamify": "^1.0.2",
     "gulp-stylint": "^3.0.0",
-    "gulp-stylus": "^2.3.0",
+    "gulp-stylus": "^2.3.1",
     "gulp-uglify": "^1.5.3",
     "gulp-uglifycss": "^1.0.6",
     "gulp-util": "^3.0.7",

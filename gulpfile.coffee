@@ -252,5 +252,9 @@ gulp.task 'build-prod', (callback) ->
   IN_DEV = false
   runSequence 'clean', 'build', callback
 
+gulp.task 'build-prod-serve', (callback) ->
+  IN_DEV = false
+  runSequence 'clean', 'build', 'serve', callback
+
 gulp.task 'default', (callback) ->
   runSequence 'clean', 'build', 'serve', 'watch', callback
