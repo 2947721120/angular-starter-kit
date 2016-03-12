@@ -48,7 +48,6 @@ SCRIPTS_VENDOR_SRC = 'vendor'
 SCRIPTS_MAIN_SRC = 'main'
 SCRIPTS_ALL_SRC = "#{SCRIPTS_SRC}/**/*.coffee"
 IMAGES_SRC = "#{APP_SRC}/images/**/*"
-WATCH_SRC = "#{APP_SRC}/**/*"
 
 APP_DEST = './public'
 VIEWS_DEST = "#{APP_DEST}/views"
@@ -101,6 +100,7 @@ gulp.task 'compile-jade', ->
       .pipe gulp.dest VIEWS_DEST
 
   merge index, views
+    .pipe browserSync.stream()
 
 gulp.task 'lint-jade', ->
   index = gulp.src INDEX_SRC
@@ -146,6 +146,7 @@ gulp.task 'compile-stylus', ->
 
   merge vendor, main
     .pipe gulp.dest STYLES_DEST
+    .pipe browserSync.stream()
 
 gulp.task 'lint-stylus', ->
   gulp
@@ -176,6 +177,7 @@ compileCoffeescript = (file, watch, map) ->
       .pipe streamify uglify()
       .pipe gulpif map, sourcemaps.write './'
       .pipe gulp.dest SCRIPTS_DEST
+      .pipe browserSync.stream()
 
   bundler.on 'update', ->
     start = process.hrtime()
@@ -216,6 +218,7 @@ gulp.task 'optimize-images', ->
       svgoPlugins: [removeViewBox: false]
       use: [pngquant()]
     .pipe gulp.dest IMAGES_DEST
+    .pipe browserSync.stream()
 
 gulp.task 'build', [
   'copy-files'
@@ -231,12 +234,9 @@ gulp.task 'serve', ->
       baseDir: APP_DEST
 
 gulp.task 'watch', ->
-  gulp.watch WATCH_SRC, [
-    'compile-jade'
-    'compile-stylus'
-    'optimize-images'
-    browserSync.reload
-  ]
+  gulp.watch [INDEX_SRC, VIEWS_ALL_SRC], ['compile-jade']
+  gulp.watch STYLES_ALL_SRC, ['compile-stylus']
+  gulp.watch IMAGES_SRC, ['optimize-images']
 
 gulp.task 'clean', (callback) ->
   rimraf APP_DEST, callback
