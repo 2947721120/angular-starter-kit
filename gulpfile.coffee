@@ -29,8 +29,6 @@ browserSync = require 'browser-sync'
 rimraf = require 'rimraf'
 runSequence = require 'run-sequence'
 
-cssVendorsSrc = ['./node_modules/angular-material/angular-material.css']
-
 IN_DEV = true
 IS_WATCH = true
 
@@ -40,6 +38,7 @@ INDEX_SRC = "#{APP_SRC}/index.jade"
 VIEWS_SRC = "#{APP_SRC}/views"
 VIEWS_ALL_SRC = "#{VIEWS_SRC}/**/*.jade"
 STYLES_SRC = "#{APP_SRC}/styles"
+CSS_VENDOR_SRC = ['./node_modules/angular-material/angular-material.css']
 STYLES_VENDOR_SRC = "#{STYLES_SRC}/vendor.styl"
 STYLES_MAIN_SRC = "#{STYLES_SRC}/main.styl"
 STYLES_ALL_SRC = "#{STYLES_SRC}/**/*.styl"
@@ -133,7 +132,7 @@ gulp.task 'compile-stylus', ->
 
     combined.on 'error', handleErrors
 
-  copy = gulp.src cssVendorsSrc
+  copy = gulp.src CSS_VENDOR_SRC
   load = gulp.src STYLES_VENDOR_SRC
   vendor =
     merge copy, load
@@ -154,49 +153,49 @@ gulp.task 'lint-stylus', ->
     .pipe stylint config: '.stylintrc'
     .pipe stylint.reporter()
 
-compileCoffeescript = (file, watch, map) ->
-  opts =
-    entries: "#{SCRIPTS_SRC}/#{file}.coffee"
-    transform: [coffeeify]
+gulp.task 'compile-coffeescript', ->
+  compileCoffeescript = (file, watch, map) ->
+    opts =
+      entries: "#{SCRIPTS_SRC}/#{file}.coffee"
+      transform: [coffeeify]
 
-  if watch is true
-    opts.debug = true
-    opts.cache = {}
-    opts.packageCache = {}
-    opts.fullPaths = true
+    if watch is true
+      opts.debug = true
+      opts.cache = {}
+      opts.packageCache = {}
+      opts.fullPaths = true
 
-  bundler = if watch then watchify browserify opts else browserify opts
+    bundler = if watch then watchify browserify opts else browserify opts
 
-  bundle = ->
-    bundler
-      .bundle()
-      .on 'error', handleErrors
-      .pipe source "#{file}.js"
-      .pipe buffer()
-      .pipe gulpif map, sourcemaps.init loadMaps: true
-      .pipe streamify uglify()
-      .pipe gulpif map, sourcemaps.write './'
-      .pipe gulp.dest SCRIPTS_DEST
-      .pipe browserSync.stream()
+    bundle = ->
+      bundler
+        .bundle()
+        .on 'error', handleErrors
+        .pipe source "#{file}.js"
+        .pipe buffer()
+        .pipe gulpif map, sourcemaps.init loadMaps: true
+        .pipe streamify uglify()
+        .pipe gulpif map, sourcemaps.write './'
+        .pipe gulp.dest SCRIPTS_DEST
+        .pipe browserSync.stream()
 
-  bundler.on 'update', ->
-    start = process.hrtime()
-    gutil.log 'Starting', "
-      '#{gutil.colors.cyan 'compile-coffeescript'}'...
-    "
+    bundler.on 'update', ->
+      start = process.hrtime()
+      gutil.log 'Starting', "
+        '#{gutil.colors.cyan 'compile-coffeescript'}'...
+      "
+
+      bundle()
+
+      end = process.hrtime start
+      words = prettyHrtime end
+      gutil.log 'Finished', "
+        '#{gutil.colors.cyan 'compile-coffeescript'}' after
+        #{gutil.colors.magenta words}
+      "
 
     bundle()
 
-    end = process.hrtime start
-    words = prettyHrtime end
-    gutil.log 'Finished', "
-      '#{gutil.colors.cyan 'compile-coffeescript'}' after
-      #{gutil.colors.magenta words}
-    "
-
-  bundle()
-
-gulp.task 'compile-coffeescript', ->
   vendor = compileCoffeescript SCRIPTS_VENDOR_SRC, IN_DEV and IS_WATCH, false
 
   main = compileCoffeescript SCRIPTS_MAIN_SRC, IN_DEV and IS_WATCH, IN_DEV
