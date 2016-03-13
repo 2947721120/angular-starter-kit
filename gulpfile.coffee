@@ -70,6 +70,22 @@ handleErrors = (error) ->
     console.log "#{gutil.colors.red error}"
     process.exit 1
 
+class TimeLogger
+  start = null
+
+  startTime: (task) ->
+    start = process.hrtime()
+    gutil.log 'Starting', "'#{gutil.colors.cyan task}'..."
+
+  endTime: (task) ->
+    end = process.hrtime start
+    words = prettyHrtime end
+    gutil.log 'Finished', "
+      '#{gutil.colors.cyan task}' after #{gutil.colors.magenta words}
+    "
+
+timeLogger = new TimeLogger()
+
 gulp.task 'copy-files', ->
   gulp
     .src FILES_COPY_SRC
@@ -180,19 +196,11 @@ gulp.task 'compile-coffeescript', ->
         .pipe browserSync.stream()
 
     bundler.on 'update', ->
-      start = process.hrtime()
-      gutil.log 'Starting', "
-        '#{gutil.colors.cyan 'compile-coffeescript'}'...
-      "
+      timeLogger.startTime('compile-coffeescript')
 
       bundle()
 
-      end = process.hrtime start
-      words = prettyHrtime end
-      gutil.log 'Finished', "
-        '#{gutil.colors.cyan 'compile-coffeescript'}' after
-        #{gutil.colors.magenta words}
-      "
+      timeLogger.endTime('compile-coffeescript')
 
     bundle()
 
