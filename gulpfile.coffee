@@ -202,7 +202,7 @@ gulp.task 'compile-coffeescript', ->
         .pipe browserSync.stream()
 
     bundler.on 'update', ->
-      bundleLogger = new TimeLogger('compile-coffeescript')
+      bundleLogger = new TimeLogger 'compile-coffeescript'
 
       bundleLogger.startTime()
 
