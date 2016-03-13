@@ -176,7 +176,7 @@ gulp.task 'lint-stylus', ->
     .pipe stylint.reporter()
 
 gulp.task 'compile-coffeescript', ->
-  compileCoffeescript = (file, watch, map) ->
+  shared = (file, watch, map) ->
     opts =
       entries: "#{SCRIPTS_SRC}/#{file}.coffee"
       transform: [coffeeify]
@@ -210,9 +210,9 @@ gulp.task 'compile-coffeescript', ->
 
     bundle()
 
-  vendor = compileCoffeescript SCRIPTS_VENDOR_SRC, IN_DEV and IS_WATCH, false
+  vendor = shared SCRIPTS_VENDOR_SRC, IN_DEV and IS_WATCH, false
 
-  main = compileCoffeescript SCRIPTS_MAIN_SRC, IN_DEV and IS_WATCH, IN_DEV
+  main = shared SCRIPTS_MAIN_SRC, IN_DEV and IS_WATCH, IN_DEV
 
   merge vendor, main
 
