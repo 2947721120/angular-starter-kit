@@ -29,6 +29,8 @@ browserSync = require 'browser-sync'
 rimraf = require 'rimraf'
 runSequence = require 'run-sequence'
 
+# ----------
+# config
 IN_DEV = true
 IS_WATCH = true
 
@@ -54,6 +56,8 @@ STYLES_DEST = "#{APP_DEST}/styles"
 SCRIPTS_DEST = "#{APP_DEST}/scripts"
 IMAGES_DEST = "#{APP_DEST}/images"
 
+# ----------
+# utils
 handleErrors = (error) ->
   if IN_DEV is true
     args = Array::slice.call arguments
@@ -86,6 +90,8 @@ class TimeLogger
 
 timeLogger = new TimeLogger()
 
+# ----------
+# tasks
 gulp.task 'copy-files', ->
   gulp
     .src FILES_COPY_SRC
