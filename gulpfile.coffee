@@ -77,18 +77,18 @@ handleErrors = (error) ->
 class TimeLogger
   start = null
 
-  startTime: (task) ->
-    start = process.hrtime()
-    gutil.log 'Starting', "'#{gutil.colors.cyan task}'..."
+  constructor: (@task) ->
 
-  endTime: (task) ->
+  startTime: ->
+    start = process.hrtime()
+    gutil.log 'Starting', "'#{gutil.colors.cyan @task}'..."
+
+  endTime: ->
     end = process.hrtime start
     words = prettyHrtime end
     gutil.log 'Finished', "
-      '#{gutil.colors.cyan task}' after #{gutil.colors.magenta words}
+      '#{gutil.colors.cyan @task}' after #{gutil.colors.magenta words}
     "
-
-timeLogger = new TimeLogger()
 
 # ----------
 # tasks
@@ -202,11 +202,13 @@ gulp.task 'compile-coffeescript', ->
         .pipe browserSync.stream()
 
     bundler.on 'update', ->
-      timeLogger.startTime 'compile-coffeescript'
+      bundleLogger = new TimeLogger('compile-coffeescript')
+
+      bundleLogger.startTime()
 
       bundle()
 
-      timeLogger.endTime 'compile-coffeescript'
+      bundleLogger.endTime()
 
     bundle()
 
