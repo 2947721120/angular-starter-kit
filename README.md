@@ -106,7 +106,6 @@ $ npm run reinstall
 │   │   └── vendor.coffee
 │   ├── styles
 │   │   ├── components
-│   │   │   ├── app.styl
 │   │   │   ├── component-1.styl
 │   │   │   └── component-2.styl
 │   │   ├── layout.styl
@@ -118,7 +117,6 @@ $ npm run reinstall
 │   │   └── vendor.styl
 │   ├── views
 │   │   ├── components
-│   │   │   ├── app.jade
 │   │   │   ├── component-1.jade
 │   │   │   └── component-2.jade
 │   │   └── main.jade
