@@ -132,17 +132,17 @@ gulp.task 'lint-jade', ->
     .pipe jadelint()
 
 gulp.task 'compile-stylus', ->
-  opts =
-    use: [
-      nib()
-      poststylus [
-        'autoprefixer'
-        'rucksack-css'
-      ]
-    ]
-    import: ['nib']
-
   shared = (vendor, map) ->
+    opts =
+      use: [
+        nib()
+        poststylus [
+          'autoprefixer'
+          'rucksack-css'
+        ]
+      ]
+      import: ['nib']
+
     combined =
       combiner(
         changed STYLES_DEST
