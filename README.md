@@ -143,6 +143,4 @@ $ firebase deploy
 ```
 
 ### Cheat Sheet
-* [AngularJade](https://github.com/Shyam-Chen/AngularJade)
-* [AngularStyl](https://github.com/Shyam-Chen/AngularStyl)
-* [AngularCoffee](https://github.com/Shyam-Chen/AngularCoffee)
+[AngularCoffee](https://github.com/Shyam-Chen/AngularCoffee)

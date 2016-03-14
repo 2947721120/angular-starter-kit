@@ -256,6 +256,8 @@ gulp.task 'watch', ->
 gulp.task 'clean', (callback) ->
   rimraf APP_DEST, callback
 
+# ----------
+# main
 gulp.task 'build-dev', (callback) ->
   IS_WATCH = false
   runSequence 'clean', 'build', callback
