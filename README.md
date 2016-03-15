@@ -143,4 +143,4 @@ $ firebase deploy
 ```
 
 ### Cheat Sheet
-[AngularCoffee](https://github.com/Shyam-Chen/AngularCoffee)
+[AngularCoffee: Angular and CoffeeScript](https://github.com/Shyam-Chen/AngularCoffee)
