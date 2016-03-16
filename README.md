@@ -67,6 +67,9 @@ $ npm run reinstall
 ```
 .
 ├── src
+│   ├── fonts
+│   │   ├── font-1.woff
+│   │   └── font-2.woff
 │   ├── images
 │   │   ├── image-1.png
 │   │   └── image-2.png
