@@ -35,7 +35,6 @@ IN_DEV = true
 IS_WATCH = true
 
 APP_SRC = './src'
-FILES_COPY_SRC = ["#{APP_SRC}/favicon.ico", "#{APP_SRC}/robots.txt"]
 INDEX_SRC = "#{APP_SRC}/index.jade"
 VIEWS_SRC = "#{APP_SRC}/views"
 VIEWS_ALL_SRC = "#{VIEWS_SRC}/**/*.jade"
@@ -49,12 +48,15 @@ SCRIPTS_VENDOR_SRC = 'vendor'
 SCRIPTS_MAIN_SRC = 'main'
 SCRIPTS_ALL_SRC = "#{SCRIPTS_SRC}/**/*.coffee"
 IMAGES_SRC = "#{APP_SRC}/images/**/*"
+FONTS_SRC = "#{APP_SRC}/fonts/**/*"
+SURPLUS_SRC = ["#{APP_SRC}/favicon.ico", "#{APP_SRC}/robots.txt"]
 
 APP_DEST = './public'
 VIEWS_DEST = "#{APP_DEST}/views"
 STYLES_DEST = "#{APP_DEST}/styles"
 SCRIPTS_DEST = "#{APP_DEST}/scripts"
 IMAGES_DEST = "#{APP_DEST}/images"
+FONTS_DEST = "#{APP_DEST}/fonts"
 
 # ----------
 # utils
@@ -92,11 +94,6 @@ class TimeLogger
 
 # ----------
 # tasks
-gulp.task 'copy-files', ->
-  gulp
-    .src FILES_COPY_SRC
-    .pipe gulp.dest APP_DEST
-
 gulp.task 'compile-jade', ->
   shared = ->
     combined =
@@ -235,12 +232,28 @@ gulp.task 'optimize-images', ->
     .pipe gulp.dest IMAGES_DEST
     .pipe browserSync.stream()
 
+gulp.task 'copy-files', ->
+  fonts =
+    gulp
+      .src FONTS_SRC
+      .pipe changed FONTS_DEST
+      .pipe gulp.dest FONTS_DEST
+
+  surplus =
+    gulp
+      .src SURPLUS_SRC
+      .pipe changed APP_DEST
+      .pipe gulp.dest APP_DEST
+
+  merge fonts, surplus
+    .pipe browserSync.stream()
+
 gulp.task 'build', [
-  'copy-files'
   'compile-jade', 'lint-jade'
   'compile-stylus', 'lint-stylus'
   'compile-coffeescript', 'lint-coffeescript'
   'optimize-images'
+  'copy-files'
 ]
 
 gulp.task 'serve', ->
@@ -253,6 +266,7 @@ gulp.task 'watch', ->
   gulp.watch STYLES_ALL_SRC, ['compile-stylus', 'lint-stylus']
   gulp.watch SCRIPTS_ALL_SRC, ['lint-coffeescript']
   gulp.watch IMAGES_SRC, ['optimize-images']
+  gulp.watch [FONTS_SRC, SURPLUS_SRC], ['copy-files']
 
 gulp.task 'clean', (callback) ->
   rimraf APP_DEST, callback
