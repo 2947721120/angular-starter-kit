@@ -249,8 +249,9 @@ gulp.task 'serve', ->
       baseDir: APP_DEST
 
 gulp.task 'watch', ->
-  gulp.watch [INDEX_SRC, VIEWS_ALL_SRC], ['compile-jade']
-  gulp.watch STYLES_ALL_SRC, ['compile-stylus']
+  gulp.watch [INDEX_SRC, VIEWS_ALL_SRC], ['compile-jade', 'lint-jade']
+  gulp.watch STYLES_ALL_SRC, ['compile-stylus', 'lint-stylus']
+  gulp.watch SCRIPTS_ALL_SRC, ['lint-coffeescript']
   gulp.watch IMAGES_SRC, ['optimize-images']
 
 gulp.task 'clean', (callback) ->
