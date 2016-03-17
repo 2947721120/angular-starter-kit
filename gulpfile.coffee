@@ -31,8 +31,7 @@ runSequence = require 'run-sequence'
 
 # ----------
 # config
-IN_DEV = true
-IS_WATCH = true
+[DEV, WATCH] = [true, true]
 
 APP_SRC = './src'
 INDEX_SRC = "#{APP_SRC}/index.jade"
@@ -61,7 +60,7 @@ FONTS_DEST = "#{APP_DEST}/fonts"
 # ----------
 # utils
 handleErrors = (error) ->
-  if IN_DEV is true
+  if DEV is true
     args = Array::slice.call arguments
 
     notify
@@ -160,7 +159,7 @@ gulp.task 'compile-stylus', ->
   main =
     gulp
       .src STYLES_MAIN_SRC
-      .pipe shared false, IN_DEV
+      .pipe shared false, DEV
 
   merge vendor, main
     .pipe gulp.dest STYLES_DEST
@@ -209,9 +208,9 @@ gulp.task 'compile-coffeescript', ->
 
     bundle()
 
-  vendor = shared SCRIPTS_VENDOR_SRC, IN_DEV and IS_WATCH, false
+  vendor = shared SCRIPTS_VENDOR_SRC, DEV and WATCH, false
 
-  main = shared SCRIPTS_MAIN_SRC, IN_DEV and IS_WATCH, IN_DEV
+  main = shared SCRIPTS_MAIN_SRC, DEV and WATCH, DEV
 
   merge vendor, main
 
@@ -274,18 +273,18 @@ gulp.task 'clean', (callback) ->
 # ----------
 # main
 gulp.task 'build-dev', (callback) ->
-  IS_WATCH = false
+  WATCH = false
   runSequence 'clean', 'build', callback
 
 gulp.task 'build-dev-watch', (callback) ->
   runSequence 'clean', 'build', 'watch', callback
 
 gulp.task 'build-prod', (callback) ->
-  IN_DEV = false
+  DEV = false
   runSequence 'clean', 'build', callback
 
 gulp.task 'build-prod-serve', (callback) ->
-  IN_DEV = false
+  DEV = false
   runSequence 'clean', 'build', 'serve', callback
 
 gulp.task 'default', (callback) ->
