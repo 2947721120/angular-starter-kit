@@ -35,17 +35,16 @@ runSequence = require 'run-sequence'
 
 APP_SRC = './src'
 INDEX_SRC = "#{APP_SRC}/index.jade"
-VIEWS_SRC = "#{APP_SRC}/views"
-VIEWS_ALL_SRC = "#{VIEWS_SRC}/**/*.jade"
+VIEWS_SRC = "#{APP_SRC}/views/**/*.jade"
 STYLES_SRC = "#{APP_SRC}/styles"
 CSS_VENDOR_SRC = ['./node_modules/angular-material/angular-material.css']
 STYLES_VENDOR_SRC = "#{STYLES_SRC}/vendor.styl"
 STYLES_MAIN_SRC = "#{STYLES_SRC}/main.styl"
-STYLES_ALL_SRC = "#{STYLES_SRC}/**/*.styl"
+STYLES_FILTER_SRC = "#{STYLES_SRC}/**/*.styl"
 SCRIPTS_SRC = "#{APP_SRC}/scripts"
 SCRIPTS_VENDOR_SRC = 'vendor'
 SCRIPTS_MAIN_SRC = 'main'
-SCRIPTS_ALL_SRC = "#{SCRIPTS_SRC}/**/*.coffee"
+SCRIPTS_FILTER_SRC = "#{SCRIPTS_SRC}/**/*.coffee"
 IMAGES_SRC = "#{APP_SRC}/images/**/*"
 FONTS_SRC = "#{APP_SRC}/fonts/**/*"
 SURPLUS_SRC = ["#{APP_SRC}/favicon.ico", "#{APP_SRC}/robots.txt"]
@@ -112,7 +111,7 @@ gulp.task 'compile-jade', ->
 
   views =
     gulp
-      .src VIEWS_ALL_SRC
+      .src VIEWS_SRC
       .pipe shared()
       .pipe gulp.dest VIEWS_DEST
 
@@ -122,7 +121,7 @@ gulp.task 'compile-jade', ->
 gulp.task 'lint-jade', ->
   index = gulp.src INDEX_SRC
 
-  views = gulp.src VIEWS_ALL_SRC
+  views = gulp.src VIEWS_SRC
 
   merge index, views
     .pipe jadelint()
@@ -167,7 +166,7 @@ gulp.task 'compile-stylus', ->
 
 gulp.task 'lint-stylus', ->
   gulp
-    .src STYLES_ALL_SRC
+    .src STYLES_FILTER_SRC
     .pipe stylint config: '.stylintrc'
     .pipe stylint.reporter()
 
@@ -216,7 +215,7 @@ gulp.task 'compile-coffeescript', ->
 
 gulp.task 'lint-coffeescript', ->
   gulp
-    .src SCRIPTS_ALL_SRC
+    .src SCRIPTS_FILTER_SRC
     .pipe coffeelint 'coffeelint.json'
     .pipe coffeelint.reporter()
 
@@ -261,9 +260,9 @@ gulp.task 'serve', ->
       baseDir: APP_DEST
 
 gulp.task 'watch', ->
-  gulp.watch [INDEX_SRC, VIEWS_ALL_SRC], ['compile-jade', 'lint-jade']
-  gulp.watch STYLES_ALL_SRC, ['compile-stylus', 'lint-stylus']
-  gulp.watch SCRIPTS_ALL_SRC, ['lint-coffeescript']
+  gulp.watch [INDEX_SRC, VIEWS_SRC], ['compile-jade', 'lint-jade']
+  gulp.watch STYLES_FILTER_SRC, ['compile-stylus', 'lint-stylus']
+  gulp.watch SCRIPTS_FILTER_SRC, ['lint-coffeescript']
   gulp.watch IMAGES_SRC, ['optimize-images']
   gulp.watch [FONTS_SRC, SURPLUS_SRC], ['copy-files']
 
