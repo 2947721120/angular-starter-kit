@@ -51,8 +51,8 @@ FONTS_SRC = "#{APP_SRC}/fonts/**/*"
 SURPLUS_SRC = ["#{APP_SRC}/favicon.ico", "#{APP_SRC}/robots.txt"]
 
 APP_DEST = './public'
-VIEWS_DEST = "#{APP_DEST}/views"  # dev
-TEMPLATES_DEST = "#{SCRIPTS_SRC}/templates.js"  # prod
+VIEWS_DEST = "#{APP_DEST}/views"
+TEMPLATES_DEST = "#{SCRIPTS_SRC}/templates.js"
 STYLES_DEST = "#{APP_DEST}/styles"
 SCRIPTS_DEST = "#{APP_DEST}/scripts"
 IMAGES_DEST = "#{APP_DEST}/images"
@@ -104,6 +104,15 @@ gulp.task 'compile-jade', ->
 
     combined.on 'error', handleErrors
 
+  handleTemplates = ->
+    combiner(
+      templateCache
+        module: 'app.template'
+        standalone: true
+        root: '../views'
+      uglify()
+    )
+
   index =
     gulp
       .src INDEX_SRC
@@ -113,13 +122,10 @@ gulp.task 'compile-jade', ->
   views =
     gulp
       .src VIEWS_SRC
+      .pipe gulpif DEV, changed VIEWS_DEST
       .pipe shared()
-      .pipe templateCache
-        module: 'app.template'
-        standalone: true
-        root: '../views'
-      .pipe uglify()
-      .pipe gulp.dest SCRIPTS_SRC
+      .pipe gulpif not DEV, handleTemplates()
+      .pipe gulpif DEV, (gulp.dest VIEWS_DEST), gulp.dest SCRIPTS_SRC
 
   merge index, views
     .pipe browserSync.stream()

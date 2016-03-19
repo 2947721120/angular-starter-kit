@@ -1,9 +1,9 @@
 require './modules.coffee'
-require './templates.js'
+# require './templates.js'
 
 angular
   .module 'app', [
     'ngMaterial', 'firebase'
     'app.core'
-    'app.template'
+    # 'app.template'
   ]
