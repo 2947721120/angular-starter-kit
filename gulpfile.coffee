@@ -27,7 +27,7 @@ coffeelint = require 'gulp-coffeelint'
 imagemin = require 'gulp-imagemin'
 pngquant = require 'imagemin-pngquant'
 browserSync = require 'browser-sync'
-rimraf = require 'rimraf'
+rimraf = require 'gulp-rimraf'
 runSequence = require 'run-sequence'
 
 # ----------
@@ -51,7 +51,8 @@ FONTS_SRC = "#{APP_SRC}/fonts/**/*"
 SURPLUS_SRC = ["#{APP_SRC}/favicon.ico", "#{APP_SRC}/robots.txt"]
 
 APP_DEST = './public'
-VIEWS_DEST = "#{APP_DEST}/views"
+VIEWS_DEST = "#{APP_DEST}/views"  # dev
+TEMPLATES_DEST = "#{SCRIPTS_SRC}/templates.js"  # prod
 STYLES_DEST = "#{APP_DEST}/styles"
 SCRIPTS_DEST = "#{APP_DEST}/scripts"
 IMAGES_DEST = "#{APP_DEST}/images"
@@ -97,7 +98,6 @@ gulp.task 'compile-jade', ->
   shared = ->
     combined =
       combiner(
-        changed APP_DEST
         jade()
         minifyHtml()
       )
@@ -118,6 +118,7 @@ gulp.task 'compile-jade', ->
         module: 'app.template'
         standalone: true
         root: '../views'
+      .pipe uglify()
       .pipe gulp.dest SCRIPTS_SRC
 
   merge index, views
@@ -251,13 +252,15 @@ gulp.task 'copy-files', ->
   merge fonts, surplus
     .pipe browserSync.stream()
 
-gulp.task 'build', [
-  'compile-jade', 'lint-jade'
-  'compile-stylus', 'lint-stylus'
-  'compile-coffeescript', 'lint-coffeescript'
-  'optimize-images'
-  'copy-files'
-]
+gulp.task 'build', (callback) ->
+  runSequence(
+    ['compile-jade', 'lint-jade']
+    ['compile-stylus', 'lint-stylus']
+    ['compile-coffeescript', 'lint-coffeescript']
+    'optimize-images'
+    'copy-files'
+    callback
+  )
 
 gulp.task 'serve', ->
   browserSync
@@ -271,8 +274,10 @@ gulp.task 'watch', ->
   gulp.watch IMAGES_SRC, ['optimize-images']
   gulp.watch [FONTS_SRC, SURPLUS_SRC], ['copy-files']
 
-gulp.task 'clean', (callback) ->
-  rimraf APP_DEST, callback
+gulp.task 'clean', ->
+  gulp
+    .src [APP_DEST, TEMPLATES_DEST], read: false
+    .pipe rimraf force: true
 
 # ----------
 # main
