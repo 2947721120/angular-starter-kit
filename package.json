@@ -27,11 +27,11 @@
   },
   "homepage": "https://github.com/Shyam-Chen/angular-starter-kit#readme",
   "dependencies": {
-    "angular": "^1.5.0",
-    "angular-animate": "^1.5.0",
-    "angular-aria": "^1.5.0",
+    "angular": "^1.5.2",
+    "angular-animate": "^1.5.2",
+    "angular-aria": "^1.5.2",
     "angular-material": "^1.0.6",
-    "angular-messages": "^1.5.0",
+    "angular-messages": "^1.5.2",
     "angularfire": "^1.1.4",
     "firebase": "^2.4.1"
   },
