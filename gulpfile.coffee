@@ -8,6 +8,7 @@ combiner = require 'stream-combiner'
 merge = require 'merge-stream'
 jade = require 'gulp-jade'
 minifyHtml = require 'gulp-minify-html'
+templateCache = require 'gulp-angular-templatecache'
 jadelint = require 'gulp-jadelint'
 sourcemaps = require 'gulp-sourcemaps'
 stylus = require 'gulp-stylus'
@@ -113,7 +114,11 @@ gulp.task 'compile-jade', ->
     gulp
       .src VIEWS_SRC
       .pipe shared()
-      .pipe gulp.dest VIEWS_DEST
+      .pipe templateCache
+        module: 'app.template'
+        standalone: true
+        root: '../views'
+      .pipe gulp.dest SCRIPTS_SRC
 
   merge index, views
     .pipe browserSync.stream()
