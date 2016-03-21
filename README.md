@@ -8,6 +8,7 @@
 * Bash and Atom
 * Jade, Stylus and CoffeeScript
 * Git, NPM, Gulp, Nib, PostStylus, Browserify, Watchify and BrowserSync
+* Jadelint, Stylint, CoffeeLint, Karma, Jasmine, Istanbul, Protractor, Travis CI and Coveralls
 
 ### Getting Started
 ##### Prerequisites
