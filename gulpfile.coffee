@@ -122,7 +122,7 @@ gulp.task 'compile-jade', ->
   views =
     gulp
       .src VIEWS_SRC
-      .pipe gulpif DEV, changed VIEWS_DEST
+      .pipe changed VIEWS_DEST
       .pipe shared()
       .pipe gulpif not DEV, handleTemplates()
       .pipe gulpif DEV, (gulp.dest VIEWS_DEST), gulp.dest SCRIPTS_SRC
