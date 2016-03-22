@@ -152,7 +152,6 @@ $ firebase deploy
 [AngularCoffee: Angular and CoffeeScript](https://github.com/Shyam-Chen/AngularCoffee)
 
 ### ToDo List
-* Component Router
 * Unit Testing
 * Scenario Testing
 * Continuous integration
