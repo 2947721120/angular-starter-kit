@@ -32,6 +32,7 @@
   },
   "homepage": "https://github.com/Shyam-Chen/angular-starter-kit#readme",
   "dependencies": {
+    "@angular/router": "^0.2.0",
     "angular": "^1.5.2",
     "angular-animate": "^1.5.2",
     "angular-aria": "^1.5.2",

@@ -129,6 +129,9 @@ $ npm run reinstall
 │   ├── favicon.ico
 │   ├── index.jade
 │   └── robots.txt
+├── test
+│   ├── scenario
+│   └── unit
 ├── .editorconfig
 ├── .gitattributes
 ├── .gitignore
@@ -152,6 +155,7 @@ $ firebase deploy
 [AngularCoffee: Angular and CoffeeScript](https://github.com/Shyam-Chen/AngularCoffee)
 
 ### ToDo List
+* Example - todo-app
 * Unit Testing
 * Scenario Testing
 * Continuous integration
