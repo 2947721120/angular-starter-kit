@@ -1,7 +1,7 @@
-cpns = require './components/index.coffee'
-ctrls = require './controllers/index.coffee'
+app = require './app.coffee'
 
 angular
   .module 'app.core', []
-  .component 'app', cpns.app
-  .controller 'AppCtrl', ctrls.app
+  .config app.config
+  .value app.inject, app.tag
+  .component app.tag, app.component

@@ -3,6 +3,7 @@ require './modules.coffee'
 
 angular
   .module 'app', [
+    'ngComponentRouter'
     'ngMaterial', 'firebase'
     'app.core'
     # 'app.template'
