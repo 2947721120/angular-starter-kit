@@ -8,6 +8,11 @@
     "build-dev-watch": "gulp --require coffee-script/register build-dev-watch",
     "build-prod": "gulp --require coffee-script/register build-prod",
     "build-prod-serve": "gulp --require coffee-script/register build-prod-serve",
+    "test": "karma start karma.conf.coffee --single-run && protractor protractor.conf.coffee",
+    "srkarma": "karma start karma.conf.coffee --single-run --browsers=PhantomJS",
+    "karma": "karma start karma.conf.coffee",
+    "preprotractor": "webdriver-manager update",
+    "protractor": "protractor protractor.conf.coffee",
     "clean": "gulp --require coffee-script/register clean",
     "reinstall": "npm cache clean && git clean -dfx -e '.*' && npm install"
   },
