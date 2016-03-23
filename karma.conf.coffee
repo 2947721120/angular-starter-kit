@@ -2,7 +2,7 @@ browserifyCoffeeCoverage = require 'browserify-coffee-coverage'
 
 module.exports = (config) ->
   config.set
-    basePath: './'
+    basePath: ''
     frameworks: [
       'jasmine'
       'browserify'
