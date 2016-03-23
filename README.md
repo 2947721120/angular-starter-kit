@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Shyam-Chen/angular-starter-kit.svg?branch=master)](https://travis-ci.org/Shyam-Chen/angular-starter-kit)
 [![Coverage Status](https://coveralls.io/repos/github/Shyam-Chen/angular-starter-kit/badge.svg?branch=master)](https://coveralls.io/github/Shyam-Chen/angular-starter-kit?branch=master)
+[![bitHound Overall Score](https://www.bithound.io/github/Shyam-Chen/angular-starter-kit/badges/score.svg)](https://www.bithound.io/github/Shyam-Chen/angular-starter-kit)
 [![Dependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit)
 [![devDependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit/dev-status.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit#info=devDependencies)
 
@@ -155,7 +156,7 @@ $ firebase deploy
 [AngularCoffee: Angular and CoffeeScript](https://github.com/Shyam-Chen/AngularCoffee)
 
 ### ToDo List
-* Example - todo-app
+* Example: todo-app
 * Unit Testing
 * Scenario Testing
 * Continuous integration
