@@ -26,8 +26,3 @@ module.exports = (config) ->
     browsers: ['Chrome']
     singleRun: false
     concurrency: Infinity
-    plugins: [
-      'karma-jasmine'
-      'karma-browserify'
-      'karma-phantomjs-launcher'
-    ]
