@@ -1,7 +1,7 @@
 # Angular Starter Kit
 
 [![Build Status](https://travis-ci.org/Shyam-Chen/angular-starter-kit.svg?branch=master)](https://travis-ci.org/Shyam-Chen/angular-starter-kit)
- // 
+ //
 [![Dependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit)
 [![devDependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit/dev-status.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit#info=devDependencies)
 
@@ -16,7 +16,7 @@
 ##### Prerequisites
 You need git to clone the angular-starter-kit repository. You can get git from http://git-scm.com/.
 
-We also use a number of node.js tools to initialize angular-starter-kit. You must have node.js and its package manager installed. You can get them from http://nodejs.org/.
+We also use a number of node.js tools to initialize and test angular-starter-kit. You must have node.js and its package manager installed. You can get them from http://nodejs.org/.
 
 ##### Clone angular-starter-kit
 ```bash

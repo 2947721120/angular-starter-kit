@@ -16,8 +16,8 @@ poststylus = require 'poststylus'
 uglifycss = require 'gulp-uglifycss'
 stylint = require 'gulp-stylint'
 coffeeify = require 'coffeeify'
-watchify = require 'watchify'
 browserify = require 'browserify'
+watchify = require 'watchify'
 source = require 'vinyl-source-stream'
 buffer = require 'vinyl-buffer'
 streamify = require 'gulp-streamify'
@@ -25,8 +25,8 @@ uglify = require 'gulp-uglify'
 coffeelint = require 'gulp-coffeelint'
 imagemin = require 'gulp-imagemin'
 pngquant = require 'imagemin-pngquant'
-browserSync = require 'browser-sync'
 rimraf = require 'gulp-rimraf'
+browserSync = require 'browser-sync'
 runSequence = require 'run-sequence'
 
 # ----------
@@ -256,6 +256,11 @@ gulp.task 'copy-files', ->
   merge fonts, surplus
     .pipe browserSync.stream()
 
+gulp.task 'clean', ->
+  gulp
+    .src [APP_DEST, TEMPLATES_DEST], read: false
+    .pipe rimraf force: true
+
 gulp.task 'build', (callback) ->
   runSequence(
     ['compile-jade', 'lint-jade']
@@ -277,11 +282,6 @@ gulp.task 'watch', ->
   gulp.watch SCRIPTS_FILTER_SRC, ['lint-coffeescript']
   gulp.watch IMAGES_SRC, ['optimize-images']
   gulp.watch [FONTS_SRC, SURPLUS_SRC], ['copy-files']
-
-gulp.task 'clean', ->
-  gulp
-    .src [APP_DEST, TEMPLATES_DEST], read: false
-    .pipe rimraf force: true
 
 # ----------
 # main
