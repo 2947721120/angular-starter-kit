@@ -1,15 +1,15 @@
 module.exports = (config) ->
   config.set
-    basePath: ''
+    basePath: './'
     frameworks: [
       'jasmine'
       'browserify'
     ]
     files: [
-      './node_modules/angular/angular.js'
-      './node_modules/angular-mocks/angular-mocks.js'
-      './src/scripts/main.coffee'
-      './test/unit/**/*.coffee'
+      'node_modules/angular/angular.js'
+      'node_modules/angular-mocks/angular-mocks.js'
+      'src/scripts/main.coffee'
+      'test/unit/**/*.coffee'
     ]
     exclude: []
     preprocessors:
