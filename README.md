@@ -7,7 +7,7 @@
 * Angular, Material and Firebase
 * Bash and Atom
 * Jade, Stylus and CoffeeScript
-* Git, NPM, Gulp, Nib, PostStylus, Browserify, Watchify and BrowserSync
+* Git, NPM, Gulp, PostStylus, Coffeeify and BrowserSync
 * Jadelint, Stylint, CoffeeLint, Jasmine, Karma, Protractor and Travis CI
 
 ### Getting Started
@@ -31,6 +31,12 @@ $ npm install
 ##### Run the Application
 ```bash
 $ npm start  # in development
+```
+
+##### Test the Application
+```bash
+$ npm test
+
 ```
 
 ### Other Commands
@@ -101,6 +107,7 @@ $ npm run reinstall
 │   │   │   ├── index.coffee
 │   │   │   ├── service-1.coffee
 │   │   │   └── service-2.coffee
+│   │   ├── app.coffee
 │   │   ├── config.coffee
 │   │   ├── constants.coffee
 │   │   ├── main.coffee

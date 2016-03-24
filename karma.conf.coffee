@@ -1,5 +1,3 @@
-browserifyCoffeeCoverage = require 'browserify-coffee-coverage'
-
 module.exports = (config) ->
   config.set
     basePath: ''
@@ -8,36 +6,19 @@ module.exports = (config) ->
       'browserify'
     ]
     files: [
+      './node_modules/angular/angular.js'
       './node_modules/angular-mocks/angular-mocks.js'
-      './src/scripts/**/*.coffee'
+      './src/scripts/main.coffee'
       './test/unit/**/*.coffee'
     ]
     exclude: []
     preprocessors:
-      '**/*.coffee': [
-        'browserify'
-        'coffee-coverage'
-      ]
+      '**/*.coffee': ['browserify']
     browserify:
       debug: true
-      transform: [
-        browserifyCoffeeCoverage
-          noInit: false
-      ]
-    coffeeCoverage:
-      preprocessor:
-        instrumentor: 'istanbul'
-    reporters: [
-      'progress'
-      'coverage'
-    ]
-    coverageReporter:
-      dir: 'coverage'
-      reporters: [
-        { type: 'text-summary' }
-        { type: 'json', subdir: '.', file: 'coverage-final.json' }
-        { type: 'html' }
-      ]
+      transform: ['coffeeify']
+      extensions: ['.coffee']
+    reporters: ['dots']
     port: 9876
     colors: true
     logLevel: config.LOG_INFO
@@ -45,3 +26,8 @@ module.exports = (config) ->
     browsers: ['Chrome']
     singleRun: false
     concurrency: Infinity
+    plugins: [
+      'karma-jasmine'
+      'karma-browserify'
+      'karma-phantomjs-launcher'
+    ]

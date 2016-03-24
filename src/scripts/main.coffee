@@ -1,4 +1,4 @@
-require './modules.coffee'
+require './modules'
 # require './templates.js'
 
 angular
@@ -6,5 +6,6 @@ angular
     'ngComponentRouter'
     'ngMaterial', 'firebase'
     'app.core'
+    'app.simple'
     # 'app.template'
   ]

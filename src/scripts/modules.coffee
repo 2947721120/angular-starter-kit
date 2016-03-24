@@ -1,4 +1,5 @@
-app = require './app.coffee'
+app = require './app'
+ctrls = require './controllers'
 
 angular
   .module 'app.core', []
@@ -7,5 +8,5 @@ angular
   .component app.tag, app.component
 
 angular
-  .module 'app.todo-app'
-  .component 'todoApp', cpns
+  .module 'app.simple', []
+  .controller 'SimpleCtrl', ctrls.simple

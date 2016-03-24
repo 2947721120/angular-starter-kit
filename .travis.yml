@@ -12,7 +12,4 @@ before_script:
 
 script:
   - karma start karma.conf.coffee --single-run --browsers=Firefox
-  - protractor protractor.conf.coffee --browser=firefox
-
-after_success:
-  - cat ./coverage/lcov.info | ./node_modules/.bin/coveralls
+#  - protractor protractor.conf.coffee --browser=firefox

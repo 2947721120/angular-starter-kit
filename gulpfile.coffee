@@ -12,7 +12,6 @@ templateCache = require 'gulp-angular-templatecache'
 jadelint = require 'gulp-jadelint'
 sourcemaps = require 'gulp-sourcemaps'
 stylus = require 'gulp-stylus'
-nib = require 'nib'
 poststylus = require 'poststylus'
 uglifycss = require 'gulp-uglifycss'
 stylint = require 'gulp-stylint'
@@ -142,13 +141,11 @@ gulp.task 'compile-stylus', ->
   shared = (vendor, map) ->
     opts =
       use: [
-        nib()
         poststylus [
           'autoprefixer'
           'rucksack-css'
         ]
       ]
-      import: ['nib']
 
     combined =
       combiner(
@@ -187,6 +184,7 @@ gulp.task 'compile-coffeescript', ->
     opts =
       entries: "#{SCRIPTS_SRC}/#{file}.coffee"
       transform: [coffeeify]
+      extensions: ['.coffee']
 
     if watch is true
       opts.debug = true
