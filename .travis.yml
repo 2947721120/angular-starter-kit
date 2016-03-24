@@ -11,5 +11,5 @@ before_script:
   - sleep 1
 
 script:
-  - karma start karma.conf.coffee --single-run --browsers=Firefox
-#  - protractor protractor.conf.coffee --browser=firefox
+#  - karma start karma.conf.coffee --single-run --browsers=Firefox
+  - protractor protractor.conf.coffee --browser=firefox
