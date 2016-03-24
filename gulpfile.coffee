@@ -62,13 +62,13 @@ FONTS_DEST = "#{APP_DEST}/fonts"
 # utils
 handleErrors = (error) ->
   if DEV is true
-    args = Array::slice.call arguments
+    arr = Array::slice.call arguments
 
     notify
       .onError
         title: 'Compile Error'
         message: "\r\n#{error}"
-      .apply this, args
+      .apply this, arr
 
     @emit 'end'
 

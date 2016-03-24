@@ -1,8 +1,5 @@
-# Angular Starter Kit
+# Angular Starter Kit [![Build Status](https://travis-ci.org/Shyam-Chen/angular-starter-kit.svg?branch=master)](https://travis-ci.org/Shyam-Chen/angular-starter-kit)
 
-[![Build Status](https://travis-ci.org/Shyam-Chen/angular-starter-kit.svg?branch=master)](https://travis-ci.org/Shyam-Chen/angular-starter-kit)
-[![Coverage Status](https://coveralls.io/repos/github/Shyam-Chen/angular-starter-kit/badge.svg?branch=master)](https://coveralls.io/github/Shyam-Chen/angular-starter-kit?branch=master)
-[![bitHound Overall Score](https://www.bithound.io/github/Shyam-Chen/angular-starter-kit/badges/score.svg)](https://www.bithound.io/github/Shyam-Chen/angular-starter-kit)
 [![Dependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit)
 [![devDependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit/dev-status.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit#info=devDependencies)
 
@@ -11,7 +8,7 @@
 * Bash and Atom
 * Jade, Stylus and CoffeeScript
 * Git, NPM, Gulp, Nib, PostStylus, Browserify, Watchify and BrowserSync
-* Jadelint, Stylint, CoffeeLint, Jasmine, Karma, Protractor, Travis CI, Istanbul and Coveralls
+* Jadelint, Stylint, CoffeeLint, Jasmine, Karma, Protractor and Travis CI
 
 ### Getting Started
 ##### Prerequisites
