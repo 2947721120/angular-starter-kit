@@ -4,7 +4,7 @@ exports.config =
   capabilities:
     browserName: 'chrome'
   baseUrl: 'http://localhost:9876/'
-  framework: 'jasmine2'
+  framework: 'jasmine'
   jasmineNodeOpts:
     isVerbose: true
     showColors: true

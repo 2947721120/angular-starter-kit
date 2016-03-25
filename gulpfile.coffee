@@ -31,7 +31,7 @@ runSequence = require 'run-sequence'
 
 # ----------
 # config
-[DEV, WATCH] = [true, true]
+[DEV, WATCH, TEST] = [true, true, true]
 
 APP_SRC = './src'
 INDEX_SRC = "#{APP_SRC}/index.jade"

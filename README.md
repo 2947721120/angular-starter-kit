@@ -136,7 +136,12 @@ $ npm run reinstall
 │   └── robots.txt
 ├── test
 │   ├── scenario
+│   │   ├── components
+│   │   └── app.coffee
 │   └── unit
+│       ├── animations
+│       ├── components
+│       └── app.coffee
 ├── .editorconfig
 ├── .gitattributes
 ├── .gitignore

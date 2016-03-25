@@ -1,5 +1,5 @@
 require './modules'
-# require './templates.js'
+# require './templates'
 
 angular
   .module 'app', [
