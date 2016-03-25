@@ -9,7 +9,7 @@
 * Angular, Material and Firebase
 * Bash and Atom
 * Jade, Stylus and CoffeeScript
-* Git, NPM, Gulp, PostStylus, Coffeeify and BrowserSync
+* Git, NPM, Gulp, PostStylus, Browserify, Watchify and BrowserSync
 * Jadelint, Stylint, CoffeeLint, Jasmine, Karma, Protractor and Travis CI
 
 ### Getting Started
@@ -32,7 +32,7 @@ $ npm install
 
 ##### Run the Application
 ```bash
-$ npm start  # in development
+$ npm start
 ```
 
 ##### Test the Application
@@ -88,12 +88,10 @@ $ npm run reinstall
 │   │   │   ├── animation-2.coffee
 │   │   │   └── index.coffee
 │   │   ├── components
-│   │   │   ├── app.coffee
 │   │   │   ├── component-1.coffee
 │   │   │   ├── component-2.coffee
 │   │   │   └── index.coffee
 │   │   ├── contrillers
-│   │   │   ├── app.coffee
 │   │   │   ├── contriller-1.coffee
 │   │   │   ├── contriller-2.coffee
 │   │   │   └── index.coffee
@@ -160,9 +158,3 @@ $ firebase deploy
 
 ### Cheat Sheet
 [AngularCoffee: Angular and CoffeeScript](https://github.com/Shyam-Chen/AngularCoffee)
-
-### ToDo List
-* Example: todo-app
-* Unit Testing
-* Scenario Testing
-* Continuous integration

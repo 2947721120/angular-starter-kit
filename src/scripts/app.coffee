@@ -5,13 +5,25 @@ class Config
     $locationProvider.html5Mode true
 
 class Value
-  @inject: '$routerRootComponent'
-  @tag: 'app'
+  @service: '$routerRootComponent'
+  @directive: 'app'
 
 class Component
   @templateUrl: '../views/main.html'
+###
+  @$routeConfig: [
+    path: ''
+    name: ''
+    component: ''
+    useAsDefault: true
+  ,
+    path: ''
+    name: ''
+    component: ''
+  ]
+###
 
 exports.config = Config
-exports.inject = Value.inject
-exports.tag = Value.tag
+exports.service = Value.service
+exports.directive = Value.directive
 exports.component = Component

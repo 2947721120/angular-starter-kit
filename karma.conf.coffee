@@ -13,7 +13,8 @@ module.exports = (config) ->
     ]
     exclude: []
     preprocessors:
-      '**/*.coffee': ['browserify']
+      'src/scripts/main.coffee': ['browserify']
+      'test/unit/**/*.coffee': ['coffee']
     browserify:
       debug: true
       transform: ['coffeeify']
