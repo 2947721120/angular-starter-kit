@@ -6,13 +6,14 @@ module.exports = (config) ->
       'browserify'
     ]
     files: [
-      'node_modules/angular/angular.js'
+      'src/scripts/vendor.coffee'
       'node_modules/angular-mocks/angular-mocks.js'
       'src/scripts/main.coffee'
       'test/unit/**/*.coffee'
     ]
     exclude: []
     preprocessors:
+      'src/scripts/vendor.coffee': ['browserify']
       'src/scripts/main.coffee': ['browserify']
       'test/unit/**/*.coffee': ['coffee']
     browserify:
