@@ -9,4 +9,4 @@ angular
 
 angular
   .module 'app.simple', []
-  .controller 'SimpleCtrl', ctrls.simple
+  .controller 'PasswordController', ctrls.simple
