@@ -1,5 +1,6 @@
-describe 'PasswordController', ->
-  beforeEach module('app.simple')
+describe 'Controller: PasswordController', ->
+  beforeEach module 'app.simple'
+
   $controller = undefined
   beforeEach inject((_$controller_) ->
     $controller = _$controller_
