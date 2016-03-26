@@ -1,20 +1,20 @@
 describe 'Component: simpleCpn', ->
-  beforeEach module 'app.simple2'
+  beforeEach module 'app.simple'
 
-  controller = undefined
-  scope = undefined
+  controller = null
+  scope = null
   beforeEach inject ($rootScope, $componentController) ->
     scope = $rootScope.$new()
     controller =
       $componentController 'simpleCpn',
         $scope: scope
       ,
-        myBinding: '1.5'
+        version: '1.0.0'
 
-  it 'should expose my title', ->
-    expect(controller.myTitle).toBeDefined()
-    expect(controller.myTitle).toBe 'Unit Testing AngularCoffee'
+  it 'should have a title', ->
+    expect(controller.title).toBeDefined()
+    expect(controller.title).toBe 'Angular Starter Kit'
 
-  it 'should have my binding bound', ->
-    expect(controller.myBinding).toBeDefined()
-    expect(controller.myBinding).toBe '1.5'
+  it 'should have a version', ->
+    expect(controller.version).toBeDefined()
+    expect(controller.version).toBe '1.0.0'

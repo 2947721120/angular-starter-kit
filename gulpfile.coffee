@@ -122,10 +122,12 @@ gulp.task 'compile-jade', ->
   views =
     gulp
       .src VIEWS_SRC
-      .pipe changed VIEWS_DEST
+      # .pipe changed VIEWS_DEST
       .pipe shared()
-      .pipe gulpif not DEV, handleTemplates()
-      .pipe gulpif DEV, (gulp.dest VIEWS_DEST), gulp.dest SCRIPTS_SRC
+      # .pipe gulpif not DEV, handleTemplates()
+      .pipe handleTemplates()
+      # .pipe gulpif DEV, (gulp.dest VIEWS_DEST), gulp.dest SCRIPTS_SRC
+      .pipe gulp.dest SCRIPTS_SRC
 
   merge index, views
     .pipe browserSync.stream()

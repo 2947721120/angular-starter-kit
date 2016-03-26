@@ -10,18 +10,6 @@ class Value
 
 class Component
   @templateUrl: '../views/main.html'
-###
-  @$routeConfig: [
-    path: ''
-    name: ''
-    component: ''
-    useAsDefault: true
-  ,
-    path: ''
-    name: ''
-    component: ''
-  ]
-###
 
 exports.config = Config
 exports.service = Value.service

@@ -1,8 +1,8 @@
 class SimpleCpn
   @bindings:
-    myBinding: '@'
+    version: '@'
   @controller: ->
-    @myTitle = 'Unit Testing AngularCoffee'
-  @template: "<h1>{{ $ctrl.myTitle }} {{ $ctrl.myBinding }}</h1>"
+    @title = 'Angular Starter Kit'
+  @templateUrl: '../views/components/component-1.html'
 
 module.exports = SimpleCpn
