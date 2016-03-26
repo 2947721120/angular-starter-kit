@@ -1,1 +1,0 @@
-angular.module("app.template",[]).run(["$templateCache",function(t){t.put("../views/main.html","<simple-cpn version=1.0.0></simple-cpn>"),t.put("../views/components/component-1.html","<md-button class=md-raised>{{ $ctrl.title }} {{ $ctrl.version }}</md-button>"),t.put("../views/components/component-2.html","")}]);
