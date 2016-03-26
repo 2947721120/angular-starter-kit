@@ -1,11 +1,11 @@
-app = require './app'
+core = require './core'
 cpns = require './components'
 
 angular
   .module 'app.core', []
-  .config app.config
-  .value app.service, app.directive
-  .component app.directive, app.component
+  .config core.config
+  .value core.service, core.directive
+  .component core.directive, core.component
 
 angular
   .module 'app.simple', []

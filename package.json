@@ -9,6 +9,7 @@
     "build-prod": "gulp --require coffee-script/register build-prod",
     "build-prod-serve": "gulp --require coffee-script/register build-prod-serve",
     "test": "karma start karma.conf.coffee --single-run && protractor protractor.conf.coffee",
+    "lint": "gulp --require coffee-script/register lint",
     "karma": "karma start karma.conf.coffee --single-run --browsers=PhantomJS",
     "karma:watch": "karma start karma.conf.coffee",
     "preprotractor": "webdriver-manager update",
