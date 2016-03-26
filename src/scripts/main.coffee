@@ -7,5 +7,6 @@ angular
     'ngMaterial', 'firebase'
     'app.core'
     'app.simple'
+    'app.simple2'
     # 'app.template'
   ]

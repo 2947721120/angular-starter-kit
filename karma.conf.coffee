@@ -20,7 +20,7 @@ module.exports = (config) ->
       debug: true
       transform: ['coffeeify']
       extensions: ['.coffee']
-    reporters: ['dots']
+    reporters: ['mocha']
     port: 9876
     colors: true
     logLevel: config.LOG_INFO
