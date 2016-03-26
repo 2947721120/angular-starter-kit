@@ -31,7 +31,8 @@ runSequence = require 'run-sequence'
 
 # ----------
 # config
-[DEV, WATCH, TEST] = [true, true, true]
+[DEV, DEV_WATCH] = [true, true]
+[TEST, TEST_WATCH] = [true, true]
 
 APP_SRC = './src'
 INDEX_SRC = "#{APP_SRC}/index.jade"
@@ -217,9 +218,9 @@ gulp.task 'compile-coffeescript', ->
 
     bundle()
 
-  vendor = shared SCRIPTS_VENDOR_SRC, DEV and WATCH, false
+  vendor = shared SCRIPTS_VENDOR_SRC, DEV and DEV_WATCH, false
 
-  main = shared SCRIPTS_MAIN_SRC, DEV and WATCH, DEV
+  main = shared SCRIPTS_MAIN_SRC, DEV and DEV_WATCH, DEV
 
   merge vendor, main
 
@@ -286,7 +287,7 @@ gulp.task 'watch', ->
 # ----------
 # main
 gulp.task 'build-dev', (callback) ->
-  WATCH = false
+  DEV_WATCH = false
   runSequence 'clean', 'build', callback
 
 gulp.task 'build-dev-watch', (callback) ->

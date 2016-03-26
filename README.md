@@ -16,7 +16,7 @@
 ##### Prerequisites
 You need git to clone the angular-starter-kit repository. You can get git from http://git-scm.com/.
 
-We also use a number of node.js tools to initialize and test angular-starter-kit. You must have node.js and its package manager installed. You can get them from http://nodejs.org/.
+I also use a number of node.js tools to initialize and test angular-starter-kit. You must have node.js and its package manager installed. You can get them from http://nodejs.org/.
 
 ##### Clone angular-starter-kit
 ```bash
@@ -26,7 +26,7 @@ $ cd <your-project-name>
 
 ##### Install Dependencies
 ```bash
-$ npm install -g gulp
+$ npm install -g gulp karma-cli protractor
 $ npm install
 ```
 
