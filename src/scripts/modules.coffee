@@ -9,4 +9,4 @@ angular
 
 angular
   .module 'app.simple', []
-  .component 'simpleCpn', cpns.simple
+  .component 'simple', cpns.simple

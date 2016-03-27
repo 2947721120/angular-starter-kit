@@ -1,4 +1,4 @@
-describe 'Component: simpleCpn', ->
+describe 'Component: simple', ->
   beforeEach module 'app.simple'
 
   scope = null
@@ -7,7 +7,7 @@ describe 'Component: simpleCpn', ->
   beforeEach inject ($rootScope, $componentController) ->
     scope = $rootScope.$new()
     controller =
-      $componentController 'simpleCpn',
+      $componentController 'simple',
         $scope: scope
       ,
         version: '1.0.0'
