@@ -12,5 +12,5 @@ before_script:
 
 script:
   - npm run lint
-  - karma start karma.conf.coffee --single-run --browsers=Firefox
-  - protractor protractor.conf.coffee --browser=firefox
+  - npm run unit
+  - npm run scenario

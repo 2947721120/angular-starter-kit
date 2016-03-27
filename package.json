@@ -4,17 +4,19 @@
   "description": "A starter kit for Angular applications",
   "scripts": {
     "start": "gulp --require coffee-script/register",
+    "test": "karma start karma.conf.coffee",
     "build-dev": "gulp --require coffee-script/register build-dev",
     "build-dev-watch": "gulp --require coffee-script/register build-dev-watch",
     "build-prod": "gulp --require coffee-script/register build-prod",
     "build-prod-serve": "gulp --require coffee-script/register build-prod-serve",
-    "test": "karma start karma.conf.coffee --single-run && protractor protractor.conf.coffee",
-    "lint": "gulp --require coffee-script/register lint",
     "karma": "karma start karma.conf.coffee --single-run --browsers=PhantomJS",
-    "karma:watch": "karma start karma.conf.coffee",
-    "preprotractor": "webdriver-manager update",
     "protractor": "protractor protractor.conf.coffee",
+    "test-all": "karma start karma.conf.coffee --single-run && protractor protractor.conf.coffee",
+    "lint": "gulp --require coffee-script/register lint",
+    "unit": "karma start karma.conf.coffee --single-run --browsers=Firefox",
+    "scenario": "protractor protractor.conf.coffee --browser=firefox",
     "clean": "gulp --require coffee-script/register clean",
+    "postinstall": "webdriver-manager update",
     "reinstall": "npm cache clean && git clean -dfx -e '.*' && npm install"
   },
   "repository": {
