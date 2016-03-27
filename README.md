@@ -5,6 +5,18 @@
 [![Dependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit)
 [![devDependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit/dev-status.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit#info=devDependencies)
 
+***
+
+### Table of Contents
+* [Key Features](https://github.com/Shyam-Chen/angular-starter-kit#key-features)
+* [Getting Started](https://github.com/Shyam-Chen/angular-starter-kit#getting-started)
+* [Other Commands](https://github.com/Shyam-Chen/angular-starter-kit#other-commands)
+* [Directory Structure](https://github.com/Shyam-Chen/angular-starter-kit#directory-structure)
+* [Deploy to Firebase Hosting](https://github.com/Shyam-Chen/angular-starter-kit#deploy-to-firebase-hosting)
+* [Cheat Sheet](https://github.com/Shyam-Chen/angular-starter-kit#cheat-sheet)
+
+***
+
 ### Key Features
 * Angular, Material and Firebase
 * Bash and Atom
