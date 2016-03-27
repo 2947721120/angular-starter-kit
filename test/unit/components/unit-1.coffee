@@ -1,8 +1,9 @@
 describe 'Component: simpleCpn', ->
   beforeEach module 'app.simple'
 
-  controller = null
   scope = null
+  controller = null
+
   beforeEach inject ($rootScope, $componentController) ->
     scope = $rootScope.$new()
     controller =
