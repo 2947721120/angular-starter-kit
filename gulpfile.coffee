@@ -299,10 +299,6 @@ gulp.task 'build-prod', (callback) ->
   DEV = false
   runSequence 'clean', 'build', callback
 
-gulp.task 'build-prod-serve', (callback) ->
-  DEV = false
-  runSequence 'clean', 'build', 'serve', callback
-
 gulp.task 'lint', (callback) ->
   runSequence 'lint-jade', 'lint-stylus', 'lint-coffeescript', callback
 
