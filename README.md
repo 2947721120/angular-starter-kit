@@ -1,7 +1,7 @@
 # Angular Starter Kit
 
 [![Build Status](https://travis-ci.org/Shyam-Chen/angular-starter-kit.svg?branch=master)](https://travis-ci.org/Shyam-Chen/angular-starter-kit)
-[![Test Coverage](https://codeclimate.com/github/Shyam-Chen/angular-starter-kit/badges/coverage.svg)](https://codeclimate.com/github/Shyam-Chen/angular-starter-kit/coverage)
+[![Coverage Status](https://coveralls.io/repos/github/Shyam-Chen/angular-starter-kit/badge.svg?branch=master)](https://coveralls.io/github/Shyam-Chen/angular-starter-kit?branch=master)
 [![Code Climate](https://codeclimate.com/github/Shyam-Chen/angular-starter-kit/badges/gpa.svg)](https://codeclimate.com/github/Shyam-Chen/angular-starter-kit)
  //
 [![Dependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit)
