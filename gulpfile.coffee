@@ -261,6 +261,9 @@ gulp.task 'clean', ->
     .src [APP_DEST, TEMPLATES_DEST], read: false
     .pipe rimraf force: true
 
+gulp.task 'lint', (callback) ->
+  runSequence 'lint-jade', 'lint-stylus', 'lint-coffeescript', callback
+
 gulp.task 'build', (callback) ->
   runSequence(
     ['compile-jade', 'lint-jade']
@@ -295,9 +298,6 @@ gulp.task 'build-dev-watch', (callback) ->
 gulp.task 'build-prod', (callback) ->
   DEV = false
   runSequence 'clean', 'build', callback
-
-gulp.task 'lint', (callback) ->
-  runSequence 'lint-jade', 'lint-stylus', 'lint-coffeescript', callback
 
 gulp.task 'default', (callback) ->
   runSequence 'clean', 'build', 'serve', 'watch', callback

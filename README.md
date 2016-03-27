@@ -45,21 +45,25 @@ $ npm test
 ##### Build the Application in Development
 ```bash
 $ npm run build-dev
+
+# test
+$ npm run build-test
 ```
 
 ##### Build the Application and Watching the Application Files in Development
 ```bash
 $ npm run build-dev-watch
+
+# test
+$ npm run build-test-watch
 ```
 
 ##### Build the Application in Production
 ```bash
 $ npm run build-prod
-```
 
-##### Build the Application and Serving the Application Files in Production
-```bash
-$ npm run build-prod-serve
+# test
+$ npm run build-e2e
 ```
 
 ##### Clean the Application
@@ -107,9 +111,9 @@ $ npm run reinstall
 │   │   │   ├── index.coffee
 │   │   │   ├── service-1.coffee
 │   │   │   └── service-2.coffee
-│   │   ├── app.coffee
 │   │   ├── config.coffee
 │   │   ├── constants.coffee
+│   │   ├── core.coffee
 │   │   ├── main.coffee
 │   │   ├── modules.coffee
 │   │   ├── run.coffee
@@ -135,23 +139,41 @@ $ npm run reinstall
 │   ├── index.jade
 │   └── robots.txt
 ├── test
-│   ├── scenario
-│   │   ├── components
-│   │   └── app.coffee
+│   ├── e2e
+│   │   ├── e2e-1.coffee
+│   │   └── e2e-2.coffee
 │   └── unit
 │       ├── animations
+│       │   ├── unit-1.coffee
+│       │   └── unit-2.coffee
 │       ├── components
-│       └── app.coffee
+│       │   ├── unit-1.coffee
+│       │   └── unit-2.coffee
+│       ├── controllers
+│       │   ├── unit-1.coffee
+│       │   └── unit-2.coffee
+│       ├── directives
+│       │   ├── unit-1.coffee
+│       │   └── unit-2.coffee
+│       ├── filters
+│       │   ├── unit-1.coffee
+│       │   └── unit-2.coffee
+│       └── services
+│           ├── unit-1.coffee
+│           └── unit-2.coffee
 ├── .editorconfig
 ├── .gitattributes
 ├── .gitignore
 ├── .jadelintrc
 ├── .stylintrc
+├── .travis.yml
 ├── LICENSE
 ├── README.md
 ├── coffeelint.json
 ├── gulpfile.coffee
-└── package.json
+├── karma.conf.coffee
+├── package.json
+└── protractor.conf.coffee
 ```
 
 ### Deploy to Firebase Hosting
