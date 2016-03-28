@@ -1,3 +1,5 @@
+coffeecoverageify = require 'browserify-coffee-coverage'
+
 class Config
   @basePath: './'
   @frameworks: [
@@ -14,12 +16,18 @@ class Config
   @preprocessors:
     'src/scripts/vendor.coffee': ['browserify']
     'src/scripts/main.coffee': ['browserify']
-    'test/unit/**/*.coffee': ['coffee']
+    'test/unit/**/*.coffee': ['coffee-coverage']
   @browserify:
     debug: true
-    transform: ['coffeeify']
+    transform: [coffeecoverageify]
     extensions: ['.coffee']
-  @reporters: ['mocha']
+  @coffeeCoverage:
+    preprocessor:
+      instrumentor: 'istanbul'
+  @reporters: ['mocha', 'coverage']
+  @coverageReporter:
+    type: 'html'
+    dir: 'coverage'
   @port: 9876
   @colors: true
   @autoWatch: true
