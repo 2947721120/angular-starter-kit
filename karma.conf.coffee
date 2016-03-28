@@ -26,8 +26,12 @@ class Config
       instrumentor: 'istanbul'
   @reporters: ['mocha', 'coverage']
   @coverageReporter:
-    type: 'html'
     dir: 'coverage'
+    reporters: [
+      { type: 'text-summary' },
+      { type: 'json', subdir: '.', file: 'coverage-final.json' },
+      { type: 'html' }
+    ]
   @port: 9876
   @colors: true
   @autoWatch: true
