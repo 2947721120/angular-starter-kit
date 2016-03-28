@@ -1,9 +1,9 @@
 describe 'Protractor Demo App', ->
-  firstNumber = element(By.model('first'))
-  secondNumber = element(By.model('second'))
-  goButton = element(By.id('gobutton'))
-  latestResult = element(By.binding('latest'))
-  history = element.all(By.repeater('result in memory'))
+  firstNumber = element By.model 'first'
+  secondNumber = element By.model 'second'
+  goButton = element By.id 'gobutton'
+  latestResult = element By.binding 'latest'
+  history = element.all By.repeater 'result in memory'
 
   add = (x, y) ->
     firstNumber.sendKeys x
