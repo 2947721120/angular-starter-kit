@@ -9,10 +9,10 @@
 
 ### Key Features
 * Angular, Material and Firebase
-* Bash and Atom
+* Bash, Atom, Git and NPM
 * Jade, Stylus and CoffeeScript
-* Git, NPM, Gulp, PostStylus, Browserify, Watchify and BrowserSync
-* Jadelint, Stylint, CoffeeLint, Jasmine, Karma, Protractor and Travis CI
+* Gulp, Jadelint, PostStylus, Stylint, Browserify, Watchify, CoffeeLint and BrowserSync
+* Jasmine, Karma, Protractor, Travis CI, Istanbul, Coveralls and Code Climate
 
 ### Getting Started
 ##### Prerequisites
