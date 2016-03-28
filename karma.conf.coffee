@@ -27,6 +27,7 @@ class Config
   @reporters: [
     'mocha'
     'coverage'
+    'coveralls'
   ]
   @coverageReporter:
     dir: 'coverage'
@@ -38,6 +39,8 @@ class Config
       file: 'coverage-final.json'
     ,
       type: 'html'
+    ,
+      type: 'lcov'
     ]
   @port: 9876
   @colors: true
