@@ -27,7 +27,6 @@ class Config
   @reporters: [
     'mocha'
     'coverage'
-    'coveralls'
   ]
   @coverageReporter:
     dir: 'coverage'
