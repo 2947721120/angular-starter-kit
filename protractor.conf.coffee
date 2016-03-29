@@ -6,8 +6,10 @@ class Config
   @baseUrl: 'http://localhost:9876/'
   @framework: 'jasmine'
   @jasmineNodeOpts:
-    isVerbose: true
     showColors: true
-    includeStackTrace: true
+    defaultTimeoutInterval: 30000
+    print: ->
+    grep: 'pattern'
+    invertGrep: false
 
 exports.config = Config
