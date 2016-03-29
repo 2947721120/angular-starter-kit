@@ -77,21 +77,21 @@ handleErrors = (error) ->
     console.log "#{gutil.colors.red error}"
     process.exit 1
 
-class TimeLogger
+class BundleLogger
   start = null
-
-  constructor: (@task) ->
+  task = 'compile-coffeescript'
 
   startTime: ->
     start = process.hrtime()
-    gutil.log 'Starting', "'#{gutil.colors.cyan @task}'..."
+    gutil.log 'Starting', "'#{gutil.colors.cyan task}'..."
 
   endTime: ->
     end = process.hrtime start
     words = prettyHrtime end
-    gutil.log 'Finished', "
-      '#{gutil.colors.cyan @task}' after #{gutil.colors.magenta words}
-    "
+    gutil.log 'Finished',
+      "'#{gutil.colors.cyan task}' after #{gutil.colors.magenta words}"
+
+bundleLogger = new BundleLogger()
 
 # ----------
 # tasks
@@ -196,26 +196,32 @@ gulp.task 'compile-coffeescript', ->
 
     bundler = if watch then watchify browserify opts else browserify opts
 
+    bundleShared = ->
+      combined =
+        combiner(
+          source "#{file}.js"
+          buffer()
+          gulpif map, sourcemaps.init loadMaps: true
+          streamify uglify()
+          gulpif map, sourcemaps.write './'
+          gulp.dest SCRIPTS_DEST
+          browserSync.stream()
+        )
+
+      combined.on 'error', handleErrors
+
     bundle = ->
       bundler
         .bundle()
-        .on 'error', handleErrors
-        .pipe source "#{file}.js"
-        .pipe buffer()
-        .pipe gulpif map, sourcemaps.init loadMaps: true
-        .pipe streamify uglify()
-        .pipe gulpif map, sourcemaps.write './'
-        .pipe gulp.dest SCRIPTS_DEST
-        .pipe browserSync.stream()
+        .pipe bundleShared()
 
     bundler.on 'update', ->
-      bundleLogger = new TimeLogger 'compile-coffeescript'
-
       bundleLogger.startTime()
 
-      bundle()
-
-      bundleLogger.endTime()
+      bundler
+        .bundle()
+        .on 'end', bundleLogger.endTime
+        .pipe bundleShared()
 
     bundle()
 
