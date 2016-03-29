@@ -28,7 +28,6 @@ $ cd <your-project-name>
 
 ##### Install Dependencies
 ```bash
-$ npm install -g gulp karma-cli protractor
 $ npm install
 ```
 
