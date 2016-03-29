@@ -2,20 +2,23 @@ describe 'Component: simple', ->
   beforeEach module 'app.simple'
 
   scope = null
-  ctrl = null
+  $componentController = null
+  component = null
 
-  beforeEach inject ($rootScope, $componentController) ->
+  beforeEach inject ($rootScope, _$componentController_) ->
     scope = $rootScope.$new()
-    ctrl =
+    $componentController = _$componentController_
+
+    component =
       $componentController 'simple',
         $scope: scope
       ,
         version: '1.0.0'
 
   it 'should have a title', ->
-    expect(ctrl.title).toBeDefined()
-    expect(ctrl.title).toBe 'Angular Starter Kit'
+    expect(component.title).toBeDefined()
+    expect(component.title).toBe 'Angular Starter Kit'
 
   it 'should have a version', ->
-    expect(ctrl.version).toBeDefined()
-    expect(ctrl.version).toBe '1.0.0'
+    expect(component.version).toBeDefined()
+    expect(component.version).toBe '1.0.0'
