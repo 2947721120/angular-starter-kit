@@ -1,9 +1,7 @@
-# Angular Starter Kit
+# Angular Starter Kit [![Codacy Badge](https://api.codacy.com/project/badge/grade/357d0497a436489689351efd1a627a55)](https://www.codacy.com/app/shyamchen1994/angular-starter-kit)
 
 [![Build Status](https://travis-ci.org/Shyam-Chen/angular-starter-kit.svg?branch=master)](https://travis-ci.org/Shyam-Chen/angular-starter-kit)
 [![Coverage Status](https://coveralls.io/repos/github/Shyam-Chen/angular-starter-kit/badge.svg?branch=master)](https://coveralls.io/github/Shyam-Chen/angular-starter-kit?branch=master)
-[![Code Climate](https://codeclimate.com/github/Shyam-Chen/angular-starter-kit/badges/gpa.svg)](https://codeclimate.com/github/Shyam-Chen/angular-starter-kit)
- //
 [![Dependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit)
 [![devDependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit/dev-status.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit#info=devDependencies)
 
@@ -12,7 +10,7 @@
 * Bash, Atom, Git and NPM
 * Jade, Stylus and CoffeeScript
 * Gulp, Jadelint, PostStylus, Stylint, Browserify, Watchify, CoffeeLint and BrowserSync
-* Jasmine, Karma, Protractor, Travis CI, Istanbul, Coveralls and Code Climate
+* Jasmine, Karma, Protractor, Travis CI, Istanbul, Coveralls and Codacy
 
 ### Getting Started
 ##### Prerequisites

@@ -215,13 +215,15 @@ gulp.task 'compile-coffeescript', ->
         .bundle()
         .pipe bundleShared()
 
-    bundler.on 'update', ->
+    rebundle = ->
       bundleLogger.startTime()
 
       bundler
         .bundle()
         .on 'end', bundleLogger.endTime
         .pipe bundleShared()
+
+    bundler.on 'update', rebundle
 
     bundle()
 
