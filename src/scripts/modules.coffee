@@ -1,11 +1,13 @@
+config = require './config'
+values = require './values'
 core = require './core'
 cpns = require './components'
 
 angular
   .module 'app.core', []
-  .config core.config
-  .value core.service, core.directive
-  .component core.directive, core.component
+  .config config.core
+  .value '$routerRootComponent', values.core
+  .component 'app', core
 
 angular
   .module 'app.simple', []
