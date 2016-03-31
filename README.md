@@ -160,8 +160,7 @@ $ npm run reinstall
 │       ├── services
 │       │   ├── unit-1.coffee
 │       │   └── unit-2.coffee
-│       ├── core.coffee
-│       └── modules.coffee
+│       └── core.coffee
 ├── .editorconfig
 ├── .gitattributes
 ├── .gitignore
