@@ -9,4 +9,3 @@ angular
     # 'app.template'
     'app.simple'
   ]
-a = 1
