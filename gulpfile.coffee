@@ -78,18 +78,18 @@ handleErrors = (error) ->
     process.exit 1
 
 class BundleLogger
-  start = null
-  task = 'compile-coffeescript'
+  _start = null
+  _task = 'compile-coffeescript'
 
   startTime: ->
-    start = process.hrtime()
-    gutil.log 'Starting', "'#{gutil.colors.cyan task}'..."
+    _start = process.hrtime()
+    gutil.log 'Starting', "'#{gutil.colors.cyan _task}'..."
 
   endTime: ->
-    end = process.hrtime start
+    end = process.hrtime _start
     words = prettyHrtime end
     gutil.log 'Finished',
-      "'#{gutil.colors.cyan task}' after #{gutil.colors.magenta words}"
+      "'#{gutil.colors.cyan _task}' after #{gutil.colors.magenta words}"
 
 bundleLogger = new BundleLogger()
 
