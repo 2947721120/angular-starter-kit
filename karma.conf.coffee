@@ -10,17 +10,22 @@ class Config
     'src/scripts/vendor.coffee'
     'node_modules/angular-mocks/angular-mocks.js'
     'src/scripts/main.coffee'
+    'src/views/**/*.jade'
     'test/unit/**/*.coffee'
   ]
   @exclude: []
   @preprocessors:
     'src/scripts/vendor.coffee': ['browserify']
     'src/scripts/main.coffee': ['browserify']
+    'src/views/**/*.jade': ['ng-jade2js']
     'test/unit/**/*.coffee': ['coffee-coverage']
   @browserify:
     debug: true
     transform: [coffeecoverageify]
     extensions: ['.coffee']
+  @ngJade2JsPreprocessor:
+    stripPrefix: 'src/views'
+    moduleName: 'app.template'
   @coffeeCoverage:
     preprocessor:
       instrumentor: 'istanbul'
