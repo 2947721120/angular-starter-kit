@@ -157,9 +157,11 @@ $ npm run reinstall
 │       ├── filters
 │       │   ├── unit-1.coffee
 │       │   └── unit-2.coffee
-│       └── services
-│           ├── unit-1.coffee
-│           └── unit-2.coffee
+│       ├── services
+│       │   ├── unit-1.coffee
+│       │   └── unit-2.coffee
+│       ├── core.coffee
+│       └── modules.coffee
 ├── .editorconfig
 ├── .gitattributes
 ├── .gitignore
