@@ -15,6 +15,9 @@ describe 'Component: simple', ->
       ,
         version: '1.0.0'
 
+  it 'should be attached to the scope', ->
+    expect(scope.$ctrl).toBe component
+
   it 'should have a title', ->
     expect(component.title).toBeDefined()
     expect(component.title).toBe 'Angular Starter Kit'
