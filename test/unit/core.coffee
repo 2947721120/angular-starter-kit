@@ -1,4 +1,4 @@
-describe 'Component: core', ->
+describe 'Core', ->
   beforeEach module 'app.core'
 
   scope = null
