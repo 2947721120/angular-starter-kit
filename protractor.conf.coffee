@@ -1,7 +1,6 @@
 SpecReporter = require 'jasmine-spec-reporter'
 
 class Config
-  @seleniumAddress: 'http://localhost:4444/wd/hub'
   @directConnect: true
   @specs: ['./test/e2e/**/*.coffee']
   @exclude: []
