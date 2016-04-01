@@ -2,8 +2,9 @@
 
 ### Project Status
 * [![Build Status](https://travis-ci.org/Shyam-Chen/angular-starter-kit.svg?branch=master)](https://travis-ci.org/Shyam-Chen/angular-starter-kit)
-* [![Coverage Status](https://coveralls.io/repos/github/Shyam-Chen/angular-starter-kit/badge.svg?branch=master)](https://coveralls.io/github/Shyam-Chen/angular-starter-kit?branch=master)
 * [![Quality Status](https://img.shields.io/badge/quality-level%20A-brightgreen.svg)](https://www.codacy.com/app/shyamchen1994/angular-starter-kit)
+* [![Coverage Status](https://coveralls.io/repos/github/Shyam-Chen/angular-starter-kit/badge.svg?branch=master)](https://coveralls.io/github/Shyam-Chen/angular-starter-kit?branch=master)
+* [![Scenario Status](https://img.shields.io/badge/scenario-unknown%20-lightgrey.svg)](https://saucelabs.com/u/Shyam-Chen)
 * [![Dependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit)
 * [![devDependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit/dev-status.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit#info=devDependencies)
 
@@ -11,9 +12,10 @@
 * Angular, Material and Firebase
 * Bash, Atom, Git and NPM
 * Jade, Stylus and CoffeeScript
-* Gulp, , PostStylus, , Browserify, Watchify,  and BrowserSync
-* Jadelint, Stylint, CoffeeLint and Codacy
-* Jasmine, Karma, Istanbul, Protractor, Travis CI, Coveralls, Sauce Labs
+* Gulp, PostStylus, Browserify and BrowserSync  
+* Jadelint, Stylint and CoffeeLint
+* Jasmine, Karma, Istanbul and Protractor
+* Travis CI, Codacy, Coveralls and Sauce Labs
 
 ### Getting Started
 ##### Prerequisites
