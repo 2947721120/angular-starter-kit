@@ -1,12 +1,13 @@
 SpecReporter = require 'jasmine-spec-reporter'
 
 class Config
+  @seleniumAddress: 'http://localhost:4444/wd/hub'
   @directConnect: true
   @specs: ['./test/e2e/**/*.coffee']
   @exclude: []
   @capabilities:
     browserName: 'chrome'
-  @baseUrl: 'http://localhost:9876/'
+  @baseUrl: 'http://localhost:3000/'
   @allScriptsTimeout: 110000
   @onPrepare: ->
     jasmine.getEnv().addReporter new SpecReporter displayStacktrace: true
