@@ -9,10 +9,6 @@ class Core
     path: '/about'
     name: 'About'
     component: 'about'
-  ,
-    path: '/thing'
-    name: 'Thing'
-    component: 'thing'
   ]
 
 module.exports = Core

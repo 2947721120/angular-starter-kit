@@ -7,7 +7,6 @@ angular
   .module 'app.core', [
     'core.home'
     'core.about'
-    'core.thing'
   ]
   .config config.core
   .value '$routerRootComponent', values.core
@@ -24,7 +23,3 @@ angular
 angular
   .module 'core.about', []
   .component 'about', template: 'About Page'
-
-angular
-  .module 'core.thing', []
-  .component 'thing', template: 'Thing Page'

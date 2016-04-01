@@ -1,25 +1,6 @@
-describe 'Protractor Demo App', ->
-  firstNumber = element By.model 'first'
-  secondNumber = element By.model 'second'
-  goButton = element By.id 'gobutton'
-  latestResult = element By.binding 'latest'
-  history = element.all By.repeater 'result in memory'
-
-  add = (x, y) ->
-    firstNumber.sendKeys x
-    secondNumber.sendKeys y
-
-    goButton.click()
-
+describe 'Core', ->
   beforeEach ->
-    browser.get 'http://juliemr.github.io/protractor-demo/'
+    browser.get 'http://localhost:3000/'
 
-  it 'should have a history', ->
-    add 1, 2
-    add 3, 4
-
-    expect(history.count()).toEqual 2
-
-    add 5, 6
-
-    expect(history.count()).toEqual 3
+  it 'should have a router', ->
+    expect(browser.getLocationAbsUrl()).toMatch('/')
