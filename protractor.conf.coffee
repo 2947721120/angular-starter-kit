@@ -6,7 +6,7 @@ class Config
   @exclude: []
   @capabilities:
     browserName: 'chrome'
-  @baseUrl: 'http://localhost:3000/public'
+  @baseUrl: 'http://localhost:3000/'
   @allScriptsTimeout: 110000
   @onPrepare: ->
     jasmine.getEnv().addReporter new SpecReporter displayStacktrace: true

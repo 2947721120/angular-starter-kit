@@ -3,6 +3,11 @@ node_js:
   - '4'
   - '5'
 
+env:
+  global:
+    - SAUCE_USERNAME=Shyam-Chen
+    - SAUCE_ACCESS_KEY=c3608032-6eff-452e-9027-602ca80a8778
+
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start

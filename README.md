@@ -11,8 +11,8 @@
 * Angular, Material and Firebase
 * Bash, Atom, Git and NPM
 * Jade, Stylus and CoffeeScript
-* Gulp, Jadelint, PostStylus, Stylint, Browserify, CoffeeLint and BrowserSync
-* Jasmine, Karma, Protractor, Travis CI, Istanbul, Coveralls and Codacy
+* Gulp, Jadelint, PostStylus, Stylint, Browserify, Watchify, CoffeeLint and BrowserSync
+* Jasmine, Karma, Istanbul, Protractor, Travis CI, Coveralls, Sauce Labs and Codacy
 
 ### Getting Started
 ##### Prerequisites
