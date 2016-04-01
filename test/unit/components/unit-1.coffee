@@ -15,6 +15,9 @@ describe 'Component: simple', ->
       ,
         version: '1.0.0'
 
+  it 'should have a component', ->
+    expect(component).toBeDefined()
+
   it 'should be attached to the scope', ->
     expect(scope.$ctrl).toBe component
 
