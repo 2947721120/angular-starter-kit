@@ -1,5 +1,5 @@
-describe 'Component: simple', ->
-  beforeEach module 'app.simple'
+describe 'Component: example', ->
+  beforeEach module 'app.example'
 
   scope = null
   $componentController = null
@@ -10,10 +10,10 @@ describe 'Component: simple', ->
     $componentController = _$componentController_
 
     component =
-      $componentController 'simple',
+      $componentController 'starterKit',
         $scope: scope
       ,
-        version: '1.0.0'
+        version: 'v1.0.0'
 
   it 'should have a component', ->
     expect(component).toBeDefined()
@@ -23,8 +23,8 @@ describe 'Component: simple', ->
 
   it 'should have a title', ->
     expect(component.title).toBeDefined()
-    expect(component.title).toBe 'Angular Starter Kit'
+    expect(component.title).toBe 'ngular Starter Kit'
 
   it 'should have a version', ->
     expect(component.version).toBeDefined()
-    expect(component.version).toBe '1.0.0'
+    expect(component.version).toBe 'v1.0.0'

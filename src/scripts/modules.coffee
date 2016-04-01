@@ -4,11 +4,27 @@ core = require './core'
 cpns = require './components'
 
 angular
-  .module 'app.core', []
+  .module 'app.core', [
+    'core.home'
+    'core.about'
+    'core.thing'
+  ]
   .config config.core
   .value '$routerRootComponent', values.core
   .component 'app', core
 
 angular
-  .module 'app.simple', []
-  .component 'simple', cpns.simple
+  .module 'app.example', []
+  .component 'starterKit', cpns.example
+
+angular
+  .module 'core.home', []
+  .component 'home', template: 'Home Page'
+
+angular
+  .module 'core.about', []
+  .component 'about', template: 'About Page'
+
+angular
+  .module 'core.thing', []
+  .component 'thing', template: 'Thing Page'

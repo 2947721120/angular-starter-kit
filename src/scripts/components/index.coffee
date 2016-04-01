@@ -1,1 +1,1 @@
-exports.simple = require './component-1'
+exports.example = require './component-1'

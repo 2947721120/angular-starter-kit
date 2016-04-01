@@ -1,8 +1,8 @@
-class Simple
+class Example
   @bindings:
     version: '@'
   @controller: ->
-    @title = 'Angular Starter Kit'
+    @title = 'ngular Starter Kit'
   @templateUrl: '../views/components/component-1.html'
 
-module.exports = Simple
+module.exports = Example

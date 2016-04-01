@@ -1,1 +1,12 @@
-simple(version='1.0.0')
+md-toolbar(md-whiteframe='2')
+  .md-toolbar-tools
+    span(flex='5')
+    image(src='../images/image-1.png')
+    starter-kit(version='v1.0.0')
+    span(flex)
+    md-button(ng-link="['Home']") Home
+    md-button(ng-link="['About']") About
+    md-button(ng-link="['Thing']") Thing
+    span(flex='5')
+md-content(layout-padding)
+  ng-outlet

@@ -7,5 +7,5 @@ angular
     'ngMaterial', 'firebase'
     'app.core'
     # 'app.template'
-    'app.simple'
+    'app.example'
   ]
