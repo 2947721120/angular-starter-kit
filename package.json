@@ -16,7 +16,7 @@
     "postinstall": "webdriver-manager update",
     "lint": "gulp --require coffee-script/register lint",
     "unit": "karma start karma.conf.coffee --single-run --browsers=Firefox",
-    "e2e": "protractor protractor.conf.coffee --browser=firefox",
+    "e2e": "protractor protractor.conf.coffee",
     "coverage": "cat ./coverage/**/lcov.info | ./node_modules/.bin/coveralls"
   },
   "repository": {
