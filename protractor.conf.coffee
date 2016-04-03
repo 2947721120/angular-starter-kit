@@ -18,15 +18,13 @@ class Config
     isVerbose: false
     includeStackTrace: false
     defaultTimeoutInterval: 400000
-
-config = new Config()
 ###
 if process.env.TRAVIS
-  config.sauceUser = process.env.SAUCE_USERNAME
-  config.sauceKey = process.env.SAUCE_ACCESS_KEY
-  config.capabilities =
+  Config.sauceUser = process.env.SAUCE_USERNAME
+  Config.sauceKey = process.env.SAUCE_ACCESS_KEY
+  Config.capabilities =
     browserName: 'chrome'
     'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
     build: process.env.TRAVIS_BUILD_NUMBER
 ###
-exports.config = config
+exports.config = Config
