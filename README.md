@@ -18,11 +18,6 @@
 * Travis CI, Codacy, Coveralls and Sauce Labs
 
 ### Getting Started
-##### Prerequisites
-You need git to clone the angular-starter-kit repository. You can get git from http://git-scm.com/.
-
-I also use a number of node.js tools to initialize and test angular-starter-kit. You must have node.js and its package manager installed. You can get them from http://nodejs.org/.
-
 ##### Clone angular-starter-kit
 ```bash
 $ git clone --depth=1 https://github.com/Shyam-Chen/angular-starter-kit.git <your-project-name>
@@ -46,27 +41,23 @@ $ npm test
 ```
 
 ### Other Commands
-##### Build the Application in Development
+##### Build the Application
 ```bash
+# headless browser
 $ npm run build-dev
-
-# test
-$ npm run build-test
-```
-
-##### Build the Application and Watching the Application Files in Development
-```bash
 $ npm run build-dev-watch
 
-# test
-$ npm run build-test-watch
+# production build
+$ npm run build-prod
 ```
 
-##### Build the Application in Production
+##### Test the Application
 ```bash
-$ npm run build-prod
+# headless browser
+$ npm run build-test
+$ npm run build-test-watch
 
-# test
+# scenario testing
 $ npm run build-e2e
 ```
 
