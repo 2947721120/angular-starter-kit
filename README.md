@@ -43,7 +43,7 @@ $ npm test
 ### Other Commands
 ##### Build the Application
 ```bash
-# headless browser
+# no start browser
 $ npm run build-dev
 $ npm run build-dev-watch
 
@@ -53,7 +53,7 @@ $ npm run build-prod
 
 ##### Test the Application
 ```bash
-# headless browser
+# no start browser
 $ npm run build-test
 $ npm run build-test-watch
 
