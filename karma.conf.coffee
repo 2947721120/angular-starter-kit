@@ -50,7 +50,14 @@ class Config
   @colors: true
   @autoWatch: true
   @browsers: ['Chrome']
+  @customLaunchers:
+    Chrome_travis_ci:
+      base: 'Chrome'
+      flags: ['--no-sandbox']
   @singleRun: false
   @concurrency: Infinity
+
+if process.env.TRAVIS
+  Config.browsers = ['Chrome_travis_ci']
 
 module.exports = (config) -> config.set Config
