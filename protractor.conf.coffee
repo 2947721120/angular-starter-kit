@@ -20,7 +20,7 @@ class Config
     defaultTimeoutInterval: 400000
 
 config = new Config()
-
+###
 if process.env.TRAVIS
   config.sauceUser = process.env.SAUCE_USERNAME
   config.sauceKey = process.env.SAUCE_ACCESS_KEY
@@ -28,5 +28,5 @@ if process.env.TRAVIS
     browserName: 'chrome'
     'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
     build: process.env.TRAVIS_BUILD_NUMBER
-
+###
 exports.config = config
