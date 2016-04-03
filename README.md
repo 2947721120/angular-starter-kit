@@ -53,7 +53,7 @@ $ npm run build-prod
 
 ##### Test the Application
 ```bash
-# no start browser
+# use headless browser
 $ npm run build-test
 $ npm run build-test-watch
 
