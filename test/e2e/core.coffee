@@ -1,6 +1,6 @@
 describe 'Core', ->
   beforeEach ->
-    browser.get 'index.html'
+    browser.get '/'
 
   it 'should have a router', ->
     expect(browser.getLocationAbsUrl()).toMatch('/')

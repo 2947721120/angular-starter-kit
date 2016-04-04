@@ -29,6 +29,27 @@ rimraf = require 'gulp-rimraf'
 browserSync = require 'browser-sync'
 runSequence = require 'run-sequence'
 
+gprotractor = require 'gulp-protractor'
+express = require 'express'
+
+e2eServer = (port, dir) ->
+  app = express()
+  app.use express.static dir
+  new Promise (resolve) ->
+    server = app.listen port, -> resolve(server)
+
+gulp.task 'webdriverUpdate', gprotractor.webdriver_update
+gulp.task 'webdriver', gprotractor.webdriver
+
+gulp.task 'e2e', ['build-prod', 'webdriverUpdate', 'webdriver'], ->
+  e2eServer 3000, './public'
+    .then (server) ->
+      gulp
+        .src './test/e2e/**/*.coffee'
+        .pipe gprotractor.protractor configFile: 'protractor.conf.coffee'
+        .on 'error', (error) -> throw error
+        .on 'end', -> server.close()
+
 # ----------
 # config
 [DEV, WATCH] = [true, true]
