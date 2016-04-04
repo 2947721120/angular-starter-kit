@@ -1,0 +1,2 @@
+export SAUCE_USERNAME="Shyam-Chen"
+export SAUCE_ACCESS_KEY="c3608032-6eff-452e-9027-602ca80a8778"
