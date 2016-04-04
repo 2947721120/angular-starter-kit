@@ -23,7 +23,6 @@ if process.env.TRAVIS
   Config.sauceUser = process.env.SAUCE_USERNAME
   Config.sauceKey = process.env.SAUCE_ACCESS_KEY
   Config.capabilities =
-    browserName: 'chrome'
     'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
     build: process.env.TRAVIS_BUILD_NUMBER
 

@@ -18,7 +18,7 @@ before_script:
 script:
   - npm run lint
   - npm run unit
-  - npm run e2e
+#  - npm run e2e
 
 after_success:
   - npm run coverage
