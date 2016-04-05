@@ -1,7 +1,6 @@
 SpecReporter = require 'jasmine-spec-reporter'
 
 class Config
-  @seleniumAddress: 'http://Shyam-Chen:c3608032-6eff-452e-9027-602ca80a8778@ondemand.saucelabs.com:80/wd/hub'
   @directConnect: true
   @specs: ['./test/e2e/**/*.coffee']
   @exclude: []
