@@ -1,11 +1,7 @@
-# Angular Starter Kit
+# Angular Starter Kit [![Build Status](https://travis-ci.org/Shyam-Chen/angular-starter-kit.svg?branch=master)](https://travis-ci.org/Shyam-Chen/angular-starter-kit)
 
-### Project Status
-* [![Build Status](https://travis-ci.org/Shyam-Chen/angular-starter-kit.svg?branch=master)](https://travis-ci.org/Shyam-Chen/angular-starter-kit)
-* [![Quality Status](https://img.shields.io/badge/quality-level%20A-brightgreen.svg)](https://www.codacy.com/app/shyamchen1994/angular-starter-kit)
-* [![Coverage Status](https://coveralls.io/repos/github/Shyam-Chen/angular-starter-kit/badge.svg?branch=master)](https://coveralls.io/github/Shyam-Chen/angular-starter-kit?branch=master)
-* [![Dependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit)
-* [![devDependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit/dev-status.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit#info=devDependencies)
+[![Dependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit)
+[![devDependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit/dev-status.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit#info=devDependencies)
 
 ### Key Features
 * Angular, Material and Firebase
