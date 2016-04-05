@@ -12,7 +12,7 @@
 * Angular, Material and Firebase
 * Bash, Atom, Git and NPM
 * Jade, Stylus and CoffeeScript
-* Gulp, PostStylus, Browserify and BrowserSync  
+* Gulp, PostCSS, Browserify and BrowserSync  
 * Jadelint, Stylint and CoffeeLint
 * Jasmine, Karma, Istanbul and Protractor
 * Travis CI, Codacy, Coveralls and Sauce Labs
