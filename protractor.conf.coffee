@@ -27,5 +27,6 @@ if process.env.TRAVIS
     'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
     build: process.env.TRAVIS_BUILD_NUMBER
     name: 'Protractor Tests'
+  Config.directConnect = false
 
 exports.config = Config
