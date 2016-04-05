@@ -324,7 +324,7 @@ gulp.task 'build-prod', (callback) ->
   runSequence 'clean', 'build', callback
 
 gulp.task 'build-e2e', ['build-prod'], ->
-  e2eServer 3000, './public'
+  e2eServer 3000, APP_DEST
     .then (server) ->
       gulp
         .src './test/e2e/**/*.coffee'
