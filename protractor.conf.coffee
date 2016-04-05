@@ -1,9 +1,8 @@
 SpecReporter = require 'jasmine-spec-reporter'
 
 class Config
-  @sauceUser: 'Shyam-Chen'
-  @sauceKey: 'c3608032-6eff-452e-9027-602ca80a8778'
-  @sauceSeleniumAddress: 'http://ondemand.saucelabs.com:80/wd/hub'
+  @sauceUser: process.env.SAUCE_USERNAME
+  @sauceKey: process.env.SAUCE_ACCESS_KEY
   @directConnect: true
   @specs: ['./test/e2e/**/*.coffee']
   @exclude: []
@@ -11,6 +10,7 @@ class Config
     browserName: 'chrome'
     'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
     build: process.env.TRAVIS_BUILD_NUMBER
+    name: 'Scenario Testing'
   @baseUrl: 'http://localhost:3000/'
   @allScriptsTimeout: 110000
   @onPrepare: ->
