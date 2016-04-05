@@ -101,7 +101,7 @@ e2eServer = (port, dir) ->
 
   new Promise (resolve) ->
     server = app.listen port, ->
-      resolve(server)
+      resolve server
 
 gulp.task 'webdriver', gprotractor.webdriver
 gulp.task 'webdriverUpdate', gprotractor.webdriver_update
