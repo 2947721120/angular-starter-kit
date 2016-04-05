@@ -78,7 +78,7 @@ handleErrors = (error) ->
     console.log "#{gutil.colors.red error}"
     process.exit 1
 
-class BundleLogger
+class RebundleLogger
   _start = null
   _task = 'compile-coffeescript'
 
@@ -92,7 +92,7 @@ class BundleLogger
     gutil.log 'Finished',
       "'#{gutil.colors.cyan _task}' after #{gutil.colors.magenta words}"
 
-bundleLogger = new BundleLogger()
+rebundleLogger = new RebundleLogger()
 
 e2eServer = (port, dir) ->
   app = express()
@@ -230,11 +230,11 @@ gulp.task 'compile-coffeescript', ->
         .pipe bundleShared()
 
     rebundle = ->
-      bundleLogger.startTime()
+      rebundleLogger.startTime()
 
       bundler
         .bundle()
-        .on 'end', bundleLogger.endTime
+        .on 'end', rebundleLogger.endTime
         .pipe bundleShared()
 
     bundler.on 'update', rebundle
