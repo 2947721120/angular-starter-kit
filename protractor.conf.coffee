@@ -26,7 +26,7 @@ if process.env.TRAVIS
     browserName: 'chrome'
     'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
     build: process.env.TRAVIS_BUILD_NUMBER
-    name: 'Protractor Tests'
+    name: 'angular-starter-kit'
   Config.directConnect = false
 
 exports.config = Config

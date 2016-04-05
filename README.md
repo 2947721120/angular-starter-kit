@@ -1,7 +1,12 @@
-# Angular Starter Kit [![Build Status](https://travis-ci.org/Shyam-Chen/angular-starter-kit.svg?branch=master)](https://travis-ci.org/Shyam-Chen/angular-starter-kit)
+# Angular Starter Kit
 
-[![Dependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit)
-[![devDependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit/dev-status.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit#info=devDependencies)
+### Project Status
+* [![Build Status](https://travis-ci.org/Shyam-Chen/angular-starter-kit.svg?branch=master)](https://travis-ci.org/Shyam-Chen/angular-starter-kit)
+* [![Quality Status](https://img.shields.io/badge/quality-A-brightgreen.svg)](https://www.codacy.com/app/shyamchen1994/angular-starter-kit/dashboard)
+* [![Coverage Status](https://coveralls.io/repos/github/Shyam-Chen/angular-starter-kit/badge.svg?branch=master)](https://coveralls.io/github/Shyam-Chen/angular-starter-kit?branch=master)
+* [![Browser Status](https://img.shields.io/badge/browser-passing-brightgreen.svg)](https://saucelabs.com/u/Shyam-Chen)
+* [![Dependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit)
+* [![devDependency Status](https://david-dm.org/Shyam-Chen/angular-starter-kit/dev-status.svg)](https://david-dm.org/Shyam-Chen/angular-starter-kit#info=devDependencies)
 
 ### Key Features
 * Angular, Material and Firebase
@@ -38,21 +43,17 @@ $ npm test
 ### Other Commands
 ##### Build the Application
 ```bash
-# no start browser
 $ npm run build-dev
 $ npm run build-dev-watch
 
-# production build
 $ npm run build-prod
 ```
 
 ##### Test the Application
 ```bash
-# use headless browser
 $ npm run build-test
 $ npm run build-test-watch
 
-# scenario testing
 $ npm run build-e2e
 ```
 
@@ -130,6 +131,7 @@ $ npm run reinstall
 │   └── robots.txt
 ├── test
 │   ├── e2e
+│   │   ├── core.coffee
 │   │   ├── e2e-1.coffee
 │   │   └── e2e-2.coffee
 │   └── unit
