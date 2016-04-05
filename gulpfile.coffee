@@ -27,28 +27,9 @@ imagemin = require 'gulp-imagemin'
 pngquant = require 'imagemin-pngquant'
 rimraf = require 'gulp-rimraf'
 browserSync = require 'browser-sync'
-runSequence = require 'run-sequence'
-
-gprotractor = require 'gulp-protractor'
 express = require 'express'
-
-e2eServer = (port, dir) ->
-  app = express()
-  app.use express.static dir
-  new Promise (resolve) ->
-    server = app.listen port, -> resolve(server)
-
-gulp.task 'webdriverUpdate', gprotractor.webdriver_update
-gulp.task 'webdriver', gprotractor.webdriver
-
-gulp.task 'e2e', ['build-prod', 'webdriverUpdate', 'webdriver'], ->
-  e2eServer 3000, './public'
-    .then (server) ->
-      gulp
-        .src './test/e2e/**/*.coffee'
-        .pipe gprotractor.protractor configFile: 'protractor.conf.coffee'
-        .on 'error', (error) -> throw error
-        .on 'end', -> server.close()
+gprotractor = require 'gulp-protractor'
+runSequence = require 'run-sequence'
 
 # ----------
 # config
@@ -112,6 +93,19 @@ class BundleLogger
       "'#{gutil.colors.cyan _task}' after #{gutil.colors.magenta words}"
 
 bundleLogger = new BundleLogger()
+
+e2eServer = (port, dir) ->
+  app = express()
+
+  app.use express.static dir
+
+  new Promise (resolve) ->
+    server = app.listen port, ->
+      resolve(server)
+
+gulp.task 'webdriver', gprotractor.webdriver
+gulp.task 'webdriverUpdate', gprotractor.webdriver_update
+gulp.task 'postinstall', ['webdriver', 'webdriverUpdate']
 
 # ----------
 # tasks
@@ -328,6 +322,15 @@ gulp.task 'build-dev-watch', (callback) ->
 gulp.task 'build-prod', (callback) ->
   DEV = false
   runSequence 'clean', 'build', callback
+
+gulp.task 'build-e2e', ['build-prod'], ->
+  e2eServer 3000, './public'
+    .then (server) ->
+      gulp
+        .src './test/e2e/**/*.coffee'
+        .pipe gprotractor.protractor configFile: 'protractor.conf.coffee'
+        .on 'error', (error) -> throw error
+        .on 'end', -> server.close()
 
 gulp.task 'default', (callback) ->
   runSequence 'clean', 'build', 'serve', 'watch', callback

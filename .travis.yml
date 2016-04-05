@@ -1,12 +1,11 @@
 language: node_js
+sudo: false
 node_js:
   - '4'
   - '5'
 
 addons:
-  sauce_connect:
-    username: "Shyam-Chen"
-    access_key: "c3608032-6eff-452e-9027-602ca80a8778"
+  sauce_connect: true
 
 before_script:
   - export CHROME_BIN=chromium-browser
@@ -16,9 +15,9 @@ before_script:
   - sleep 1
 
 script:
-  - npm run lint
-  - npm run unit
-#  - npm run e2e
+  - gulp --require coffee-script/register lint
+  - karma start karma.conf.coffee --single-run
+  - gulp --require coffee-script/register build-e2e
 
 after_success:
-  - npm run coverage
+  - cat ./coverage/**/lcov.info | ./node_modules/.bin/coveralls

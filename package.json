@@ -10,14 +10,10 @@
     "build-dev-watch": "gulp --require coffee-script/register build-dev-watch",
     "build-test-watch": "karma start karma.conf.coffee --browsers=PhantomJS",
     "build-prod": "gulp --require coffee-script/register build-prod",
-    "build-e2e": "gulp --require coffee-script/register e2e",
+    "build-e2e": "gulp --require coffee-script/register build-e2e",
     "clean": "gulp --require coffee-script/register clean",
     "reinstall": "npm cache clean && git clean -dfx -e '.*' && npm install",
-    "postinstall": "webdriver-manager update",
-    "lint": "gulp --require coffee-script/register lint",
-    "unit": "karma start karma.conf.coffee --single-run",
-    "e2e": "gulp --require coffee-script/register e2e",
-    "coverage": "cat ./coverage/**/lcov.info | ./node_modules/.bin/coveralls"
+    "postinstall": "gulp --require coffee-script/register postinstall"
   },
   "repository": {
     "type": "git",
