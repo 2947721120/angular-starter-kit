@@ -20,8 +20,8 @@ class Config
     defaultTimeoutInterval: 400000
 
 if process.env.TRAVIS
-  Config.sauceUser = process.env.SAUCE_USERNAME
-  Config.sauceKey = process.env.SAUCE_ACCESS_KEY
+  Config.sauceUser = 'Shyam-Chen'
+  Config.sauceKey = 'c3608032-6eff-452e-9027-602ca80a8778'
   Config.capabilities =
     'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
     build: process.env.TRAVIS_BUILD_NUMBER
