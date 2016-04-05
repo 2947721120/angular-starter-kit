@@ -22,6 +22,7 @@ before_script:
 script:
   - gulp --require coffee-script/register lint
   - karma start karma.conf.coffee --single-run
+  - gulp --require coffee-script/register build-e2e
 
 after_success:
   - cat ./coverage/**/lcov.info | ./node_modules/.bin/coveralls
