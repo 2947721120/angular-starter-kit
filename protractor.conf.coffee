@@ -23,7 +23,7 @@ if process.env.TRAVIS
   Config.sauceKey = process.env.SAUCE_ACCESS_KEY
   Config.capabilities =
     browserName: 'chrome'
-    'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
+    tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER
     build: process.env.TRAVIS_BUILD_NUMBER
     name: 'angular-starter-kit'
   Config.directConnect = false

@@ -103,9 +103,7 @@ e2eServer = (port, dir) ->
     server = app.listen port, ->
       resolve server
 
-gulp.task 'webdriver', gprotractor.webdriver
-gulp.task 'webdriverUpdate', gprotractor.webdriver_update
-gulp.task 'postinstall', ['webdriver', 'webdriverUpdate']
+gulp.task 'postinstall', gprotractor.webdriver_update
 
 # ----------
 # tasks
