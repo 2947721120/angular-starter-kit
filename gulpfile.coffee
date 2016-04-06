@@ -156,7 +156,6 @@ gulp.task 'compile-stylus', ->
     opts =
       use: [
         poststylus [
-          'autoprefixer'
           'rucksack-css'
         ]
       ]
