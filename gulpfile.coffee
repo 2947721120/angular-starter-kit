@@ -285,9 +285,6 @@ gulp.task 'clean', ->
     .src [APP_DEST, TEMPLATES_DEST, COVERAGE_DEST], read: false
     .pipe rimraf force: true
 
-gulp.task 'lint', (callback) ->
-  runSequence 'lint-jade', 'lint-stylus', 'lint-coffeescript', callback
-
 gulp.task 'build', (callback) ->
   runSequence(
     ['compile-jade', 'lint-jade']
@@ -310,6 +307,29 @@ gulp.task 'watch', ->
   gulp.watch IMAGES_SRC, ['optimize-images']
   gulp.watch [FONTS_SRC, SURPLUS_SRC], ['copy-files']
 
+gulp.task 'lint', (callback) ->
+  runSequence 'lint-jade', 'lint-stylus', 'lint-coffeescript', callback
+
+gulp.task 'pree2e', (callback) ->
+  DEV = false
+  runSequence(
+    'compile-jade'
+    'compile-stylus'
+    'compile-coffeescript'
+    'optimize-images'
+    'copy-files'
+    callback
+  )
+
+gulp.task 'e2e', ['pree2e'], ->
+  e2eServer 3000, APP_DEST
+    .then (server) ->
+      gulp
+        .src './test/e2e/**/*.coffee'
+        .pipe gprotractor.protractor configFile: 'protractor.conf.coffee'
+        .on 'error', (error) -> throw error
+        .on 'end', -> server.close()
+
 # ----------
 # main
 gulp.task 'build-dev', (callback) ->
@@ -323,14 +343,9 @@ gulp.task 'build-prod', (callback) ->
   DEV = false
   runSequence 'clean', 'build', callback
 
-gulp.task 'build-e2e', ['build-prod'], ->
-  e2eServer 3000, APP_DEST
-    .then (server) ->
-      gulp
-        .src './test/e2e/**/*.coffee'
-        .pipe gprotractor.protractor configFile: 'protractor.conf.coffee'
-        .on 'error', (error) -> throw error
-        .on 'end', -> server.close()
+gulp.task 'build-e2e', (callback) ->
+  DEV = false
+  runSequence 'clean', 'e2e', callback
 
 gulp.task 'default', (callback) ->
   runSequence 'clean', 'build', 'serve', 'watch', callback
