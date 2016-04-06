@@ -167,7 +167,7 @@ $ npm run reinstall
 └── protractor.conf.coffee
 ```
 
-### Deploy to Firebase Hosting
+### Firebase Hosting
 ```bash
 $ npm install -g firebase-tools
 $ firebase init
