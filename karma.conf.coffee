@@ -36,12 +36,12 @@ class Config
   @coverageReporter:
     dir: 'coverage'
     reporters: [
-      type: 'text-summary'
-    ,
-      type: 'json'
-      subdir: '.'
-      file: 'coverage-final.json'
-    ,
+#      type: 'text-summary'
+#    ,
+#      type: 'json'
+#      subdir: '.'
+#      file: 'coverage-final.json'
+#    ,
       type: 'html'
     ,
       type: 'lcov'

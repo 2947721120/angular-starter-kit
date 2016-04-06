@@ -15,6 +15,3 @@ describe 'Core', ->
 
   it 'should have a component', ->
     expect(component).toBeDefined()
-
-  it 'should be attached to the scope', ->
-    expect(scope.$ctrl).toBe component

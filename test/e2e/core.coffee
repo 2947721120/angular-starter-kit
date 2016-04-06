@@ -3,4 +3,4 @@ describe 'Core', ->
     browser.get '/'
 
   it 'should have a router', ->
-    expect(browser.getLocationAbsUrl()).toMatch('/')
+    expect(browser.getLocationAbsUrl()).toMatch '/'
