@@ -4,8 +4,7 @@ class Config
   @directConnect: true
   @specs: ['./test/e2e/**/*.coffee']
   @exclude: []
-  @capabilities:
-    browserName: 'chrome'
+  @capabilities: browserName: 'chrome'
   @baseUrl: 'http://localhost:3000/'
   @allScriptsTimeout: 110000
   @onPrepare: ->
