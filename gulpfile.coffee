@@ -27,13 +27,15 @@ imagemin = require 'gulp-imagemin'
 pngquant = require 'imagemin-pngquant'
 rimraf = require 'gulp-rimraf'
 browserSync = require 'browser-sync'
+karma = require 'karma'
 express = require 'express'
 gprotractor = require 'gulp-protractor'
 runSequence = require 'run-sequence'
 
 # ----------
 # config
-[DEV, WATCH] = [true, true]
+[IN_DEV, DEV_WATCH] = [true, true]
+[TEST_SERVE, TEST_WATCH] = [true, true]
 
 APP_SRC = './src'
 INDEX_SRC = "#{APP_SRC}/index.jade"
@@ -62,8 +64,8 @@ COVERAGE_DEST = './coverage'
 
 # ----------
 # utils
-handleErrors = (error) ->
-  if DEV is true
+handleCompileErrors = (error) ->
+  if IN_DEV is true
     arr = Array::slice.call arguments
 
     notify
@@ -94,6 +96,8 @@ class RebundleLogger
 
 rebundleLogger = new RebundleLogger()
 
+UnitServer = karma.Server
+
 e2eServer = (port, dir) ->
   app = express()
 
@@ -115,7 +119,7 @@ gulp.task 'compile-jade', ->
         minifyHtml()
       )
 
-    combined.on 'error', handleErrors
+    combined.on 'error', handleCompileErrors
 
   handleTemplates = ->
     combiner(
@@ -137,8 +141,8 @@ gulp.task 'compile-jade', ->
       .src VIEWS_SRC
       .pipe changed VIEWS_DEST
       .pipe shared()
-      .pipe gulpif not DEV, handleTemplates()
-      .pipe gulpif DEV, (gulp.dest VIEWS_DEST), gulp.dest SCRIPTS_SRC
+      .pipe gulpif not IN_DEV, handleTemplates()
+      .pipe gulpif IN_DEV, (gulp.dest VIEWS_DEST), gulp.dest SCRIPTS_SRC
 
   merge index, views
     .pipe browserSync.stream()
@@ -169,7 +173,7 @@ gulp.task 'compile-stylus', ->
         gulpif map, sourcemaps.write './'
       )
 
-    combined.on 'error', handleErrors
+    combined.on 'error', handleCompileErrors
 
   copy = gulp.src CSS_VENDOR_SRC
   load = gulp.src STYLES_VENDOR_SRC
@@ -180,7 +184,7 @@ gulp.task 'compile-stylus', ->
   main =
     gulp
       .src STYLES_MAIN_SRC
-      .pipe shared false, DEV
+      .pipe shared false, IN_DEV
 
   merge vendor, main
     .pipe gulp.dest STYLES_DEST
@@ -219,7 +223,7 @@ gulp.task 'compile-coffeescript', ->
           browserSync.stream()
         )
 
-      combined.on 'error', handleErrors
+      combined.on 'error', handleCompileErrors
 
     bundle = ->
       bundler
@@ -238,9 +242,9 @@ gulp.task 'compile-coffeescript', ->
 
     bundle()
 
-  vendor = shared SCRIPTS_VENDOR_SRC, DEV and WATCH, false
+  vendor = shared SCRIPTS_VENDOR_SRC, IN_DEV and DEV_WATCH, false
 
-  main = shared SCRIPTS_MAIN_SRC, DEV and WATCH, DEV
+  main = shared SCRIPTS_MAIN_SRC, IN_DEV and DEV_WATCH, IN_DEV
 
   merge vendor, main
 
@@ -307,8 +311,22 @@ gulp.task 'watch', ->
 gulp.task 'lint', (callback) ->
   runSequence 'lint-jade', 'lint-stylus', 'lint-coffeescript', callback
 
+gulp.task 'unit', (callback) ->
+  opts =
+    configFile: "#{__dirname}/karma.conf.coffee"
+
+  if TEST_WATCH is false
+    opts.browsers = ['PhantomJS']
+    opts.singleRun = true
+
+  if TEST_SERVE is false
+    opts.browsers = ['PhantomJS']
+
+  new UnitServer opts, callback
+    .start()
+
 gulp.task 'pree2e', (callback) ->
-  DEV = false
+  IN_DEV = false
   runSequence(
     'compile-jade'
     'compile-stylus'
@@ -329,20 +347,31 @@ gulp.task 'e2e', ['pree2e'], ->
 
 # ----------
 # main
+gulp.task 'start', (callback) ->
+  runSequence 'clean', 'build', 'serve', 'watch', callback
+
+gulp.task 'test', (callback) ->
+  runSequence 'unit', callback
+
 gulp.task 'build-dev', (callback) ->
-  WATCH = false
+  DEV_WATCH = false
   runSequence 'clean', 'build', callback
+
+gulp.task 'build-test', (callback) ->
+  TEST_WATCH = false
+  runSequence 'unit', callback
 
 gulp.task 'build-dev-watch', (callback) ->
   runSequence 'clean', 'build', 'watch', callback
 
+gulp.task 'build-test-watch', (callback) ->
+  TEST_SERVE = false
+  runSequence 'unit', callback
+
 gulp.task 'build-prod', (callback) ->
-  DEV = false
+  IN_DEV = false
   runSequence 'clean', 'build', callback
 
 gulp.task 'build-e2e', (callback) ->
-  DEV = false
+  IN_DEV = false
   runSequence 'clean', 'e2e', callback
-
-gulp.task 'default', (callback) ->
-  runSequence 'clean', 'build', 'serve', 'watch', callback

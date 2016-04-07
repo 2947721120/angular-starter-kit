@@ -19,7 +19,7 @@ before_script:
 
 script:
   - gulp --require coffee-script/register lint
-  - karma start karma.conf.coffee
+  - gulp --require coffee-script/register unit
   - gulp --require coffee-script/register e2e
 
 after_success:
