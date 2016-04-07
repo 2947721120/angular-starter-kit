@@ -35,7 +35,7 @@ runSequence = require 'run-sequence'
 # ----------
 # config
 [IN_DEV, DEV_WATCH] = [true, true]
-[TEST_SERVE, TEST_WATCH] = [true, true]
+[TEST_WATCH, TEST_SERVE] = [true, true]
 
 APP_SRC = './src'
 INDEX_SRC = "#{APP_SRC}/index.jade"
@@ -98,7 +98,7 @@ rebundleLogger = new RebundleLogger()
 
 UnitServer = karma.Server
 
-e2eServer = (port, dir) ->
+e2eServer = ({port, dir}) ->
   app = express()
 
   app.use express.static dir
@@ -325,7 +325,7 @@ gulp.task 'unit', (callback) ->
   new UnitServer opts, callback
     .start()
 
-gulp.task 'pree2e', (callback) ->
+gulp.task 'pre-e2e', (callback) ->
   IN_DEV = false
   runSequence(
     'compile-jade'
@@ -336,14 +336,21 @@ gulp.task 'pree2e', (callback) ->
     callback
   )
 
-gulp.task 'e2e', ['pree2e'], ->
-  e2eServer 3000, APP_DEST
+gulp.task 'run-e2e', ->
+  opts =
+    port: 3000
+    dir: APP_DEST
+
+  e2eServer opts
     .then (server) ->
       gulp
         .src './test/e2e/**/*.coffee'
         .pipe gprotractor.protractor configFile: 'protractor.conf.coffee'
         .on 'error', (error) -> throw error
         .on 'end', -> server.close()
+
+gulp.task 'e2e', (callback) ->
+  runSequence 'pre-e2e', 'run-e2e', callback
 
 # ----------
 # main
@@ -373,5 +380,4 @@ gulp.task 'build-prod', (callback) ->
   runSequence 'clean', 'build', callback
 
 gulp.task 'build-e2e', (callback) ->
-  IN_DEV = false
   runSequence 'clean', 'e2e', callback
