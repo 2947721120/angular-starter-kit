@@ -1,6 +1,3 @@
-SpecReporter = require 'jasmine-spec-reporter'
-phantomjs = require 'phantomjs'
-
 class Config
   @directConnect: true
   @specs: ['./test/e2e/**/*.coffee']
@@ -9,6 +6,7 @@ class Config
   @baseUrl: 'http://localhost:3000/'
   @allScriptsTimeout: 110000
   @onPrepare: ->
+    SpecReporter = require 'jasmine-spec-reporter'
     jasmine.getEnv().addReporter new SpecReporter displayStacktrace: true
     browser.ignoreSynchronization = false
   @framework: 'jasmine'
@@ -22,7 +20,7 @@ class Config
 if process.env.TRAVIS
   Config.capabilities =
     browserName: 'phantomjs'
-    'phantomjs.binary.path': phantomjs.path
+    'phantomjs.binary.path': require('phantomjs').path
   Config.directConnect = false
 
 exports.config = Config
