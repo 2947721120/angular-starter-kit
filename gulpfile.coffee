@@ -35,7 +35,7 @@ runSequence = require 'run-sequence'
 # ----------
 # config
 [IN_DEV, DEV_WATCH] = [true, true]
-[TEST_WATCH, TEST_SERVE] = [true, true]
+[TEST_SERVE, TEST_WATCH] = [true, true]
 
 APP_SRC = './src'
 INDEX_SRC = "#{APP_SRC}/index.jade"
@@ -315,12 +315,11 @@ gulp.task 'unit', (callback) ->
   opts =
     configFile: "#{__dirname}/karma.conf.coffee"
 
-  if TEST_WATCH is false
-    opts.browsers = ['PhantomJS']
-    opts.singleRun = true
-
   if TEST_SERVE is false
     opts.browsers = ['PhantomJS']
+
+  if TEST_WATCH is false
+    opts.singleRun = true
 
   new UnitServer opts, callback
     .start()
@@ -365,7 +364,7 @@ gulp.task 'build-dev', (callback) ->
   runSequence 'clean', 'build', callback
 
 gulp.task 'build-test', (callback) ->
-  TEST_WATCH = false
+  [TEST_SERVE, TEST_WATCH] = [false, false]
   runSequence 'unit', callback
 
 gulp.task 'build-dev-watch', (callback) ->
