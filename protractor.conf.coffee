@@ -1,4 +1,5 @@
 SpecReporter = require 'jasmine-spec-reporter'
+phantomjs = require 'phantomjs'
 
 class Config
   @directConnect: true
@@ -19,13 +20,9 @@ class Config
     defaultTimeoutInterval: 400000
 
 if process.env.TRAVIS
-  Config.sauceUser = process.env.SAUCE_USERNAME
-  Config.sauceKey = process.env.SAUCE_ACCESS_KEY
   Config.capabilities =
-    browserName: 'chrome'
-    tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER
-    build: process.env.TRAVIS_BUILD_NUMBER
-    name: 'angular-starter-kit'
+    browserName: 'phantomjs'
+    'phantomjs.binary.path': phantomjs.path
   Config.directConnect = false
 
 exports.config = Config

@@ -1,5 +1,3 @@
-coffeecoverageify = require 'browserify-coffee-coverage'
-
 class Config
   @basePath: './'
   @frameworks: [
@@ -18,34 +16,15 @@ class Config
     'src/scripts/vendor.coffee': ['browserify']
     'src/scripts/main.coffee': ['browserify']
     'src/views/**/*.jade': ['ng-jade2js']
-    'test/unit/**/*.coffee': ['coffee-coverage']
+    'test/unit/**/*.coffee': ['coffee']
   @browserify:
     debug: true
-    transform: [coffeecoverageify]
+    transform: ['coffeeify']
     extensions: ['.coffee']
   @ngJade2JsPreprocessor:
     stripPrefix: 'src/views'
     moduleName: 'app.template'
-  @coffeeCoverage:
-    preprocessor:
-      instrumentor: 'istanbul'
-  @reporters: [
-    'mocha'
-    'coverage'
-  ]
-  @coverageReporter:
-    dir: 'coverage'
-    reporters: [
-#      type: 'text-summary'
-#    ,
-#      type: 'json'
-#      subdir: '.'
-#      file: 'coverage-final.json'
-#    ,
-      type: 'html'
-    ,
-      type: 'lcov'
-    ]
+  @reporters: ['mocha']
   @port: 9876
   @colors: true
   @autoWatch: true
@@ -54,11 +33,7 @@ class Config
   @concurrency: Infinity
 
 if process.env.TRAVIS
-  Config.customLaunchers =
-    Chrome_travis_ci:
-      base: 'Chrome'
-      flags: ['--no-sandbox']
-  Config.browsers = ['Chrome_travis_ci']
+  Config.browsers = ['PhantomJS']
   Config.singleRun = true
 
 module.exports = (config) -> config.set Config

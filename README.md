@@ -12,8 +12,7 @@
 * Jade, Stylus and CoffeeScript
 * Gulp, PostCSS, Browserify and BrowserSync  
 * Jadelint, Stylint and CoffeeLint
-* Jasmine, Karma, Istanbul and Protractor
-* Travis CI, Codacy, Coveralls and Sauce Labs
+* Jasmine, Karma, Protractor and Travis CI
 
 ### Getting Started
 ##### Clone angular-starter-kit
