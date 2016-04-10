@@ -4,7 +4,6 @@ class Config
   @exclude: []
   @capabilities: browserName: 'chrome'
   @baseUrl: 'http://localhost:3000/'
-  @allScriptsTimeout: 110000
   @onPrepare: ->
     SpecReporter = require 'jasmine-spec-reporter'
     jasmine.getEnv().addReporter new SpecReporter displayStacktrace: true
@@ -15,10 +14,8 @@ class Config
     showColors: true
     isVerbose: false
     includeStackTrace: false
-    defaultTimeoutInterval: 400000
 
 if process.env.TRAVIS
-  Config.capabilities =
-    browserName: 'firefox'
+  Config.capabilities = browserName: 'firefox'
 
 exports.config = Config
