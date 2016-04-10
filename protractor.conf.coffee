@@ -20,6 +20,5 @@ class Config
 if process.env.TRAVIS
   Config.capabilities =
     browserName: 'firefox'
-  Config.directConnect = false
 
 exports.config = Config
