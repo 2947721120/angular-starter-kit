@@ -74,7 +74,6 @@
     "karma-coffee-preprocessor": "^0.3.0",
     "karma-jasmine": "^0.3.8",
     "karma-mocha-reporter": "^2.0.0",
-    "karma-ng-jade2js-preprocessor": "^0.2.1",
     "karma-phantomjs-launcher": "^1.0.0",
     "merge-stream": "^1.0.0",
     "phantomjs": "^2.1.3",
