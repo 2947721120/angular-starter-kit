@@ -60,7 +60,6 @@ STYLES_DEST = "#{APP_DEST}/styles"
 SCRIPTS_DEST = "#{APP_DEST}/scripts"
 IMAGES_DEST = "#{APP_DEST}/images"
 FONTS_DEST = "#{APP_DEST}/fonts"
-COVERAGE_DEST = './coverage'
 
 # ----------
 # utils
@@ -283,7 +282,7 @@ gulp.task 'copy-files', ->
 
 gulp.task 'clean', ->
   gulp
-    .src [APP_DEST, TEMPLATES_DEST, COVERAGE_DEST], read: false
+    .src [APP_DEST, TEMPLATES_DEST], read: false
     .pipe rimraf force: true
 
 gulp.task 'build', (callback) ->
