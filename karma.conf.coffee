@@ -33,7 +33,7 @@ class Config
   @concurrency: Infinity
 
 if process.env.TRAVIS
-  Config.browsers = ['PhantomJS']
+  Config.browsers = ['Firefox']
   Config.singleRun = true
 
 module.exports = (config) -> config.set Config
