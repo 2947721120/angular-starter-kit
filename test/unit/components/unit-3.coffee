@@ -1,5 +1,5 @@
-describe 'Component: home', ->
-  beforeEach module 'core.home'
+describe 'Component: about', ->
+  beforeEach module 'core.about'
 
   scope = null
   $componentController = null
@@ -10,7 +10,7 @@ describe 'Component: home', ->
     $componentController = _$componentController_
 
     component =
-      $componentController 'home',
+      $componentController 'about',
         $scope: scope
 
   it 'should have a component', ->
