@@ -324,7 +324,7 @@ gulp.task 'unit', (callback) ->
     .start()
 
 gulp.task 'pre-e2e', (callback) ->
-  IN_DEV = false
+  DEV_WATCH = false
   runSequence(
     'compile-jade'
     'compile-stylus'

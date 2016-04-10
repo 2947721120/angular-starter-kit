@@ -18,8 +18,8 @@ angular
 
 angular
   .module 'core.home', []
-  .component 'home', template: 'Home Page'
+  .component 'home', template: '<span>Home Page</span>'
 
 angular
   .module 'core.about', []
-  .component 'about', template: 'About Page'
+  .component 'about', template: '<span>About Page</span>'
