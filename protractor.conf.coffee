@@ -18,9 +18,6 @@ class Config
     defaultTimeoutInterval: 400000
 
 if process.env.TRAVIS
-  Config.capabilities =
-    browserName: 'phantomjs'
-    'phantomjs.binary.path': require('phantomjs').path
   Config.directConnect = false
 
 exports.config = Config
