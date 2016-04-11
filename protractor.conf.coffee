@@ -10,9 +10,8 @@ class Config
     browser.ignoreSynchronization = false
   @framework: 'jasmine'
   @jasmineNodeOpts:
-    showTiming: true
-    showColors: true
     isVerbose: false
+    showColors: true
     includeStackTrace: false
 
 if process.env.TRAVIS

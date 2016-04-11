@@ -137,7 +137,8 @@ $ npm run reinstall
 │       │   └── unit-2.coffee
 │       ├── components
 │       │   ├── unit-1.coffee
-│       │   └── unit-2.coffee
+│       │   ├── unit-2.coffee
+│       │   └── unit-3.coffee
 │       ├── controllers
 │       │   ├── unit-1.coffee
 │       │   └── unit-2.coffee
