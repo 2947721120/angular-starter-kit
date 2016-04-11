@@ -362,14 +362,14 @@ gulp.task 'build-dev', (callback) ->
   DEV_WATCH = false
   runSequence 'clean', 'build', callback
 
-gulp.task 'build-test', (callback) ->
+gulp.task 'test-unit', (callback) ->
   [TEST_SERVE, TEST_WATCH] = [false, false]
   runSequence 'unit', callback
 
 gulp.task 'build-dev-watch', (callback) ->
   runSequence 'clean', 'build', 'watch', callback
 
-gulp.task 'build-test-watch', (callback) ->
+gulp.task 'test-unit-watch', (callback) ->
   TEST_SERVE = false
   runSequence 'unit', callback
 
@@ -377,5 +377,5 @@ gulp.task 'build-prod', (callback) ->
   IN_DEV = false
   runSequence 'clean', 'build', callback
 
-gulp.task 'build-e2e', (callback) ->
+gulp.task 'test-e2e', (callback) ->
   runSequence 'clean', 'e2e', callback

@@ -48,10 +48,10 @@ $ npm run build-prod
 
 ##### Test the Application
 ```bash
-$ npm run build-test
-$ npm run build-test-watch
+$ npm run test-unit
+$ npm run test-unit-watch
 
-$ npm run build-e2e
+$ npm run test-e2e
 ```
 
 ##### Clean the Application
