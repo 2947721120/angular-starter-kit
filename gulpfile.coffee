@@ -106,7 +106,10 @@ e2eServer = ({port, dir}) ->
     server = app.listen port, ->
       resolve server
 
-gulp.task 'postinstall', gprotractor.webdriver_update
+webdriverUpdate = gprotractor.webdriver_update
+protractor = gprotractor.protractor
+
+gulp.task 'postinstall', webdriverUpdate
 
 # ----------
 # tasks
@@ -343,7 +346,7 @@ gulp.task 'run-e2e', ->
     .then (server) ->
       gulp
         .src './test/e2e/**/*.coffee'
-        .pipe gprotractor.protractor configFile: 'protractor.conf.coffee'
+        .pipe protractor configFile: 'protractor.conf.coffee'
         .on 'error', (error) -> throw error
         .on 'end', -> server.close()
 
